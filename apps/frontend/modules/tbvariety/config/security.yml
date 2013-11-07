@@ -1,0 +1,26 @@
+New:
+  is_secure:   on        # La acción "Nuevo" es sólo para usuarios autenticados
+
+Edit:
+  is_secure:   on        # La acción "Editar" es sólo para usuarios autenticados
+
+Delete:
+  is_secure:   on        # La acción "Eliminar" es sólo para usuarios autenticados
+  
+checkvariety:
+  is_secure:   on        # Es sólo para usuarios autenticados
+  
+batchuploadvariety:
+  is_secure:   on        # Es sólo para usuarios autenticados
+
+checkvarietybatch:
+  is_secure:   on        # Es sólo para usuarios autenticados
+
+resultfilecheckvariety:
+  is_secure:   on        # Es sólo para usuarios autenticados
+  
+Index:
+  is_secure:   on        # La acción "Lista" es sólo para usuarios autenticados
+  
+Show:
+  is_secure:   on        # La acción "Ver" es sólo para usuarios autenticados

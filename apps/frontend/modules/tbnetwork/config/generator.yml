@@ -1,0 +1,42 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbnetwork
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbnetwork
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:          ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_network:  {label: Id}
+        ntwname:      {label: Name}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Network
+        max_per_page:   10
+        display:        ~
+        object_actions:
+          _edit:        ~
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Network
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Network

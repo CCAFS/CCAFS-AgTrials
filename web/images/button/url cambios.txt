@@ -1,0 +1,7 @@
+http://cooltext.com/Edit-Button?LogoID=569597189&Font=11000
+
+font:11000
+size:14
+efect:brillo
+w:120
+h25

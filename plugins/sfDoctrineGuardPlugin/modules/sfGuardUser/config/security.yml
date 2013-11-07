@@ -1,0 +1,15 @@
+all:
+  is_secure: on
+  credentials: [Administrator]
+
+changepassword:
+  is_secure: on
+  credentials: [[ Administrator, "Contributor" ]]
+
+user:
+  is_secure: on
+  credentials: [[ Administrator, "Contributor" ]]
+
+validacorreo:
+  is_secure: off
+  credentials: [[ Administrator, "Contributor" ]]

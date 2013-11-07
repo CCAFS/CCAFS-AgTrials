@@ -1,0 +1,56 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbmeteorologicalfields
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbmeteorologicalfields
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:          ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_meteorologicalfields:     {label: Id}
+        mtflname:                    {label: Name}
+        mtfldescription:             {label: Description}
+        mtflsynonyms:                {label: Synonyms}
+        mtflunit:                    {label: Unit}
+        
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Meteorological Fields
+        max_per_page:   20
+        display:        [id_meteorologicalfields, mtflname, mtfldescription, mtflunit]
+        fields:
+          id_meteorologicalfields:     {label: Id}
+          mtflname:                    {label: Name}
+          mtfldescription:             {label: Description}
+          mtflunit:                    {label: Unit}
+        
+        object_actions:
+          _edit:        ~
+          _show:        ~
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Meteorological Fields
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Meteorological Fields
+
+      #Configuracion para la Vista del Registro
+      show:
+        title:          View Meteorological Fields

@@ -1,0 +1,45 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbprimarydiscipline
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbprimarydiscipline
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:       ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_primarydiscipline: {label: id}
+        prdsname:             {label: Name}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Primary Discipline
+        max_per_page:   20
+        display:        [id_primarydiscipline, prdsname]
+        fields:
+          id_primarydiscipline: {label: Id}
+          prdsname:             {label: Name}
+        object_actions: 
+          _edit:        ~
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Primary Discipline
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Primary Discipline

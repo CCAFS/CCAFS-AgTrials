@@ -1,0 +1,67 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbtrialgroup
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbtrialgroup
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:          ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_trialgroup:               {label: Id}
+        id_institution:              {label: Institution}
+        id_contactperson:            {label: Contact person}
+        id_trialgrouptype:           {label: Type}
+        id_objective:                {label: Objective}
+        id_primarydiscipline:        {label: Primary discipline}
+        trgrname:                    {label: Name}
+        trgrstartyear:               {label: Start year}
+        trgrendyear:                 {label: End year}
+        trgrtrialgrouprecorddate:    {label: Record date }
+        trgrtrialgrouprecordstatus:  {label: Rrecord status }
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Trial Group
+        max_per_page:   20
+        display:        [id_trialgroup, _institution, _trialgrouptype, _objective, _primarydiscipline, trgrname, trgrtrialgrouprecordstatus]
+        fields:
+          id_trialgroup:               {label: Id}
+          institution:                 {label: Institution}
+          trialgrouptype:              {label: Type}
+          objective:                   {label: Objective}
+          primarydiscipline:           {label: Primary discipline}
+          trgrname:                    {label: Name}
+          trgrtrialgrouprecordstatus:  {label: Status }
+        object_actions:
+          _edit:        ~
+          _show:        ~
+          _Show_trial:  ~
+          _Add_trial:   ~
+          _Comments:    ~
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Trial Group
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Trial Group
+
+      #Configuracion para la Vista del Registro
+      show:
+        title:          View Trial Group

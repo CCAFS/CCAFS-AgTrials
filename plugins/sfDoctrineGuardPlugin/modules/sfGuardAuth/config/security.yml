@@ -1,0 +1,11 @@
+secure:
+  is_secure: false
+
+signin:
+  is_secure: false
+
+signout:
+  is_secure: false
+  
+forgotpassword:
+  is_secure: false

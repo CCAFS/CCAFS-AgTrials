@@ -1,0 +1,18 @@
+Index:
+  is_secure:   on        # La acción "Index" es sólo para usuarios autenticados
+  
+Clearcache:
+  is_secure:   on        # La acción "Clearcache" es sólo para usuarios autenticados
+  
+Schema:
+  is_secure:   on        # La acción "Schema" es sólo para usuarios autenticados
+  
+Logtransaction:
+  is_secure:   on        # La acción "Logtransaction" es sólo para usuarios autenticados
+  
+Communications:
+  is_secure:   on        # La acción "Communications" es sólo para usuarios autenticados
+
+batchprocesses:
+  is_secure:   on        # La acción es sólo para usuarios autenticados
+

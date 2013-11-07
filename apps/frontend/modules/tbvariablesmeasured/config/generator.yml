@@ -1,0 +1,57 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbvariablesmeasured
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbvariablesmeasured
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:          ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_variablesmeasured:  {label: Id}
+        id_crop:               {label: Technology}
+        id_traitclass:         {label: Trait Class}
+        vrmsname:              {label: Name}
+        vrmsshortname:         {label: Short name}
+        vrmsdefinition:        {label: Definition}
+        vrmnmethod:            {label: Method}
+        vrmsunit:              {label: Unit}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Variables Measured
+        max_per_page:   20
+        display:        [id_variablesmeasured, _crop, _traitclass, vrmsname, vrmsshortname]
+        fields:
+         id_variablesmeasured:  {label: Id}
+         crop:                  {label: Technology}
+         traitclass:            {label: Trait class}
+         vrmsname:              {label: Name}
+         vrmsshortname:         {label: Short name}
+        #object_actions:  {}
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Variables Measured
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Variables Measured
+        
+      #Configuracion para la Vista del Registro
+      show:
+        title:          View Variables Measured

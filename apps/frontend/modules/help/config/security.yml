@@ -1,0 +1,5 @@
+Index:
+  is_secure:   on        # La acción "Index" es sólo para usuarios autenticados
+  
+Help:
+  is_secure:   on        # La acción "Help" es sólo para usuarios autenticados

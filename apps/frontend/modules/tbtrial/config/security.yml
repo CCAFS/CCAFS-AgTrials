@@ -1,0 +1,18 @@
+New:
+  is_secure:   on        # La acción "Nuevo" es sólo para usuarios autenticados
+
+Edit:
+  is_secure:   on        # La acción "Editar" es sólo para usuarios autenticados
+
+Delete:
+  is_secure:   on        # La acción "Eliminar" es sólo para usuarios autenticados
+  
+Index:
+  is_secure:   on        # La acción "Lista" es sólo para usuarios autenticados
+
+batchupload:
+  is_secure:   on        # La acción es sólo para usuarios autenticados
+  
+permissionstrials:
+  is_secure: on
+  credentials: [[ Administrator]]

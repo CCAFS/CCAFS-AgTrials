@@ -1,0 +1,5658 @@
+SfGuardForgotPassword:
+  connection: doctrine
+  tableName: sf_guard_forgot_password
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: sf_guard_forgot_password_id
+    user_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    unique_key:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    expires_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    SfGuardUser:
+      local: user_id
+      foreign: id
+      type: one
+SfGuardGroup:
+  connection: doctrine
+  tableName: sf_guard_group
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: sf_guard_group_id
+    name:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    SfGuardGroupPermission:
+      local: id
+      foreign: group_id
+      type: many
+    TbTrialgrouppermission:
+      local: id
+      foreign: id_group
+      type: many
+    SfGuardUserGroup:
+      local: id
+      foreign: group_id
+      type: many
+SfGuardGroupPermission:
+  connection: doctrine
+  tableName: sf_guard_group_permission
+  columns:
+    group_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    permission_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    SfGuardGroup:
+      local: group_id
+      foreign: id
+      type: one
+    SfGuardPermission:
+      local: permission_id
+      foreign: id
+      type: one
+SfGuardPermission:
+  connection: doctrine
+  tableName: sf_guard_permission
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: sf_guard_permission_id
+    name:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    SfGuardUserPermission:
+      local: id
+      foreign: permission_id
+      type: many
+    SfGuardGroupPermission:
+      local: id
+      foreign: permission_id
+      type: many
+SfGuardRememberKey:
+  connection: doctrine
+  tableName: sf_guard_remember_key
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: sf_guard_remember_key_id
+    user_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    remember_key:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    ip_address:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    SfGuardUser:
+      local: user_id
+      foreign: id
+      type: one
+SfGuardUser:
+  connection: doctrine
+  tableName: sf_guard_user
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: sf_guard_user_id
+    first_name:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    last_name:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    email_address:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    username:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    algorithm:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: sha1
+      primary: false
+    salt:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    password:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    is_active:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: 'true'
+      primary: false
+    is_super_admin:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: 'false'
+      primary: false
+    last_login:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    SfGuardUserPermission:
+      local: id
+      foreign: user_id
+      type: many
+    TbWeatherstation:
+      local: id
+      foreign: id_user
+      type: many
+    SfGuardRememberKey:
+      local: id
+      foreign: user_id
+      type: many
+    TbTrialsiteuserpermissionfiles:
+      local: id
+      foreign: id_userpermission
+      type: many
+    TbTrialuserpermissionfiles:
+      local: id
+      foreign: id_userpermission
+      type: many
+    SfGuardUserGroup:
+      local: id
+      foreign: user_id
+      type: many
+    TbWeatherstationuserpermission:
+      local: id
+      foreign: id_userpermission
+      type: many
+    SfGuardForgotPassword:
+      local: id
+      foreign: user_id
+      type: many
+    SfGuardUserDownloads:
+      local: id
+      foreign: user_id
+      type: many
+    SfGuardUserInformation:
+      local: id
+      foreign: user_id
+      type: many
+SfGuardUserDownloads:
+  connection: doctrine
+  tableName: sf_guard_user_downloads
+  columns:
+    id_download:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: sf_guard_user_downloads_id_download
+    user_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    usdwtype:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    usdwfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    usdwdate:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    usdwsize:
+      type: float()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrial:
+      local: id_trial
+      foreign: id_trial
+      type: one
+    SfGuardUser:
+      local: user_id
+      foreign: id
+      type: one
+SfGuardUserGroup:
+  connection: doctrine
+  tableName: sf_guard_user_group
+  columns:
+    user_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    group_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    SfGuardGroup:
+      local: group_id
+      foreign: id
+      type: one
+    SfGuardUser:
+      local: user_id
+      foreign: id
+      type: one
+SfGuardUserInformation:
+  connection: doctrine
+  tableName: sf_guard_user_information
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: sf_guard_user_information_id
+    user_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    city:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    state:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    address:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    telephone:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    motivation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    key:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    visits:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: '0'
+      primary: false
+  relations:
+    TbCountry:
+      local: id_country
+      foreign: id_country
+      type: one
+    TbInstitution:
+      local: id_institution
+      foreign: id_institution
+      type: one
+    SfGuardUser:
+      local: user_id
+      foreign: id
+      type: one
+SfGuardUserPermission:
+  connection: doctrine
+  tableName: sf_guard_user_permission
+  columns:
+    user_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    permission_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    SfGuardPermission:
+      local: permission_id
+      foreign: id
+      type: one
+    SfGuardUser:
+      local: user_id
+      foreign: id
+      type: one
+TbBibliography:
+  connection: doctrine
+  tableName: tb_bibliography
+  columns:
+    id_bibliography:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_bibliography
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialgroup:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_language:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    bbgreferencetype:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    bbgtitle:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    bbgauthor:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    bbgvolume:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgnumber:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgyear:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgdocumenttitle:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgpublisher:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgpages:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgabstract:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgkeywords:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    bbgnotes:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgaddedtolibrary:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbCrop:
+      local: id_crop
+      foreign: id_crop
+      type: one
+    TbLanguage:
+      local: id_language
+      foreign: id_language
+      type: one
+    TbTrialgroup:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: one
+TbBibliographyLog:
+  connection: doctrine
+  tableName: tb_bibliography_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_bibliography:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialgroup:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_language:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgreferencetype:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgtitle:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgauthor:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgvolume:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgnumber:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgyear:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgdocumenttitle:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgpublisher:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgpages:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgabstract:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgkeywords:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgnotes:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    bbgaddedtolibrary:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbCategory:
+  connection: doctrine
+  tableName: tb_category
+  columns:
+    id_category:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_category
+    ctgname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    ctgdescription:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbMessage:
+      local: id_category
+      foreign: id_category
+      type: many
+    TbTheme:
+      local: id_category
+      foreign: id_category
+      type: many
+TbContactperson:
+  connection: doctrine
+  tableName: tb_contactperson
+  columns:
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_contactperson
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_contactpersontype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    cnprfirstname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    cnprlastname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    cnpraddress:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    cnprphone:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    cnpremail:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbCountry:
+      local: id_country
+      foreign: id_country
+      type: one
+    TbInstitution:
+      local: id_institution
+      foreign: id_institution
+      type: one
+    TbContactpersontype:
+      local: id_contactpersontype
+      foreign: id_contactpersontype
+      type: one
+    TbTrialgroupcontactperson:
+      local: id_contactperson
+      foreign: id_contactperson
+      type: many
+    TbWeatherstation:
+      local: id_contactperson
+      foreign: id_contactperson
+      type: many
+    TbTrial:
+      local: id_contactperson
+      foreign: id_contactperson
+      type: many
+    TbTrialsitecontactperson:
+      local: id_contactperson
+      foreign: id_contactperson
+      type: many
+TbContactpersonLog:
+  connection: doctrine
+  tableName: tb_contactperson_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_contactpersontype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cnprfirstname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cnprlastname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cnpraddress:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cnprphone:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cnpremail:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbContactpersontype:
+  connection: doctrine
+  tableName: tb_contactpersontype
+  columns:
+    id_contactpersontype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_contactpersontype
+    ctprtpname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbContactperson:
+      local: id_contactpersontype
+      foreign: id_contactpersontype
+      type: many
+TbContactpersontypeLog:
+  connection: doctrine
+  tableName: tb_contactpersontype_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_contactpersontype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    ctprtpname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbCountry:
+  connection: doctrine
+  tableName: tb_country
+  columns:
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_country
+    cntname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    cntiso:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cntiso3:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cntnumcode:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbContactperson:
+      local: id_country
+      foreign: id_country
+      type: many
+    TbLocation:
+      local: id_country
+      foreign: id_country
+      type: many
+    TbInstitution:
+      local: id_country
+      foreign: id_country
+      type: many
+    TbWeatherstation:
+      local: id_country
+      foreign: id_country
+      type: many
+    TbTrial:
+      local: id_country
+      foreign: id_country
+      type: many
+    TbTrialsite:
+      local: id_country
+      foreign: id_country
+      type: many
+    TbOrigin:
+      local: id_country
+      foreign: id_country
+      type: many
+    SfGuardUserInformation:
+      local: id_country
+      foreign: id_country
+      type: many
+TbCountryLog:
+  connection: doctrine
+  tableName: tb_country_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cntname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cntiso:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cntiso3:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cntnumcode:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbCrop:
+  connection: doctrine
+  tableName: tb_crop
+  columns:
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_crop
+    crpname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    crpscientificname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbVariablesmeasured:
+      local: id_crop
+      foreign: id_crop
+      type: many
+    TbTrial:
+      local: id_crop
+      foreign: id_crop
+      type: many
+    TbVariety:
+      local: id_crop
+      foreign: id_crop
+      type: many
+    TbBibliography:
+      local: id_crop
+      foreign: id_crop
+      type: many
+TbCropLog:
+  connection: doctrine
+  tableName: tb_crop_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    crpname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    crpscientificname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbFieldnamenumber:
+  connection: doctrine
+  tableName: tb_fieldnamenumber
+  columns:
+    id_fieldnamenumber:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_fieldnamenumber
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_trialenvironmenttype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trialenvironmentname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    finanulatitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanulatitudedecimal:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanulongitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanulongitudedecimal:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanualtitude:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanuph:
+      type: float()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_soil:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_taxonomyfao:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbSoil:
+      local: id_soil
+      foreign: id_soil
+      type: one
+    TbTaxonomyfao:
+      local: id_taxonomyfao
+      foreign: id_taxonomyfao
+      type: one
+    TbTrialsite:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: one
+    TbTrialenvironmenttype:
+      local: id_trialenvironmenttype
+      foreign: id_trialenvironmenttype
+      type: one
+    TbTrial:
+      local: id_fieldnamenumber
+      foreign: id_fieldnamenumber
+      type: many
+TbFieldnamenumberLog:
+  connection: doctrine
+  tableName: tb_fieldnamenumber_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_fieldnamenumber:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialenvironmenttype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trialenvironmentname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanulatitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanulatitudedecimal:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanulongitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanulongitudedecimal:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanualtitude:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    finanuph:
+      type: float()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_soil:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_taxonomyfao:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbInstitution:
+  connection: doctrine
+  tableName: tb_institution
+  columns:
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_institution
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    insname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    insaddress:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    insphone:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    insfax:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    insemail:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    inswebsite:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    insnetwork:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbCountry:
+      local: id_country
+      foreign: id_country
+      type: one
+    TbContactperson:
+      local: id_institution
+      foreign: id_institution
+      type: many
+    TbWeatherstation:
+      local: id_institution
+      foreign: id_institution
+      type: many
+    TbTrialgroup:
+      local: id_institution
+      foreign: id_institution
+      type: many
+    TbTrialsite:
+      local: id_institution
+      foreign: id_institution
+      type: many
+    TbOrigin:
+      local: id_institution
+      foreign: id_institution
+      type: many
+    SfGuardUserInformation:
+      local: id_institution
+      foreign: id_institution
+      type: many
+TbInstitutionLog:
+  connection: doctrine
+  tableName: tb_institution_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    insname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    insaddress:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    insphone:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    insfax:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    insemail:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    inswebsite:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    insnetwork:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbLanguage:
+  connection: doctrine
+  tableName: tb_language
+  columns:
+    id_language:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_language
+    lngname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    lngcode:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbBibliography:
+      local: id_language
+      foreign: id_language
+      type: many
+TbLocation:
+  connection: doctrine
+  tableName: tb_location
+  columns:
+    id_location:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_location
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    lctname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbCountry:
+      local: id_country
+      foreign: id_country
+      type: one
+    TbTrialsite:
+      local: id_location
+      foreign: id_location
+      type: many
+TbLocationLog:
+  connection: doctrine
+  tableName: tb_location_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_location:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    lctname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbMessage:
+  connection: doctrine
+  tableName: tb_message
+  columns:
+    id_message:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_message
+    mnsmessage:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_category:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_theme:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbCategory:
+      local: id_category
+      foreign: id_category
+      type: one
+    TbTheme:
+      local: id_theme
+      foreign: id_theme
+      type: one
+TbMeteorologicalfields:
+  connection: doctrine
+  tableName: tb_meteorologicalfields
+  columns:
+    id_meteorologicalfields:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_meteorologicalfields_id_meteorologicalfields
+    mtflname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    mtfldescription:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    mtflunit:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    mtflsynonyms:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    mtflnamedatacolumn:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbObjective:
+  connection: doctrine
+  tableName: tb_objective
+  columns:
+    id_objective:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_objective
+    objname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrialgroup:
+      local: id_objective
+      foreign: id_objective
+      type: many
+TbObjectiveLog:
+  connection: doctrine
+  tableName: tb_objective_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_objective:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    objname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbOrigin:
+  connection: doctrine
+  tableName: tb_origin
+  columns:
+    id_origin:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_origin
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    orgname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbCountry:
+      local: id_country
+      foreign: id_country
+      type: one
+    TbInstitution:
+      local: id_institution
+      foreign: id_institution
+      type: one
+    TbVariety:
+      local: id_origin
+      foreign: id_origin
+      type: many
+TbOriginLog:
+  connection: doctrine
+  tableName: tb_origin_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_origin:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    orgname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbPrimarydiscipline:
+  connection: doctrine
+  tableName: tb_primarydiscipline
+  columns:
+    id_primarydiscipline:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_primarydiscipline
+    prdsname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrialgroup:
+      local: id_primarydiscipline
+      foreign: id_primarydiscipline
+      type: many
+TbPrimarydisciplineLog:
+  connection: doctrine
+  tableName: tb_primarydiscipline_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_primarydiscipline:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    prdsname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbSoil:
+  connection: doctrine
+  tableName: tb_soil
+  columns:
+    id_soil:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_soil
+    soiname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbFieldnamenumber:
+      local: id_soil
+      foreign: id_soil
+      type: many
+    TbTrialsite:
+      local: id_soil
+      foreign: id_soil
+      type: many
+TbSoilLog:
+  connection: doctrine
+  tableName: tb_soil_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_soil:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    soiname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTaxonomyfao:
+  connection: doctrine
+  tableName: tb_taxonomyfao
+  columns:
+    id_taxonomyfao:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_taxonomyfao
+    txnname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbFieldnamenumber:
+      local: id_taxonomyfao
+      foreign: id_taxonomyfao
+      type: many
+    TbTrialsite:
+      local: id_taxonomyfao
+      foreign: id_taxonomyfao
+      type: many
+TbTaxonomyfaoLog:
+  connection: doctrine
+  tableName: tb_taxonomyfao_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_taxonomyfao:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    txnname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTheme:
+  connection: doctrine
+  tableName: tb_theme
+  columns:
+    id_theme:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_theme
+    thmname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_category:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbCategory:
+      local: id_category
+      foreign: id_category
+      type: one
+    TbMessage:
+      local: id_theme
+      foreign: id_theme
+      type: many
+TbTraitclass:
+  connection: doctrine
+  tableName: tb_traitclass
+  columns:
+    id_traitclass:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_traitclass
+    trclname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbVariablesmeasured:
+      local: id_traitclass
+      foreign: id_traitclass
+      type: many
+TbTraitclassLog:
+  connection: doctrine
+  tableName: tb_traitclass_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_traitclass:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trclname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTrial:
+  connection: doctrine
+  tableName: tb_trial
+  columns:
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trial
+    id_trialgroup:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_fieldnamenumber:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trlvarieties:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlsowdate:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlharvestdate:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trltrialresultsfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlvariablesmeasured:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trllicense:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trltrialresultsfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlsupplementalinformationfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlweatherduringtrialfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlweatherduringtrialfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlsoiltypeconditionsduringtrialfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlsoiltypeconditionsduringtrialfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trltrialrecorddate:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trltrialtype:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlirrigation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: N/A
+      primary: false
+    trlreplications:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbContactperson:
+      local: id_contactperson
+      foreign: id_contactperson
+      type: one
+    TbCountry:
+      local: id_country
+      foreign: id_country
+      type: one
+    TbCrop:
+      local: id_crop
+      foreign: id_crop
+      type: one
+    TbTrialgroup:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: one
+    TbTrialsite:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: one
+    TbFieldnamenumber:
+      local: id_fieldnamenumber
+      foreign: id_fieldnamenumber
+      type: one
+    TbTrialvariablesmeasured:
+      local: id_trial
+      foreign: id_trial
+      type: many
+    TbTrialcomments:
+      local: id_trial
+      foreign: id_trial
+      type: many
+    TbTrialvariety:
+      local: id_trial
+      foreign: id_trial
+      type: many
+    TbTrialuserpermissionfiles:
+      local: id_trial
+      foreign: id_trial
+      type: many
+    TbTrialgrouppermission:
+      local: id_trial
+      foreign: id_trial
+      type: many
+    TbTrialdata:
+      local: id_trial
+      foreign: id_trial
+      type: many
+    SfGuardUserDownloads:
+      local: id_trial
+      foreign: id_trial
+      type: many
+TbTrialLog:
+  connection: doctrine
+  tableName: tb_trial_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialgroup:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_fieldnamenumber:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlvarieties:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlsowdate:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlharvestdate:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trltrialresultsfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlvariablesmeasured:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trllicense:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trltrialresultsfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlsupplementalinformationfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlweatherduringtrialfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlweatherduringtrialfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlsoiltypeconditionsduringtrialfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlsoiltypeconditionsduringtrialfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trltrialrecorddate:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trltrialtype:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trlirrigation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: N/A
+      primary: false
+    trlreplications:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTrialcomments:
+  connection: doctrine
+  tableName: tb_trialcomments
+  columns:
+    id_trialcomments:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialcomments
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trcmcomment:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrial:
+      local: id_trial
+      foreign: id_trial
+      type: one
+TbTrialdata:
+  connection: doctrine
+  tableName: tb_trialdata
+  columns:
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    trdtreplication:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    id_variety:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    id_variablesmeasured:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    trdtvalue:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    TbTrial:
+      local: id_trial
+      foreign: id_trial
+      type: one
+    TbVariablesmeasured:
+      local: id_variablesmeasured
+      foreign: id_variablesmeasured
+      type: one
+    TbVariety:
+      local: id_variety
+      foreign: id_variety
+      type: one
+TbTrialenvironmenttype:
+  connection: doctrine
+  tableName: tb_trialenvironmenttype
+  columns:
+    id_trialenvironmenttype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialenvironmenttype
+    trnvtyname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbFieldnamenumber:
+      local: id_trialenvironmenttype
+      foreign: id_trialenvironmenttype
+      type: many
+TbTrialenvironmenttypeLog:
+  connection: doctrine
+  tableName: tb_trialenvironmenttype_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialenvironmenttype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trnvtyname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTrialgroup:
+  connection: doctrine
+  tableName: tb_trialgroup
+  columns:
+    id_trialgroup:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialgroup
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialgrouptype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_objective:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_primarydiscipline:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trgrname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trgrstartyear:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trgrendyear:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trgrtrialgrouprecorddate:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trgrtrialgrouprecordstatus:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbInstitution:
+      local: id_institution
+      foreign: id_institution
+      type: one
+    TbObjective:
+      local: id_objective
+      foreign: id_objective
+      type: one
+    TbPrimarydiscipline:
+      local: id_primarydiscipline
+      foreign: id_primarydiscipline
+      type: one
+    TbTrialgrouptype:
+      local: id_trialgrouptype
+      foreign: id_trialgrouptype
+      type: one
+    TbTrialgroupcontactperson:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: many
+    TbTrial:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: many
+    TbBibliography:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: many
+    TbTrialgroupcomments:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: many
+    TbTrialgroupfile:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: many
+TbTrialgroupLog:
+  connection: doctrine
+  tableName: tb_trialgroup_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialgroup:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialgrouptype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_objective:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_primarydiscipline:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trgrname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trgrstartyear:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trgrendyear:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trgrtrialgrouprecorddate:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trgrtrialgrouprecordstatus:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTrialgroupcomments:
+  connection: doctrine
+  tableName: tb_trialgroupcomments
+  columns:
+    id_trialgroupcomments:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialgroupcomments
+    id_trialgroup:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trgpcmcomment:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrialgroup:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: one
+TbTrialgroupcontactperson:
+  connection: doctrine
+  tableName: tb_trialgroupcontactperson
+  columns:
+    id_trialgroup:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+  relations:
+    TbContactperson:
+      local: id_contactperson
+      foreign: id_contactperson
+      type: one
+    TbTrialgroup:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: one
+TbTrialgroupfile:
+  connection: doctrine
+  tableName: tb_trialgroupfile
+  columns:
+    id_trialgroupfile:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialgroupfile_id_trialgroupfile
+    id_trialgroup:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trgrflfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trgrfldescription:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrialgroup:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: one
+TbTrialgrouppermission:
+  connection: doctrine
+  tableName: tb_trialgrouppermission
+  columns:
+    id_trialgrouppermission:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialgrouppermission_id_trialgrouppermission
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_group:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    SfGuardGroup:
+      local: id_group
+      foreign: id
+      type: one
+    TbTrial:
+      local: id_trial
+      foreign: id_trial
+      type: one
+TbTrialgrouptype:
+  connection: doctrine
+  tableName: tb_trialgrouptype
+  columns:
+    id_trialgrouptype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialgrouptype
+    trgptyname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrialgroup:
+      local: id_trialgrouptype
+      foreign: id_trialgrouptype
+      type: many
+TbTrialgrouptypeLog:
+  connection: doctrine
+  tableName: tb_trialgrouptype_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialgrouptype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trgptyname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTrialsGft:
+  connection: doctrine
+  tableName: tb_trials_gft
+  columns:
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    googlefusiontable:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: NO
+      primary: false
+TbTrialsite:
+  connection: doctrine
+  tableName: tb_trialsite
+  columns:
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialsite
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_location:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trstname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trstlatitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstlatitudedecimal:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstlongitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstlongitudedecimal:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstaltitude:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstph:
+      type: float()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_soil:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_taxonomyfao:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstsupplementalinformationfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstsupplementalinformationfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trststatus:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trststatereason:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstactive:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: 'false'
+      primary: false
+    id_trialsitetype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: '1'
+      primary: false
+  relations:
+    TbCountry:
+      local: id_country
+      foreign: id_country
+      type: one
+    TbInstitution:
+      local: id_institution
+      foreign: id_institution
+      type: one
+    TbLocation:
+      local: id_location
+      foreign: id_location
+      type: one
+    TbSoil:
+      local: id_soil
+      foreign: id_soil
+      type: one
+    TbTaxonomyfao:
+      local: id_taxonomyfao
+      foreign: id_taxonomyfao
+      type: one
+    TbTrialsitetype:
+      local: id_trialsitetype
+      foreign: id_trialsitetype
+      type: one
+    TbTrialsiteweather:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
+    TbTrial:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
+    TbTrialsiteuserpermissionfiles:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
+    TbTrialsitephotograph:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
+    TbTrialsiteweatherstation:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
+    TbTrialsitecontactperson:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
+    TbFieldnamenumber:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
+TbTrialsiteLog:
+  connection: doctrine
+  tableName: tb_trialsite_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_location:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstlatitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstlatitudedecimal:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstlongitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstlongitudedecimal:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstaltitude:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstph:
+      type: float()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_soil:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_taxonomyfao:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstsupplementalinformationfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstsupplementalinformationfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trststatus:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trststatereason:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstactive:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialsitetype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTrialsitecontactperson:
+  connection: doctrine
+  tableName: tb_trialsitecontactperson
+  columns:
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+  relations:
+    TbContactperson:
+      local: id_contactperson
+      foreign: id_contactperson
+      type: one
+    TbTrialsite:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: one
+TbTrialsitephotograph:
+  connection: doctrine
+  tableName: tb_trialsitephotograph
+  columns:
+    id_trialsitephotograph:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialsitephotograph_id_trialsitephotograph
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trstphfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trstphfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trstphpersonphotograph:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstphlock:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: Y
+      primary: false
+  relations:
+    TbTrialsite:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: one
+TbTrialsitetype:
+  connection: doctrine
+  tableName: tb_trialsitetype
+  columns:
+    id_trialsitetype:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialsitetype_id_trialsitetype
+    trsttyname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrialsite:
+      local: id_trialsitetype
+      foreign: id_trialsitetype
+      type: many
+TbTrialsiteuserpermissionfiles:
+  connection: doctrine
+  tableName: tb_trialsiteuserpermissionfiles
+  columns:
+    id_trialsiteuserpermissionfiles:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialsiteuserpermissionfil_id_trialsiteuserpermissionfil
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_userpermission:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrialsite:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: one
+    SfGuardUser:
+      local: id_userpermission
+      foreign: id
+      type: one
+TbTrialsiteweather:
+  connection: doctrine
+  tableName: tb_trialsiteweather
+  columns:
+    id_trialsiteweather:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialsiteweather_id_trialsiteweather
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trstwtfileaccess:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trstwtfile:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    trstwtstartdate:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstwtenddate:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstwtdescription:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    trstwtlock:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: Y
+      primary: false
+  relations:
+    TbTrialsite:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: one
+    TbTrialsiteweathervariablesmeasured:
+      local: id_trialsiteweather
+      foreign: id_trialsiteweather
+      type: many
+TbTrialsiteweatherstation:
+  connection: doctrine
+  tableName: tb_trialsiteweatherstation
+  columns:
+    id_trialsite:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    id_weatherstation:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+  relations:
+    TbTrialsite:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: one
+    TbWeatherstation:
+      local: id_weatherstation
+      foreign: id_weatherstation
+      type: one
+TbTrialsiteweathervariablesmeasured:
+  connection: doctrine
+  tableName: tb_trialsiteweathervariablesmeasured
+  columns:
+    id_trialsiteweather:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    id_weathervariablesmeasured:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+  relations:
+    TbTrialsiteweather:
+      local: id_trialsiteweather
+      foreign: id_trialsiteweather
+      type: one
+    TbWeathervariablesmeasured:
+      local: id_weathervariablesmeasured
+      foreign: id_weathervariablesmeasured
+      type: one
+TbTrialuserpermissionfiles:
+  connection: doctrine
+  tableName: tb_trialuserpermissionfiles
+  columns:
+    id_trialuserpermissionfiles:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialuserpermissionfiles
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_userpermission:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrial:
+      local: id_trial
+      foreign: id_trial
+      type: one
+    SfGuardUser:
+      local: id_userpermission
+      foreign: id
+      type: one
+TbTrialuserpermissionfilesLog:
+  connection: doctrine
+  tableName: tb_trialuserpermissionfiles_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialuserpermissionfiles:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_userpermission:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTrialvariablesmeasured:
+  connection: doctrine
+  tableName: tb_trialvariablesmeasured
+  columns:
+    id_trialvariablesmeasured:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialvariablesmeasured
+    id_variablesmeasured:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrial:
+      local: id_trial
+      foreign: id_trial
+      type: one
+    TbVariablesmeasured:
+      local: id_variablesmeasured
+      foreign: id_variablesmeasured
+      type: one
+TbTrialvariablesmeasuredLog:
+  connection: doctrine
+  tableName: tb_trialvariablesmeasured_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialvariablesmeasured:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_variablesmeasured:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbTrialvariety:
+  connection: doctrine
+  tableName: tb_trialvariety
+  columns:
+    id_trialvariety:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_trialvariety
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_variety:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbTrial:
+      local: id_trial
+      foreign: id_trial
+      type: one
+    TbVariety:
+      local: id_variety
+      foreign: id_variety
+      type: one
+TbTrialvarietyLog:
+  connection: doctrine
+  tableName: tb_trialvariety_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trialvariety:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_trial:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_variety:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbVariablesmeasured:
+  connection: doctrine
+  tableName: tb_variablesmeasured
+  columns:
+    id_variablesmeasured:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_variablesmeasured
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_traitclass:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    vrmsname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    vrmsshortname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrmsdefinition:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrmsunit:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_ontology:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrmnmethod:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbCrop:
+      local: id_crop
+      foreign: id_crop
+      type: one
+    TbTraitclass:
+      local: id_traitclass
+      foreign: id_traitclass
+      type: one
+    TbTrialvariablesmeasured:
+      local: id_variablesmeasured
+      foreign: id_variablesmeasured
+      type: many
+    TbTrialdata:
+      local: id_variablesmeasured
+      foreign: id_variablesmeasured
+      type: many
+TbVariablesmeasuredLog:
+  connection: doctrine
+  tableName: tb_variablesmeasured_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_variablesmeasured:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_traitclass:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrmsname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrmsshortname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrmsdefinition:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrmsunit:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_ontology:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrmnmethod:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbVariety:
+  connection: doctrine
+  tableName: tb_variety
+  columns:
+    id_variety:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_variety
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_origin:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrtname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    vrtsynonymous:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrtdescription:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_genebank:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    TbCrop:
+      local: id_crop
+      foreign: id_crop
+      type: one
+    TbOrigin:
+      local: id_origin
+      foreign: id_origin
+      type: one
+    TbTrialvariety:
+      local: id_variety
+      foreign: id_variety
+      type: many
+    TbTrialdata:
+      local: id_variety
+      foreign: id_variety
+      type: many
+TbVarietyLog:
+  connection: doctrine
+  tableName: tb_variety_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_variety:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_crop:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_origin:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrtname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrtsynonymous:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vrtdescription:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_genebank:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbVideo:
+  connection: doctrine
+  tableName: tb_video
+  columns:
+    id_video:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_video_id_video
+    vdename:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    vdedescription:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vdeurl:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    vdedate:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+TbWeatherstation:
+  connection: doctrine
+  tableName: tb_weatherstation
+  columns:
+    id_weatherstation:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_weatherstation_id_weatherstation
+    id_country:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    wtstname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    wtstlatitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    wtstlongitude:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    wtstelevation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_institution:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_contactperson:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    wtstrestricted:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: YES
+      primary: false
+    wtstlicence:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_weatherstationsource:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    TbContactperson:
+      local: id_contactperson
+      foreign: id_contactperson
+      type: one
+    TbCountry:
+      local: id_country
+      foreign: id_country
+      type: one
+    TbInstitution:
+      local: id_institution
+      foreign: id_institution
+      type: one
+    SfGuardUser:
+      local: id_user
+      foreign: id
+      type: one
+    TbWeatherstationsource:
+      local: id_weatherstationsource
+      foreign: id_weatherstationsource
+      type: one
+    TbTrialsiteweatherstation:
+      local: id_weatherstation
+      foreign: id_weatherstation
+      type: many
+    TbWeatherstationuserpermission:
+      local: id_weatherstation
+      foreign: id_weatherstation
+      type: many
+TbWeatherstationsource:
+  connection: doctrine
+  tableName: tb_weatherstationsource
+  columns:
+    id_weatherstationsource:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_weatherstationsource_id_weatherstationsource
+    wtstsrname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    wtstsrnametable:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    TbWeatherstation:
+      local: id_weatherstationsource
+      foreign: id_weatherstationsource
+      type: many
+TbWeatherstationuserpermission:
+  connection: doctrine
+  tableName: tb_weatherstationuserpermission
+  columns:
+    id_weatherstation:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+    id_userpermission:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+  relations:
+    SfGuardUser:
+      local: id_userpermission
+      foreign: id
+      type: one
+    TbWeatherstation:
+      local: id_weatherstation
+      foreign: id_weatherstation
+      type: one
+TbWeathervariablesmeasured:
+  connection: doctrine
+  tableName: tb_weathervariablesmeasured
+  columns:
+    id_weathervariablesmeasured:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: tb_weathervariablesmeasured_id_weathervariablesmeasured
+    wtvrmsname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    wtvrmsshortname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    wtvrmsdefinition:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    wtvrmsunit:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    TbTrialsiteweathervariablesmeasured:
+      local: id_weathervariablesmeasured
+      foreign: id_weathervariablesmeasured
+      type: many

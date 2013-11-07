@@ -1,0 +1,73 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbtrialsite
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbtrialsite
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:       ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_trialsite:                           {label: Id}
+        id_institution:                         {label: Institution}
+        id_contactperson:                       {label: Contact persons}
+        id_country:                             {label: Country}
+        id_location:                            {label: Location}
+        trstname:                               {label: Site Name}
+        trstlatitude:                           {label: Latitude}
+        trstlongitude:                          {label: Longitude}
+        trstaltitude:                           {label: Altitude}
+        trstph:                                 {label: Ph}
+        id_soil:                                {label: Soil texture}
+        id_taxonomyfao:                         {label: Taxonomy FAO}
+        weatherstation:                         {label: Weather stations}
+        trstsupplementalinformationfileaccess:  {label: Supplemental information file access}
+        trststatus:                             {label: Location verified}
+        trststatereason:                        {label: Notes on the location (100 characters max)}
+        trsttyname:                             {label: Trial site type}
+        trstactive:                             {label: IS Active}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Trial Site
+        max_per_page:   20
+        display:        [id_trialsite, _institution, _country, _location, trstname, _latitudedecimal, _longitudedecimal, trstaltitude, trstph, trststatus]
+        fields:
+          id_trialsite:                           {label: Id}
+          institution:                            {label: Institution}
+          location:                               {label: Location}
+          country:                                {label: Country}
+          trstname:                               {label: Site Name}
+          latitudedecimal:                        {label: Latitude}
+          longitudedecimal:                       {label: Longitude}
+          trstaltitude:                           {label: Altitude}
+          trstph:                                 {label: Ph}
+          trststatus:                             {label: Location verified}
+        object_actions:
+          _edit: ~
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Trial Site
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Trial Site
+        
+      #Configuracion para la Vista del Registro
+      show:
+        title:          View Trial Site

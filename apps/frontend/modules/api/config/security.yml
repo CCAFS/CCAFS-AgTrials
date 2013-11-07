@@ -1,0 +1,2 @@
+Index:
+  is_secure:   on        # La acción "Index" es sólo para usuarios autenticados

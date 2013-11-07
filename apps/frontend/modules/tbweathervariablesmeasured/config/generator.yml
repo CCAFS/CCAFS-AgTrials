@@ -1,0 +1,51 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbweathervariablesmeasured
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbweathervariablesmeasured
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:          ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_weathervariablesmeasured:  {label: Id}
+        wtvrmsname:                   {label: Name}
+        wtvrmsshortname:              {label: Short name}
+        wtvrmsdefinition:             {label: Definition}
+        wtvrmsunit:                   {label: Unit}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Weather Variables Measured
+        max_per_page:   10
+        display:        [id_weathervariablesmeasured, wtvrmsname, wtvrmsshortname, wtvrmsdefinition, wtvrmsunit]
+        fields:
+          id_weathervariablesmeasured:  {label: Id}
+          wtvrmsname:                   {label: Name}
+          wtvrmsshortname:              {label: Short name}
+          wtvrmsdefinition:             {label: Definition}
+          wtvrmsunit:                   {label: Unit}
+
+        #object_actions:  {}
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Weather Variables Measured
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Weather Variables Measured

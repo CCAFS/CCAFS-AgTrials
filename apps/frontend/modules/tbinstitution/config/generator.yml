@@ -1,0 +1,57 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbinstitution
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbinstitution
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_institution:  {label: id}
+        id_country:      {label: Country}
+        insname:         {label: Name}
+        insaddress:      {label: Address}
+        insphone:        {label: Phone}
+        insfax:          {label: Fax}
+        insemail:        {label: Email}
+        inswebsite:      {label: Web site}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Institution
+        max_per_page:   20
+        display:        [id_institution, _country, insname,	insaddress, insphone,	insfax, insemail, inswebsite]
+        fields:
+          id_institution:  {label: id}
+          _country:        {label: Country}
+          insname:         {label: Name}
+          insaddress:      {label: Address}
+          insphone:        {label: Phone}
+          insfax:          {label: Fax}
+          insemail:        {label: Email}
+          inswebsite:      {label: Web site}
+        object_actions:
+          _edit:        ~
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Institution
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Institution

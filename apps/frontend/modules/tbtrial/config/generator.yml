@@ -1,0 +1,75 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbtrial
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbtrial
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:
+
+      #Configuracion Etiqueta Campos
+      fields:
+        id_trial:                                    {label: id}
+        id_trialgroup:                               {label: Trial group}
+        id_contactperson:                            {label: Contact person}
+        id_country:                                  {label: Country}
+        id_trialsite:                                {label: Trial site}
+        id_fieldnamenumber :                         {label: Field name number}
+        id_crop:                                     {label: Technology}
+        trlvarieties:                                {label: Varieties}
+        trlname:                                     {label: Name}
+        trlsowdate:                                  {label: Sow/plant date yyyy-mm-dd, type: Date, date_format: yyyy-mm-dd}
+        trlharvestdate:                              {label: Harvest date yyyy-mm-dd, type: Date, date_format: yyyy-mm-dd}
+        trltrialresultsfileaccess:                   {label: Trial results file access}
+        trlvariablesmeasured:                        {label: Variables measured}
+        trllicense :                                 {label: License of file Results and file supplemental information }
+        trlweatherduringtrialfileaccess:             {label: Weather during the trial file access}
+        trlsoiltypeconditionsduringtrialfileaccess:  {label: Soil type and/or conditions during trial file access}
+        trltrialrecorddate:                          {label: Trial record date, type: Date, date_format: d.m.Y}
+        
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Trial
+        max_per_page:   5
+        display:        [id_trial, id_contactperson, id_trialgroup, id_country, id_trialsite, id_crop, trlname, trltrialresultsfileaccess]
+        fields:
+          trialgroup:                    {label: Trial group}
+          contactperson:                 {label: Contact person}
+          country:                       {label: Country}
+          trialsite:                     {label: Trial site}
+          crop:                          {label: Technology}
+          trlname:                       {label: Name}
+          trltrialresultsfileaccess:     {label: Trial results file access}
+        object_actions:
+          _edit:       ~
+          _show:       ~
+          _Comments:   ~
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Trial
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Trial
+
+      #Configuracion para la Vista del Registro
+      show:
+        title:          View Trial
+
+
+

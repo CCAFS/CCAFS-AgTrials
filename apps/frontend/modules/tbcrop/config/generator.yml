@@ -1,0 +1,47 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbcrop
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbcrop
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:       ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_crop:           {label: id}
+        crpname:           {label: Name}
+        crpscientificname: {label: Scientific name}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Technology
+        max_per_page:   20
+        display:        [id_crop, crpname, crpscientificname]
+        fields:
+          id_crop:            {label: Id}
+          crpname:            {label: Name}
+          crpscientificname:  {label: Scientific name}
+        object_actions: {}
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Technology
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Technology
+

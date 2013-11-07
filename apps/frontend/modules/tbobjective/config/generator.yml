@@ -1,0 +1,45 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbobjective
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbobjective
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:          ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_objective: {label: Id}
+        objname:      {label: Name}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Objetive
+        max_per_page:   20
+        display:        [id_objective, objname]
+        fields:
+          id_objective: {label: Id}
+          objname:      {label: Name}
+        object_actions: 
+          _edit:        ~
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Objetive
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Objetive

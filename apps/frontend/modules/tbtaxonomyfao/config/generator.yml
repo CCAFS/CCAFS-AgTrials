@@ -1,0 +1,41 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbtaxonomyfao
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbtaxonomyfao
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:       ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_taxonomyfao: {label: id}
+        txnname:        {label: Name}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Taxonomy FAO
+        max_per_page:   20
+        display:        ~
+        object_actions: {}
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Taxonomy FAO
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Taxonomy FAO

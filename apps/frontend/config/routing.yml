@@ -1,0 +1,846 @@
+tbmeteorologicalfields:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbmeteorologicalfields
+    module:               tbmeteorologicalfields
+    prefix_path:          /tbmeteorologicalfields
+    column:               id_meteorologicalfields
+    with_wildcard_routes: true
+
+tbweatherstation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbweatherstation
+    module:               tbweatherstation
+    prefix_path:          /tbweatherstation
+    column:               id_weatherstation
+    with_wildcard_routes: true
+
+tbclimatestation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbclimatestation
+    module:               tbclimatestation
+    prefix_path:          /tbclimatestation
+    column:               id_climatestation
+    with_wildcard_routes: true
+
+tbunit:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbunit
+    module:               tbunit
+    prefix_path:          /tbunit
+    column:               id_unit
+    with_wildcard_routes: true
+
+tbweathervariablesmeasured:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbweathervariablesmeasured
+    module:               tbweathervariablesmeasured
+    prefix_path:          /tbweathervariablesmeasured
+    column:               id_weathervariablesmeasured
+    with_wildcard_routes: true
+
+tb_trialvariablesmeasured:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TbTrialvariablesmeasured
+    module:               tb_trialvariablesmeasured
+    prefix_path:          /tb_trialvariablesmeasured
+    column:               id_trialvariablesmeasured
+    with_wildcard_routes: true
+
+#SISTEME DE ENRUTAMIENTO MODULOS
+tbtraitclass:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbtraitclass
+    module:               tbtraitclass
+    prefix_path:          /tbtraitclass
+    column:               id_traitclass
+    with_wildcard_routes: true
+
+tbtrialenvironmenttype:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbtrialenvironmenttype
+    module:               tbtrialenvironmenttype
+    prefix_path:          /tbtrialenvironmenttype
+    column:               id_trialenvironmenttype
+    with_wildcard_routes: true
+
+tbvariablesmeasured:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbvariablesmeasured
+    module:               tbvariablesmeasured
+    prefix_path:          /tbvariablesmeasured
+    column:               id_variablesmeasured
+    with_wildcard_routes: true
+
+tbtrialgrouptype:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbtrialgrouptype
+    module:               tbtrialgrouptype
+    prefix_path:          /tbtrialgrouptype
+    column:               id_trialgrouptype
+    with_wildcard_routes: true
+
+tbphenotypicpropertiesmeasured:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbphenotypicpropertiesmeasured
+    module:               tbphenotypicpropertiesmeasured
+    prefix_path:          /tbphenotypicpropertiesmeasured
+    column:               id_phenotypicpropertiesmeasured
+    with_wildcard_routes: true
+
+tbfieldnamenumber:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbfieldnamenumber
+    module:               tbfieldnamenumber
+    prefix_path:          /tbfieldnamenumber
+    column:               id_fieldnamenumber
+    with_wildcard_routes: true
+
+tb_phenotypicpropertiesmeasured:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TbPhenotypicpropertiesmeasured
+    module:               tb_phenotypicpropertiesmeasured
+    prefix_path:          /tb_phenotypicpropertiesmeasured
+    column:               id_phenotypicpropertiesmeasured
+    with_wildcard_routes: true
+
+tb_fieldnamenumber:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TbFieldnamenumber
+    module:               tb_fieldnamenumber
+    prefix_path:          /tb_fieldnamenumber
+    column:               id_fieldnamenumber
+    with_wildcard_routes: true
+
+tb_trialsite:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TbTrialsite
+    module:               tb_trialsite
+    prefix_path:          /tb_trialsite
+    column:               id_trialsite
+    with_wildcard_routes: true
+
+tborigin:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tborigin
+    module:               tborigin
+    prefix_path:          /tborigin
+    column:               id_origin
+    with_wildcard_routes: true
+
+tbsoil:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbsoil
+    module:               tbsoil
+    prefix_path:          /tbsoil
+    column:               id_soil
+    with_wildcard_routes: true
+
+tbtrialtype:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbtrialtype
+    module:               tbtrialtype
+    prefix_path:          /tbtrialtype
+    column:               id_trialtype
+    with_wildcard_routes: true
+
+tbvariety:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbvariety
+    module:               tbvariety
+    prefix_path:          /tbvariety
+    column:               id_variety
+    with_wildcard_routes: true
+
+tbtypetrialsite:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbtypetrialsite
+    module:               tbtypetrialsite
+    prefix_path:          /tbtypetrialsite
+    column:               id_typetrialsite
+    with_wildcard_routes: true
+
+tbtrialsite:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbtrialsite
+    module:               tbtrialsite
+    prefix_path:          /tbtrialsite
+    column:               id_trialsite
+    with_wildcard_routes: true
+
+tbtrialgroup:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbtrialgroup
+    module:               tbtrialgroup
+    prefix_path:          /tbtrialgroup
+    column:               id_trialgroup
+    with_wildcard_routes: true
+
+tbtrial:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbtrial
+    module:               tbtrial
+    prefix_path:          /tbtrial
+    column:               id_trial
+    with_wildcard_routes: true
+
+tbtaxonomyfao:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbtaxonomyfao
+    module:               tbtaxonomyfao
+    prefix_path:          /tbtaxonomyfao
+    column:               id_taxonomyfao
+    with_wildcard_routes: true
+
+tbnetwork:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbnetwork
+    module:               tbnetwork
+    prefix_path:          /tbnetwork
+    column:               id_network
+    with_wildcard_routes: true
+
+tblocation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tblocation
+    module:               tblocation
+    prefix_path:          /tblocation
+    column:               id_location
+    with_wildcard_routes: true
+
+tblanguage:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tblanguage
+    module:               tblanguage
+    prefix_path:          /tblanguage
+    column:               id_language
+    with_wildcard_routes: true
+
+tbinstitutionnetwork:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbinstitutionnetwork
+    module:               tbinstitutionnetwork
+    prefix_path:          /tbinstitutionnetwork
+    column:               Array
+    with_wildcard_routes: true
+
+tbinstitution:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbinstitution
+    module:               tbinstitution
+    prefix_path:          /tbinstitution
+    column:               id_institution
+    with_wildcard_routes: true
+
+tbcrop:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbcrop
+    module:               tbcrop
+    prefix_path:          /tbcrop
+    column:               id_crop
+    with_wildcard_routes: true
+
+tbcountry:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbcountry
+    module:               tbcountry
+    prefix_path:          /tbcountry
+    column:               id_country
+    with_wildcard_routes: true
+
+tbcontactpersontype:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbcontactpersontype
+    module:               tbcontactpersontype
+    prefix_path:          /tbcontactpersontype
+    column:               id_contactpersontype
+    with_wildcard_routes: true
+
+tbcontactperson:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbcontactperson
+    module:               tbcontactperson
+    prefix_path:          /tbcontactperson
+    column:               id_contactperson
+    with_wildcard_routes: true
+
+tbbibliography:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbbibliography
+    module:               tbbibliography
+    prefix_path:          /tbbibliography
+    column:               id_bibliography
+    with_wildcard_routes: true
+
+tbprimarydiscipline:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbprimarydiscipline
+    module:               tbprimarydiscipline
+    prefix_path:          /tbprimarydiscipline
+    column:               id_primarydiscipline
+    with_wildcard_routes: true
+
+tbobjective:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                tbobjective
+    module:               tbobjective
+    prefix_path:          /tbobjective
+    column:               id_objective
+    with_wildcard_routes: true
+
+reset:
+  url: /reset
+  param: { module: tbtrial, action: reset }
+
+resetRequest:
+  url: /reset-request
+  param: { module: tbtrial, action: resetRequest }
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+
+changepassword:
+  url:   /changepassword
+  param: { module: SfGuardUser, action: changepassword }
+
+user:
+  url:   /user
+  param: { module: SfGuardUser, action: user }
+
+forgotpassword:
+  url:   /forgotpassword
+  param: { module: sfGuardAuth, action: forgotpassword }
+
+
+#INICIO: ENRRUTAMIENTO CERRAR VENTANA EMERGENTE CREACION tb_trialgroup
+closepopup_trialgroup:
+  url:   /tbtrialgroup_close/*
+  param: { module: tbtrialgroup, action: close }
+
+#INICIO: ENRRUTAMIENTO VENTANA EMERGENTE GENERADOR LICENCIA
+license_generator:
+  url:   /licence/*
+  param: { module: tbtrial, action: licence }
+
+
+#INICIO: ENRRUTAMIENTO VENTANA EMERGENTE DESCARGAS
+download_file:
+  url:   /download/*
+  param: { module: tbtrial, action: download }
+
+#INICIO: ENRRUTAMIENTO Batch Upload Trial
+batchupload:
+  url:   /batchupload/*
+  param: { module: tbtrial, action: batchupload }
+
+upload:
+  url:   /upload/*
+  param: { module: tbtrial, action: upload }
+
+downloadestruture:
+  url:   /downloadestruture/*
+  param: { module: tbtrial, action: downloadestruture }
+  
+templatedownload:
+  url:   /templatedownload/*
+  param: { module: tbtrial, action: templatedownload }
+
+informationbatchupload:
+  url:   /informationbatchupload/*
+  param: { module: tbtrial, action: informationbatchupload }
+
+
+#INICIO: ENRRUTAMIENTO Batch Upload Trial Sites
+batchuploadtrialsite:
+  url:   /batchuploadtrialsite/*
+  param: { module: tbtrialsite, action: batchuploadtrialsite }
+
+downloadestruturetrialsite:
+  url:   /downloadestruturetrialsite/*
+  param: { module: tbtrialsite, action: downloadestruturetrialsite }
+
+weathervariablesmeasuredlist:
+  url:   /weathervariablesmeasuredlist/*
+  param: { module: tbtrialsite, action: weathervariablesmeasuredlist }
+
+saveweathervariablesmeasuredlist:
+  url:   /saveweathervariablesmeasuredlist/*
+  param: { module: tbtrialsite, action: saveweathervariablesmeasuredlist }
+  
+downloadusers:
+  url:   /downloadusers
+  param: { module: SfGuardUser, action: downloadusers }
+  
+downloadlist:
+  url:   /downloadlist/*
+  param: { module: tbtrialsite, action: downloadlist }
+
+#INICIO: ENRRUTAMIENTO Batch Upload Variety
+batchuploadvariety:
+  url:   /batchuploadvariety/*
+  param: { module: tbvariety, action: batchuploadvariety }
+
+downloadestruturevariety:
+  url:   /downloadestruturevariety/*
+  param: { module: tbvariety, action: downloadestruturevariety }
+  
+checkvariety:
+  url:   /checkvariety/*
+  param: { module: tbvariety, action: checkvariety }
+
+checkvarietybatch:
+  url:   /checkvarietybatch/*
+  param: { module: tbvariety, action: checkvarietybatch }
+
+downloadcheckvarietytemplate:
+  url:   /downloadcheckvarietytemplate/*
+  param: { module: tbvariety, action: downloadcheckvarietytemplate }
+
+resultfilecheckvariety:
+  url:   /resultfilecheckvariety/*
+  param: { module: tbvariety, action: resultfilecheckvariety }
+  
+checkvariablesmeasured:
+  url:   /checkvariablesmeasured/*
+  param: { module: tbvariablesmeasured, action: checkvariablesmeasured }
+
+checkvariablesmeasuredbatch:
+  url:   /checkvariablesmeasuredbatch/*
+  param: { module: tbvariablesmeasured, action: checkvariablesmeasuredbatch }
+
+downloadcheckvariablesmeasuredtemplate:
+  url:   /downloadcheckvariablesmeasuredtemplate/*
+  param: { module: tbvariablesmeasured, action: downloadcheckvariablesmeasuredtemplate }
+
+resultfilecheckvariablesmeasured:
+  url:   /resultfilecheckvariablesmeasured/*
+  param: { module: tbvariablesmeasured, action: resultfilecheckvariablesmeasured }
+
+checktrialsite:
+  url:   /checktrialsite/*
+  param: { module: tbtrialsite, action: checktrialsite }
+
+checktrialsitebatch:
+  url:   /checktrialsitebatch/*
+  param: { module: tbtrialsite, action: checktrialsitebatch }
+
+downloadchecktrialsitetemplate:
+  url:   /downloadchecktrialsitetemplate/*
+  param: { module: tbtrialsite, action: downloadchecktrialsitetemplate }
+
+resultfilechecktrialsite:
+  url:   /resultfilechecktrialsite/*
+  param: { module: tbtrialsite, action: resultfilechecktrialsite }
+
+viewtrialsite:
+  url:   /viewtrialsite/*
+  param: { module: tbtrialsite, action: viewtrialsite }
+
+#INICIO: ENRRUTAMIENTO Batch Upload Variables Measured
+batchuploadvariablesmeasured:
+  url:   /batchuploadvariablesmeasured/*
+  param: { module: tbvariablesmeasured, action: batchuploadvariablesmeasured }
+
+downloadestruturevariablesmeasured:
+  url:   /downloadestruturevariablesmeasured/*
+  param: { module: tbvariablesmeasured, action: downloadestruturevariablesmeasured }
+
+#INICIO: ENRRUTAMIENTO Batch Upload Location
+batchuploadlocation:
+  url:   /batchuploadlocation/*
+  param: { module: tblocation, action: batchuploadlocation }
+
+downloadestruturelocation:
+  url:   /downloadestruturelocation/*
+  param: { module: tblocation, action: downloadestruturelocation }
+
+#INICIO: ENRRUTAMIENTO Batch Upload Trial Group
+batchuploadtrialgroup:
+  url:   /batchuploadtrialgroup/*
+  param: { module: tbtrialgroup, action: batchuploadtrialgroup }
+
+downloadestruturetrialgroup:
+  url:   /downloadestruturetrialgroup/*
+  param: { module: tbtrialgroup, action: downloadestruturetrialgroup }
+
+#INICIO: LISTA DE REGISTROS MODIFICADA
+list:
+  url:   /list/*
+  param: { module: tbtrial, action: list }
+
+#VENTANA DE VARIEDADES
+get_id_crop:
+  url:   /get_id/*
+  param: { module: tbtrial, action: getidcrop }
+
+varieties:
+  url:   /varieties/*
+  param: { module: tbtrial, action: varieties }
+
+savevarieties:
+  url:   /savevarieties/*
+  param: { module: tbtrial, action: savevarieties }
+
+#INICIO: RUTAS PARA LAS LISTA DE TRIAL
+listvarieties:
+  url:   /listvarieties/*
+  param: { module: tbtrial, action: listvarieties }
+
+listvariablesmeasured:
+  url:   /listvariablesmeasured/*
+  param: { module: tbtrial, action: listvariablesmeasured }
+
+savelistvarieties:
+  url:   /savelistvarieties/*
+  param: { module: tbtrial, action: savelistvarieties }
+
+savelistvariablesmeasured:
+  url:   /savelistvariablesmeasured/*
+  param: { module: tbtrial, action: savelistvariablesmeasured }
+  
+listmeteorologicalfields:
+  url:   /listmeteorologicalfields/*
+  param: { module: tbweatherstation, action: listmeteorologicalfields }
+
+savelistmeteorologicalfields:
+  url:   /savelistmeteorologicalfields/*
+  param: { module: tbweatherstation, action: savelistmeteorologicalfields }
+  
+templatemeteorologicalfields:
+  url:   /templatemeteorologicalfields/*
+  param: { module: tbweatherstation, action: templatemeteorologicalfields }
+
+#FIN: RUTAS PARA LAS LISTA DE TRIAL
+
+#VENTAN DE VARIABLES MEDIDAS
+get_id_crop_variablesmeasured:
+  url:   /get_id_crop_variablesmeasured/*
+  param: { module: tbtrial, action: getidcropvariablesmeasured }
+variablesmeasured:
+  url:   /variablesmeasured/*
+  param: { module: tbtrial, action: variablesmeasured }
+
+#VENTANa DE Specified users
+specifiedusers:
+  url:   /specifiedusers/*
+  param: { module: tbtrial, action: specifiedusers }
+
+#VENTANa DE Specified groups
+specifiedgroups:
+  url:   /specifiedgroups/*
+  param: { module: tbtrial, action: specifiedgroups }
+  
+trialsitespecifiedusers:
+  url:   /trialsitespecifiedusers/*
+  param: { module: tbtrialsite, action: trialsitespecifiedusers }
+  
+trials:
+  url:   /trials/*
+  param: { module: tbtrial, action: trials }
+  
+trialgroups:
+  url:   /trialgroups/*
+  param: { module: tbtrialgroup, action: trialgroups }
+
+variablesmeasured:
+  url:   /variablesmeasured/*
+  param: { module: tbtrial, action: variablesmeasured }
+
+savevariablesmeasured:
+  url:   /savevariablesmeasured/*
+  param: { module: tbtrial, action: savevariablesmeasured }
+
+savespecifiedusers:
+  url:   /savespecifiedusers/*
+  param: { module: tbtrial, action: savespecifiedusers }
+
+savespecifiedgroups:
+  url:   /savespecifiedgroups/*
+  param: { module: tbtrial, action: savespecifiedgroups }
+  
+savetrialsitespecifiedusers:
+  url:   /savetrialsitespecifiedusers/*
+  param: { module: tbtrialsite, action: savetrialsitespecifiedusers }
+  
+savetrials:
+  url:   /savetrials/*
+  param: { module: tbtrial, action: savetrials }
+  
+savetrialgroups:
+  url:   /savetrialgroups/*
+  param: { module: tbtrialgroup, action: savetrialgroups }
+
+savetrialgroupcomment:
+  url:   /savetrialgroupcomment/*
+  param: { module: tbtrialgroup, action: List_Comments }
+
+savetrialcomment:
+  url:   /savetrialcomment/*
+  param: { module: tbtrial, action: List_Comments }
+  
+permissionstrials:
+  url:   /permissionstrials/*
+  param: { module: tbtrial, action: permissionstrials }
+
+ViewVarieties:
+  url:   /ViewVarieties/*
+  param: { module: tbvariety, action: ViewVarieties }
+
+ViewVariablesMeasured:
+  url:   /ViewVariablesMeasured/*
+  param: { module: tbvariablesmeasured, action: ViewVariablesMeasured }
+
+downloadkml:
+  url:   /downloadkml/*
+  param: { module: tbtrialsite, action: downloadkml }
+#INICIO: LISTA DE REGISTROS TRANSACIONES
+logtransaction:
+  url:   /logtransaction/*
+  param: { module: administration, action: logtransaction }
+  
+updatevariablemeasured:
+  url:   /updatevariablemeasured/*
+  param: { module: administration, action: updatevariablemeasured }
+
+communications:
+  url:   /communications/*
+  param: { module: administration, action: communications }
+  
+video:
+  url:   /video/*
+  param: { module: administration, action: video }
+  
+viewvideo:
+  url:   /viewvideo/*
+  param: { module: administration, action: viewvideo }
+
+batchprocesses:
+  url:   /batchprocesses/*
+  param: { module: administration, action: batchprocesses }
+  
+trialsitecontactperson:
+  url:   /trialsitecontactperson/*
+  param: { module: tbtrialsite, action: trialsitecontactperson }
+
+savetrialsitecontactperson:
+  url:   /savetrialsitecontactperson/*
+  param: { module: tbtrialsite, action: savetrialsitecontactperson }
+  
+trialgroupcontactperson:
+  url:   /trialgroupcontactperson/*
+  param: { module: tbtrialgroup, action: trialgroupcontactperson }
+
+savetrialgroupcontactperson:
+  url:   /savetrialgroupcontactperson/*
+  param: { module: tbtrialgroup, action: savetrialgroupcontactperson }
+  
+weatherstationuserpermission:
+  url:   /weatherstationuserpermission/*
+  param: { module: tbweatherstation, action: weatherstationuserpermission }
+
+saveweatherstationuserpermission:
+  url:   /saveweatherstationuserpermission/*
+  param: { module: tbweatherstation, action: saveweatherstationuserpermission }
+  
+trialsiteweatherstation:
+  url:   /trialsiteweatherstation/*
+  param: { module: tbtrialsite, action: trialsiteweatherstation }
+
+savetrialsiteweatherstation:
+  url:   /savetrialsiteweatherstation/*
+  param: { module: tbtrialsite, action: savetrialsiteweatherstation }
+
+#INICIO: MAPA DE COORDENADAS
+maptrialsites:
+  url:   /maptrialsites/*
+  param: { module: tbtrialsite, action: maptrialsites }
+
+#INICIO: MAPA DE SITIOS DE ENSAYOS
+trialsitesmap:
+  url:   /trialsitesmap/*
+  param: { module: tbtrialsite, action: trialsitesmap }
+
+#INICIO: ENRUTAMIENTO FORO
+forum:
+  url:   /forum/*
+  param: { module: forum, action: forum }
+
+theme:
+  url:   /theme/*
+  param: { module: forum, action: theme }
+
+message:
+  url:   /message/*
+  param: { module: forum, action: message }
+
+savemessage:
+  url:   /savemessage/*
+  param: { module: forum, action: savemessage }
+
+newcategory:
+  url:   /newcategory/*
+  param: { module: forum, action: newcategory }
+
+newtheme:
+  url:   /newtheme/*
+  param: { module: forum, action: newtheme }
+
+contact:
+  url:   /contact/*
+  param: { module: help, action: contact }
+
+#Reportes
+reports:
+  url:   /reports/*
+  param: { module: reports, action: index }
+
+rep_trialssitesbycrop:
+  url:   /rep_trialssitesbycrop/*
+  param: { module: reports, action: trialssitesbycrop }
+  
+batchuploadmeteorology:
+  url:   /batchuploadmeteorology/*
+  param: { module: tbweatherstation, action: batchuploadmeteorology }
+
+
+#enrrutamiento de pruebas
+pruebas:
+  url:   /pruebas/*
+  param: { module: tbtrial, action: pruebas }
+
+# default rules
+trialsites:
+  url:   /trialsites/*
+  param: { module: tbtrial, action: list }
+  
+sitemap:
+  url:   /sitemap/*
+  param: { module: home, action: sitemap }
+
+aboutagtrials:
+  url:   /aboutagtrials/*
+  param: { module: home, action: aboutagtrials }
+
+aboutccafs:
+  url:   /aboutccafs/*
+  param: { module: home, action: aboutccafs }
+
+contactagtrials:
+  url:   /contactagtrials/*
+  param: { module: home, action: contactagtrials }
+
+register:
+  url:   /register/*
+  param: { module: home, action: register }
+
+moreoptions:
+  url:   /moreoptions/*
+  param: { module: home, action: moreoptions }
+
+statistics:
+  url:   /statistics/*
+  param: { module: home, action: statistics }
+  
+search:
+  url:   /search/*
+  param: { module: home, action: search }
+
+geoRSS:
+  url:   /geoRSS/*
+  param: { module: home, action: geoRSS }
+
+blog:
+  url:   /blog/*
+  param: { module: home, action: blog }
+
+AgTrialsBlogRSS:
+  url:   /AgTrialsBlogRSS/*
+  param: { module: home, action: AgTrialsBlogRSS }
+
+#INICIO: RUTAS PARA LAS LISTA DE TRIAL
+varieties:
+  url:   /varieties/*
+  param: { module: tbtrial, action: varieties }
+
+varietiessave:
+  url:   /varietiessave/*
+  param: { module: tbtrial, action: varietiessave }
+
+variablesmeasured:
+  url:   /variablesmeasured/*
+  param: { module: tbtrial, action: variablesmeasured }
+
+variablesmeasuredsave:
+  url:   /variablesmeasuredsave/*
+  param: { module: tbtrial, action: variablesmeasuredsave }
+
+
+#ENRUTAMIENTO DE PRUEBA
+test:
+  url:   /test/*
+  param: { module: home, action: test }
+
+homepage:
+  url:   /
+  param: { module: home, action: index }
+
+default_symfony:
+  url:   /symfony/:action/*
+  param: { module: default }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   :module/:action/*
+
+
+
+
+
+

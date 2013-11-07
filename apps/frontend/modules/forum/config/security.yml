@@ -1,0 +1,20 @@
+Index:
+  is_secure:   on        # La acción "Index" es sólo para usuarios autenticados
+  
+Forum:
+  is_secure:   on        # La acción "Forum" es sólo para usuarios autenticados
+  
+Theme:
+  is_secure:   on        # La acción "Theme" es sólo para usuarios autenticados
+  
+Message:
+  is_secure:   on        # La acción "Message" es sólo para usuarios autenticados
+  
+Savemessage:
+  is_secure:   on        # La acción "Savemessage" es sólo para usuarios autenticados
+  
+Newcategory:
+  is_secure:   on        # La acción "Newcategory" es sólo para usuarios autenticados
+  
+Newtheme:
+  is_secure:   on        # La acción "Newtheme" es sólo para usuarios autenticados

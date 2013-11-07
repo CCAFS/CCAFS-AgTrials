@@ -1,0 +1,59 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           tbcontactperson
+    theme:                 jroller
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tbcontactperson
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:          ~
+      #Configuracion Etiqueta Campos
+      fields:
+        id_contactperson:      {label: Id}
+        id_institution:        {label: Institution}
+        id_country:            {label: Country}
+        id_contactpersontype:  {label: Contact person type}
+        cnprfirstname:         {label: First name}
+        cnprlastname:          {label: Last name}
+        cnpraddress:           {label: Address}
+        cnprphone:             {label: Phone}
+        cnpremail:             {label: Email}
+
+      #Configuracion para Lista de Registros
+      list:
+        title:          List Contact Person
+        max_per_page:   20
+        display:        [id_contactperson, _institution, _country,	_contactpersontype, cnprfirstname,	cnprlastname, cnpraddress, cnprphone, cnpremail ]
+        fields:
+          id_contactperson:      {label: Id}
+          _institution:          {label: Institution}
+          _country:              {label: Country }
+          _contactpersontype:    {label: Contact person type}
+          cnprfirstname:         {label: First name}
+          cnprlastname:          {label: Last name}
+          cnpraddress:           {label: Address}
+          cnprphone:             {label: Phone}
+          cnpremail:             {label: Email}
+        object_actions:
+          _edit:        ~
+        batch_actions:  {}
+
+      #Configuracion para Filtro Registros
+      filter:  ~
+
+      #Configuracion para Formulario Registro
+      form:    ~
+
+      #Configuracion para Edicion Registro
+      edit:
+        title:          Edit Contact Person
+
+      #Configuracion para Nuevo Registro
+      new:
+        title:          New Contact Person
