@@ -1675,8 +1675,7 @@ class tbtrialActions extends autoTbtrialActions {
                 ->from("TbTrial T")
                 ->innerJoin("T.TbTrialsite TS")
                 ->innerJoin("T.TbCrop CR")
-                ->where("T.id_user = $id_user")
-                ->andWhere("LOWER(T.trlname) LIKE '$dato%'")
+                ->where("LOWER(T.trlname) LIKE '$dato%'")
                 ->orderBy("CR.crpname,TS.trstname,T.trlname")
                 ->limit(20);
 
