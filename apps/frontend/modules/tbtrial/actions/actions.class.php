@@ -1740,6 +1740,7 @@ class tbtrialActions extends autoTbtrialActions {
                 $Variety_id .= "$valor,";
             }
         }
+        
         $Variety_id = substr($Variety_id, 0, (strlen($Variety_id) - 1));
         if ($Variety_id != "")
             $WhereVariety = " AND TV.id_variety IN ($Variety_id)";
