@@ -130,8 +130,6 @@ class tbtrialsiteActions extends autoTbtrialsiteActions {
 
         $TbTrialsite = Doctrine::getTable('TbTrialsite')->findOneByIdTrialsite($id_trialsite);
         $trstactive = $TbTrialsite->getTrstactive();
-        if ($trstactive != 1)
-            $this->getUser()->setFlash('notice', "Pending for Activation!", false);
     }
 
     public function executeUpdate(sfWebRequest $request) {
@@ -197,7 +195,7 @@ class tbtrialsiteActions extends autoTbtrialsiteActions {
         }
 
         if ($form->isValid() && $FileValid) {
-            $notice = $form->getObject()->isNew() ? 'The item was created successfully (Pending for Activation).' : 'The item was updated successfully.';
+            $notice = $form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
 
             $tbtrialsite = $form->save();
             $id_trialsite = $tbtrialsite['id_trialsite'];
