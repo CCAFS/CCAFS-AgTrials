@@ -32,7 +32,7 @@ class TbTrialsite extends BaseTbTrialsite {
 
         $SF_username = sfContext::getInstance()->getUser()->getUsername();
 
-        if ($this->isNew()) {
+        /*if ($this->isNew()) {
             $SfGuardUser = Doctrine::getTable('SfGuardUser')->findOneById($id_user);
             $UserEmailAddress = $SfGuardUser->getEmailAddress();
             if (!(@ereg("^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@+([_a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]{2,200}\.[a-zA-Z]{2,6}$", $UserEmailAddress))) {
@@ -138,7 +138,7 @@ class TbTrialsite extends BaseTbTrialsite {
                 }
             }
         }
-        //FIN:ENVIO DE CORREO PARA LA POSTERIOR ACTIVACION
+        //FIN:ENVIO DE CORREO PARA LA POSTERIOR ACTIVACION*/
         return parent::save($conn);
     }
 
