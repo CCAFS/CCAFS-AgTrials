@@ -2001,6 +2001,68 @@ TbLanguage:
       local: id_language
       foreign: id_language
       type: many
+TbLanguageLog:
+  connection: doctrine
+  tableName: tb_language_log
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      primary: true
+    operation:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_language:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    lngname:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    lngcode:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_user_update:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
 TbLocation:
   connection: doctrine
   tableName: tb_location

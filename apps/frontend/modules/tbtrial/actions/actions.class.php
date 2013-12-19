@@ -1784,6 +1784,8 @@ class tbtrialActions extends autoTbtrialActions {
     }
 
     public function executeList(sfWebRequest $request) {
+        ini_set("memory_limit", "2048M");
+        set_time_limit(900000000000);
         $user = sfContext::getInstance()->getUser();
         $id_contactperson = $request->getParameter('id_contactperson_list');
         $id_trialgroup = $request->getParameter('id_trialgroup_list');

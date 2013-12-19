@@ -49,7 +49,7 @@ if ($variablesmeasured != '')
 
     #tbtrial_list{
         width:950px;
-        height:650px;
+        height:700px;
         overflow:auto;
     }
 </style>

@@ -60,7 +60,6 @@ function toggleMarkerManager() {
             mgr.refresh();
         });
     }
-    mgr.refresh();
 }
 
 //Toggles Marker Clusterer visibility.
@@ -71,7 +70,7 @@ function toggleMarkerClusterer() {
             mc.addMarkers(markers.info);
         } else {
             mc = new MarkerClusterer(map, markers.info, {
-                maxZoom: 15
+                maxZoom: 5
             });
         }
     } else {

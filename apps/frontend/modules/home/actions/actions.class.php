@@ -21,6 +21,7 @@ class homeActions extends sfActions {
     public function executeSitemap(sfWebRequest $request) {
         
     }
+
     public function executeIndex(sfWebRequest $request) {
         $conexion = connectionblog();
         $sql = @mysql_query("SELECT P.id,P.post_title,P.post_date,P.guid,P.post_parent,P.post_content,U.display_name FROM wp_posts P JOIN wp_users U ON P.post_author = U.id WHERE P.post_status = 'publish' AND P.post_type = 'post' ORDER BY P.post_date DESC LIMIT 2", $conexion);
@@ -38,15 +39,15 @@ class homeActions extends sfActions {
         $this->lastpost = $lastpost;
 
         $QUERY00 = Doctrine_Query::create()
-                        ->select("T.*,TG.trgrname AS trialgroup, (CP.cnprfirstname||' '||CP.cnprlastname) AS contactperson, CN.cntname AS country, TS.trstname AS trialsite, CR.crpname AS cropanimal, (TS.trstlatitudedecimal||' '||TS.trstlongitudedecimal) AS georsspoint, T.*")
-                        ->from("TbTrial T")
-                        ->innerJoin("T.TbTrialgroup TG")
-                        ->innerJoin("T.TbContactperson CP")
-                        ->innerJoin("T.TbCountry CN")
-                        ->innerJoin("T.TbTrialsite TS")
-                        ->innerJoin("T.TbCrop CR")
-                        ->orderBy("T.created_at DESC")
-                        ->limit(3);
+                ->select("T.*,TG.trgrname AS trialgroup, (CP.cnprfirstname||' '||CP.cnprlastname) AS contactperson, CN.cntname AS country, TS.trstname AS trialsite, CR.crpname AS cropanimal, (TS.trstlatitudedecimal||' '||TS.trstlongitudedecimal) AS georsspoint, T.*")
+                ->from("TbTrial T")
+                ->innerJoin("T.TbTrialgroup TG")
+                ->innerJoin("T.TbContactperson CP")
+                ->innerJoin("T.TbCountry CN")
+                ->innerJoin("T.TbTrialsite TS")
+                ->innerJoin("T.TbCrop CR")
+                ->orderBy("T.created_at DESC")
+                ->limit(3);
         //die($QUERY00->getSqlQuery());
         $Resultado00 = $QUERY00->execute();
         $this->lasttrial = $Resultado00;
@@ -56,9 +57,9 @@ class homeActions extends sfActions {
         $this->statistics = $st->fetchAll();
 
         $QUERY01 = Doctrine_Query::create()
-                        ->from("TbVideo")
-                        ->orderBy("id_video DESC")
-                        ->limit(3);
+                ->from("TbVideo")
+                ->orderBy("id_video DESC")
+                ->limit(3);
         //die($QUERY01->getSqlQuery());
         $Resultado01 = $QUERY01->execute();
         $this->videos = $Resultado01;
@@ -293,15 +294,15 @@ class homeActions extends sfActions {
             $limit = 100;
 
         $QUERY00 = Doctrine_Query::create()
-                        ->select("TG.trgrname AS trialgroup, (CP.cnprfirstname||' '||CP.cnprlastname) AS contactperson, CN.cntname AS country, TS.trstname AS trialsite, CR.crpname AS cropanimal, (TS.trstlatitudedecimal||' '||TS.trstlongitudedecimal) AS georsspoint, T.*")
-                        ->from("TbTrial T")
-                        ->innerJoin("T.TbTrialgroup TG")
-                        ->innerJoin("T.TbContactperson CP")
-                        ->innerJoin("T.TbCountry CN")
-                        ->innerJoin("T.TbTrialsite TS")
-                        ->innerJoin("T.TbCrop CR")
-                        ->orderBy("T.created_at DESC")
-                        ->limit($limit);
+                ->select("TG.trgrname AS trialgroup, (CP.cnprfirstname||' '||CP.cnprlastname) AS contactperson, CN.cntname AS country, TS.trstname AS trialsite, CR.crpname AS cropanimal, (TS.trstlatitudedecimal||' '||TS.trstlongitudedecimal) AS georsspoint, T.*")
+                ->from("TbTrial T")
+                ->innerJoin("T.TbTrialgroup TG")
+                ->innerJoin("T.TbContactperson CP")
+                ->innerJoin("T.TbCountry CN")
+                ->innerJoin("T.TbTrialsite TS")
+                ->innerJoin("T.TbCrop CR")
+                ->orderBy("T.created_at DESC")
+                ->limit($limit);
         //die($QUERY00->getSqlQuery());
         $Resultado00 = $QUERY00->execute();
         $this->feed = $Resultado00;
@@ -310,6 +311,10 @@ class homeActions extends sfActions {
 
     public function executeBlog(sfWebRequest $request) {
         
+    }
+
+    public function executeMapindex(sfWebRequest $request) {
+        $this->setLayout(false);
     }
 
     public function executeAgTrialsBlogRSS(sfWebRequest $request) {

@@ -1,1 +1,1 @@
-php symfony cc
+E:\xampp\php\php.exe symfony cc

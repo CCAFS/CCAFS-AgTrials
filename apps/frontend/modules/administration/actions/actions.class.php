@@ -245,7 +245,9 @@ class administrationActions extends sfActions {
                 foreach ($data_array AS $data) {
                     $id = $data->id;
                     $name = trim($data->name);
-                    $arrcrop = explode(" ", $data->ontology_name);
+                    $tmp = $data->ontology_name;
+                    $tmp = $tmp." tmp";
+                    $arrcrop = explode(" ", $tmp);
                     $crop = trim($arrcrop[0]);
                     //echo "($crop == $C_crop && $name== $C_variablesmeasured <br>";
                     if ((strtoupper($crop) == strtoupper($C_crop)) && (strtoupper($name) == strtoupper($C_variablesmeasured))) {

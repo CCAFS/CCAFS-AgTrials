@@ -16,37 +16,6 @@ class apiActions extends sfActions {
         
     }
 
-    public function executeApimap(sfWebRequest $request) {
-        $key = $request->getParameter('key');
-        $limit = $request->getParameter('cant');
-        $crop = $request->getParameter('crop');
-
-
-        if (!CheckAPI($key)) {
-            die("*** Error Key ***");
-        } else {
-            $connection = Doctrine_Manager::getInstance()->connection();
-
-            $QUERY00 = "SELECT T.id_trial, TS.trstname, TS.trstlatitudedecimal AS latitude, TS.trstlongitudedecimal AS longitude, INS.insname, trlvarieties, trlname, trlvariablesmeasured, CR.crpname ";
-            $QUERY00 .= "FROM tb_trial T ";
-            $QUERY00 .= "INNER JOIN tb_trialsite TS ON T.id_trialsite = TS.id_trialsite ";
-            $QUERY00 .= "INNER JOIN tb_institution INS ON TS.id_institution = INS.id_institution ";
-            $QUERY00 .= "INNER JOIN tb_crop CR ON T.id_crop = CR.id_crop ";
-            if ($crop != '')
-                $QUERY00 .= "WHERE T.id_crop IN ($crop) ";
-            if (is_numeric($limit))
-                $QUERY00 .= "LIMIT $limit ";
-
-            $st = $connection->execute($QUERY00);
-            $Result = $st->fetchAll(PDO::FETCH_ASSOC);
-            $JSON = json_encode($Result);
-            $JSONApimap = "agtrialWS = " . $JSON . ";";
-            header('Content-type: text/json');
-            header('Content-type: application/json');
-            die($JSONApimap);
-        }
-    }
-
     public function executeApitrials(sfWebRequest $request) {
         $key = $request->getParameter('key');
         $trial = $request->getParameter('trial');
@@ -303,30 +272,34 @@ class apiActions extends sfActions {
         }
     }
 
-    public function executeApiaddlocation(sfWebRequest $request) {
+    public function executeApimap(sfWebRequest $request) {
         $key = $request->getParameter('key');
-        $data = $request->getParameter('data');
-        $url = $request->getParameter('url');
-        
-        //http://www.agtrials.local/api/apiaddlocation?key=80418728F131FF0&data={%22locations%22:[{%22id_country%22:%2047,%22lctname%22:%22test%22,%22id_user%22:1},{%22id_country%22:%2047,%22lctname%22:%22test%22,%22id_user%22:1}]}
-        //http://www.agtrials.local/api/apiaddlocation?key=80418728F131FF0&url=https://dl.dropboxusercontent.com/u/73293501/location.json
-        
-        if ($data != '')
-            $info = $data;
-        else if ($url != '')
-            $info = file_get_contents($url);
+        $limit = $request->getParameter('cant');
+        $crop = $request->getParameter('crop');
+
+
         if (!CheckAPI($key)) {
             die("*** Error Key ***");
         } else {
-            if ($info != '') {
-                $data2 = json_decode($info);
-                print_r("<pre>");
-                print_r($data2);
-                print_r("<pre>");
-                die("End");
-            } else {
-                die("Not Data!!!");
-            }
+            $connection = Doctrine_Manager::getInstance()->connection();
+
+            $QUERY00 = "SELECT T.id_trial, TS.trstname, TS.trstlatitudedecimal AS latitude, TS.trstlongitudedecimal AS longitude, INS.insname, trlvarieties, trlname, trlvariablesmeasured, CR.crpname ";
+            $QUERY00 .= "FROM tb_trial T ";
+            $QUERY00 .= "INNER JOIN tb_trialsite TS ON T.id_trialsite = TS.id_trialsite ";
+            $QUERY00 .= "INNER JOIN tb_institution INS ON TS.id_institution = INS.id_institution ";
+            $QUERY00 .= "INNER JOIN tb_crop CR ON T.id_crop = CR.id_crop ";
+            if ($crop != '')
+                $QUERY00 .= "WHERE T.id_crop IN ($crop) ";
+            if (is_numeric($limit))
+                $QUERY00 .= "LIMIT $limit ";
+
+            $st = $connection->execute($QUERY00);
+            $Result = $st->fetchAll(PDO::FETCH_ASSOC);
+            $JSON = json_encode($Result);
+            $JSONApimap = "agtrialWS = " . $JSON . ";";
+            header('Content-type: text/json');
+            header('Content-type: application/json');
+            die($JSONApimap);
         }
     }
 

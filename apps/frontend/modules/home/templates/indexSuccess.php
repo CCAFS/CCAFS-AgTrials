@@ -119,7 +119,7 @@ use_javascript('/sfAdminThemejRollerPlugin/js/ui.selectmenu.js');
                                 <a href="http://www.agtrials.org/forum" target="_blank" title="Forum"><img width="32" height="32" border="0" src="/images/forum-icon.png"></a>
                                 <a href="mailto:noreplyagtrials@gmail.com" target="_blank" title="Send E-mail"><img width="32" height="32" border="0" src="/images/mail-icon2.png"></a>
                             </div>
-							</br></br></br></br>
+                            </br></br></br></br>
                         </td>
                     </tr>
                 </table>
@@ -129,7 +129,7 @@ use_javascript('/sfAdminThemejRollerPlugin/js/ui.selectmenu.js');
                 <table width="455" border="0">
                     <tr>
                         <td width="450" colspan="2">
-                            <iframe width="462" height="320" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://gismap.ciat.cgiar.org/agtrials/indexsmall.html"></iframe>
+                            <iframe width="462" height="320" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/home/mapindex"></iframe>
                         </td>
                     </tr>
                     <tr>
@@ -145,53 +145,54 @@ use_javascript('/sfAdminThemejRollerPlugin/js/ui.selectmenu.js');
                             <div align="center" id="post">
                                 <?php
                                 $first = true;
-                                if(count($lastpost) > 0){
-                                foreach ($lastpost AS $post) {
-                                    ?>
-                                    <table>
-                                        <tr>
-                                            <td width="30%" align="center">
-                                                <a title="Permanent Link to <?php echo $post['post_title']; ?>" target="_new" rel="bookmark" href="http://gisweb.ciat.cgiar.org/trialsitesblog/?p=<?php echo $post['id']; ?>">
-                                                    <span><img width=90 height=90 border="0" src="<?php echo $post['image']; ?>"/></span>
-                                                </a>
-                                            </td>
-                                            <td width="70%">
-                                                <a title="Permanent Link to <?php echo $post['post_title']; ?>" target="_new" href="http://gisweb.ciat.cgiar.org/trialsitesblog/?p=<?php echo $post['id']; ?>"><b><?php echo $post['post_title']; ?></b><br><?php echo date("M jS, Y", strtotime($post['post_date'])) . " | by {$post['user']}"; ?></a><br>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <p align="justify">
-                                                    <?php
-													$total = 0;
-                                                    $post_content = html_entity_decode($post['post_content']);
-													$maximo = strlen($post_content);
-                                                    $cadena_comienzo = "[/caption]";
-                                                    $total = strpos($post_content, $cadena_comienzo) + 10;
-													if($total != 10)
-														$post_content = substr($post_content, $total, $maximo);
-													$strfin = strpos($post_content, ". ") + 1;
-													$PostContent= substr($post_content, 0, $strfin);
-													$PostContent = trim($PostContent);
-													echo $PostContent;
-													?>
-													
-                                                    <br>
-                                                    <span>
-                                                        <a title="<?php echo $post['post_title']; ?> Read More..." target="_new" href="http://gisweb.ciat.cgiar.org/trialsitesblog/?p=<?php echo $post['id']; ?>"><b>[Continue Reading...]</b></a>
-                                                    </span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <hr>
-                                    <?php
-                                }}
+                                if (count($lastpost) > 0) {
+                                    foreach ($lastpost AS $post) {
+                                        ?>
+                                        <table>
+                                            <tr>
+                                                <td width="30%" align="center">
+                                                    <a title="Permanent Link to <?php echo $post['post_title']; ?>" target="_new" rel="bookmark" href="http://gisweb.ciat.cgiar.org/trialsitesblog/?p=<?php echo $post['id']; ?>">
+                                                        <span><img width=90 height=90 border="0" src="<?php echo $post['image']; ?>"/></span>
+                                                    </a>
+                                                </td>
+                                                <td width="70%">
+                                                    <a title="Permanent Link to <?php echo $post['post_title']; ?>" target="_new" href="http://gisweb.ciat.cgiar.org/trialsitesblog/?p=<?php echo $post['id']; ?>"><b><?php echo $post['post_title']; ?></b><br><?php echo date("M jS, Y", strtotime($post['post_date'])) . " | by {$post['user']}"; ?></a><br>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <p align="justify">
+                                                        <?php
+                                                        $total = 0;
+                                                        $post_content = html_entity_decode($post['post_content']);
+                                                        $maximo = strlen($post_content);
+                                                        $cadena_comienzo = "[/caption]";
+                                                        $total = strpos($post_content, $cadena_comienzo) + 10;
+                                                        if ($total != 10)
+                                                            $post_content = substr($post_content, $total, $maximo);
+                                                        $strfin = strpos($post_content, ". ") + 1;
+                                                        $PostContent = substr($post_content, 0, $strfin);
+                                                        $PostContent = trim($PostContent);
+                                                        echo $PostContent;
+                                                        ?>
+
+                                                        <br>
+                                                        <span>
+                                                            <a title="<?php echo $post['post_title']; ?> Read More..." target="_new" href="http://gisweb.ciat.cgiar.org/trialsitesblog/?p=<?php echo $post['id']; ?>"><b>[Continue Reading...]</b></a>
+                                                        </span>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <hr>
+                                        <?php
+                                    }
+                                }
                                 ?>
                                 <p align="center">
                                     <a title="AgTrials Blog" target="_new" href="http://gisweb.ciat.cgiar.org/trialsitesblog/"><img src="/images/blog-icon2.png" border="0"/></a>
                                 </p>
-								</br>
+                                </br>
                             </div>
                         </td>
                     </tr>
@@ -212,7 +213,7 @@ use_javascript('/sfAdminThemejRollerPlugin/js/ui.selectmenu.js');
                                     <div onclick='$("#div_loading").show();'><img src="/images/Arrow-icon.png" width="12" height="12" border="0"/> <a rel="bookmark" href="tbtrial/<?php echo $trial['id_trial']; ?>"><?php echo "{$trial['trlname']} - {$trial['cropanimal']} - " . date("M jS, Y", strtotime($trial['created_at'])); ?></a></div>
                                 <?php } ?>
                             </div>
-							</br>
+                            </br>
                         </td>
                     </tr>
                     <tr>

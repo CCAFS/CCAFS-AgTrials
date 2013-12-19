@@ -1,5 +1,5 @@
-php symfony doctrine:build-schema
-php symfony doctrine:build-model
-php symfony doctrine:build-forms
-php symfony doctrine:build-filters
-php symfony cc
+E:\xampp\php\php.exe symfony doctrine:build-schema
+E:\xampp\php\php.exe symfony doctrine:build-model
+E:\xampp\php\php.exe symfony doctrine:build-forms
+E:\xampp\php\php.exe symfony doctrine:build-filters
+E:\xampp\php\php.exe symfony cc
