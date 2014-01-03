@@ -1,4 +1,5 @@
 <?php
+
 require_once '../lib/funtions/funtion.php';
 
 /**
@@ -129,9 +130,9 @@ class administrationActions extends sfActions {
                 $To = "";
                 if ($userssystemall != '') {
                     $QUERY00 = Doctrine_Query::create()
-                                    ->select("email_address")
-                                    ->from("SfGuardUser")
-                                    ->orderBy("first_name");
+                            ->select("email_address")
+                            ->from("SfGuardUser")
+                            ->orderBy("first_name");
                     $Resultado00 = $QUERY00->execute();
                     $count = 0;
                     foreach ($Resultado00 AS $SfGuardUser) {
@@ -246,7 +247,7 @@ class administrationActions extends sfActions {
                     $id = $data->id;
                     $name = trim($data->name);
                     $tmp = $data->ontology_name;
-                    $tmp = $tmp." tmp";
+                    $tmp = $tmp . " tmp";
                     $arrcrop = explode(" ", $tmp);
                     $crop = trim($arrcrop[0]);
                     //echo "($crop == $C_crop && $name== $C_variablesmeasured <br>";
@@ -302,24 +303,47 @@ class administrationActions extends sfActions {
     public function executeViewvideo(sfWebRequest $request) {
         $this->id_video = $request->getParameter('id_video');
     }
-	
-	public function executeCropOntology(sfWebRequest $request) {
-	    ini_set("memory_limit", "2048M");
+
+    public function executeCropOntology(sfWebRequest $request) {
+        ini_set("memory_limit", "2048M");
         set_time_limit(900000000000);
-		$CropName = $request->getParameter('CropName');
-		$notice = "Remember: These processes run automatically on weekends.";
-		if($CropName != ''){
-			//$notice = "Process successfully completed.";
-			$out = array();
-			$Command = "E:\\xampp\\php\\ScriptCropOntology\\CropOntology".$CropName;
-			exec($Command, $out);
-			$this->out = $out;
-		}
-		$this->notice = $notice;
+        $CropName = $request->getParameter('CropName');
+        $notice = "Remember: These processes run automatically on weekends.";
+        if ($CropName != '') {
+            //$notice = "Process successfully completed.";
+            $out = array();
+            $Command = "E:\\xampp\\php\\ScriptCropOntology\\CropOntology" . $CropName;
+            exec($Command, $out);
+            $this->out = $out;
+        }
+        $this->notice = $notice;
+    }
+
+    public function executeFieldmodulehelp(sfWebRequest $request) {
+        $flmdhlmodule = trim($request->getParameter('flmdhlmodule'));
+        $Fields = trim($request->getParameter('Fields'));
+
+        if ($flmdhlmodule != '') {
+            $connection = Doctrine_Manager::getInstance()->connection();
+            $QUERY = "SELECT id_fieldmodulehelp,flmdhlmodule,flmdhlfield,flmdhlname,trgrflhelp FROM tb_fieldmodulehelp WHERE flmdhlmodule = '$flmdhlmodule'";
+            $st = $connection->execute($QUERY);
+            $R_FieldModuleHelp = $st->fetchAll();
+            $this->R_FieldModuleHelp = $R_FieldModuleHelp;
+        }
+        if ($Fields > 0) {
+            for ($i = 1; $i <= $Fields; $i++) {
+                $connection = Doctrine_Manager::getInstance()->connection();
+                $id_fieldmodulehelp = trim($request->getParameter('id_fieldmodulehelp' . $i));
+                $trgrflhelp = trim($request->getParameter('trgrflhelp' . $i));
+                $UPDATE = "UPDATE tb_fieldmodulehelp SET trgrflhelp = '$trgrflhelp' WHERE id_fieldmodulehelp = $id_fieldmodulehelp";
+                $connection->execute($UPDATE);
+            }
+            $this->notice = "The module was updated successfully.";
+        }
     }
 
     public function executeBatchprocesses(sfWebRequest $request) {
-
+        
     }
 
 }

@@ -128,6 +128,22 @@ function select_from_table_TrialSite($name, $wheretable='', $value = null, $prop
     return $HTML;
 }
 
+function select_from_table_module() {
+    $connection = Doctrine_Manager::getInstance()->connection();
+    $QUERY = "SELECT flmdhlmodule AS name FROM tb_fieldmodulehelp GROUP BY flmdhlmodule ORDER BY flmdhlmodule";
+    $st = $connection->execute($QUERY);
+    $R_datos = $st->fetchAll();
+    $OPTION = "<OPTION VALUE=''>Choose...</OPTION>";
+    foreach ($R_datos AS $fila) {
+        $OPTION .= "<OPTION TITLE='{$fila['name']}' VALUE='{$fila['name']}'>{$fila['name']}</OPTION>";
+    }
+
+    $HTML = "<SELECT NAME='flmdhlmodule' id='flmdhlmodule' SIZE='1' $properties>";
+    $HTML .= $OPTION;
+    $HTML .= "</SELECT>";
+    return $HTML;
+}
+
 function YearsYeatherstation($id_weatherstation) {
     $connection = Doctrine_Manager::getInstance()->connection();
     $QUERY = "SELECT fc_years_weatherstation($id_weatherstation) AS data; ";

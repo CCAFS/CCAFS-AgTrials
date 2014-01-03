@@ -650,6 +650,10 @@ communications:
   url:   /communications/*
   param: { module: administration, action: communications }
   
+fieldmodulehelp:
+  url:   /fieldmodulehelp/*
+  param: { module: administration, action: fieldmodulehelp }
+  
 video:
   url:   /video/*
   param: { module: administration, action: video }

@@ -160,6 +160,7 @@ if ($sf_user->isAuthenticated()) {
 
                                                     <li><a href="/sfGuardUser">Users</a></li>
                                                     <li><a href="/administration">Administration</a></li>
+                                                    <li><a href="/fieldmodulehelp">Field Module Help</a></li>
                                                 <?php } ?>
                                                 <li><a href="/communications">Communications</a></li>
 
