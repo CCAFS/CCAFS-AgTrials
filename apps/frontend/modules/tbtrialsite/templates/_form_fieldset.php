@@ -4,88 +4,88 @@
         $('#otherfile').click(function() {
             var filadocument = $('#filadocument').attr('value');
             filadocument = (filadocument * 1) + 1;
-            $('#document'+filadocument).show();
-            $('#filadocument').attr('value',filadocument);
+            $('#document' + filadocument).show();
+            $('#filadocument').attr('value', filadocument);
         });
 
         $('#nextphotograph').click(function() {
             var filaphotograph = $('#filaphotograph').attr('value');
             filaphotograph = (filaphotograph * 1) + 1;
-            $('#photograph'+filaphotograph).show();
-            $('#filaphotograph').attr('value',filaphotograph);
+            $('#photograph' + filaphotograph).show();
+            $('#filaphotograph').attr('value', filaphotograph);
         });
 
     });
-    function deletenew(i){
-        $('#variablesmeasured'+i).attr('value','');
-        $('#trstwtstartdate'+i).attr('value','');
-        $('#trstwtenddate'+i).attr('value','');
-        $('#file'+i).attr('value','');
-        $('#document'+i).hide();
+    function deletenew(i) {
+        $('#variablesmeasured' + i).attr('value', '');
+        $('#trstwtstartdate' + i).attr('value', '');
+        $('#trstwtenddate' + i).attr('value', '');
+        $('#file' + i).attr('value', '');
+        $('#document' + i).hide();
     }
 
-    function deletenew2(i){
-        $('#trstphfileaccess'+i).attr('value','');
-        $('#trstphfile'+i).attr('value','');
-        $('#trstphpersonphotograph'+i).attr('value','');
-        $('#photograph'+i).hide();
+    function deletenew2(i) {
+        $('#trstphfileaccess' + i).attr('value', '');
+        $('#trstphfile' + i).attr('value', '');
+        $('#trstphpersonphotograph' + i).attr('value', '');
+        $('#photograph' + i).hide();
     }
 
-    function deleterow(id_trialsiteweather){
+    function deleterow(id_trialsiteweather) {
         $.ajax({
             type: "GET",
             url: "/tbtrialsite/deleterow/",
-            data:"id_trialsiteweather="+id_trialsiteweather,
-            success: function(data){
+            data: "id_trialsiteweather=" + id_trialsiteweather,
+            success: function(data) {
                 $('#documents').html(data);
             }
         });
     }
 
-    function deleterow2(id_trialsitephotograph){
+    function deleterow2(id_trialsitephotograph) {
         $.ajax({
             type: "GET",
             url: "/tbtrialsite/deleterow2/",
-            data:"id_trialsitephotograph="+id_trialsitephotograph,
-            success: function(data){
+            data: "id_trialsitephotograph=" + id_trialsitephotograph,
+            success: function(data) {
                 $('#photographs').html(data);
             }
         });
 
     }
-    
-    function Lock_Unlock(id_trialsiteweather){
+
+    function Lock_Unlock(id_trialsiteweather) {
         $.ajax({
             type: "GET",
             url: "/tbtrialsite/LockUnlock/",
-            data:"id_trialsiteweather="+id_trialsiteweather,
-            success: function(data){
+            data: "id_trialsiteweather=" + id_trialsiteweather,
+            success: function(data) {
                 $('#documents').html(data);
             }
         });
     }
-    
-    function Lock_Unlock2(id_trialsitephotograph){
+
+    function Lock_Unlock2(id_trialsitephotograph) {
         $.ajax({
             type: "GET",
             url: "/tbtrialsite/LockUnlock2/",
-            data:"id_trialsitephotograph="+id_trialsitephotograph,
-            success: function(data){
+            data: "id_trialsitephotograph=" + id_trialsitephotograph,
+            success: function(data) {
                 $('#photographs').html(data);
             }
         });
     }
 
-    function downloadfile(id_trialsiteweather){
-        location.href="/tbtrialsite/downloadfile/?id_trialsiteweather="+id_trialsiteweather;
+    function downloadfile(id_trialsiteweather) {
+        location.href = "/tbtrialsite/downloadfile/?id_trialsiteweather=" + id_trialsiteweather;
     }
 
-    function downloadfile2(id_trialsitephotograph){
-        location.href="/tbtrialsite/downloadfile2/?id_trialsitephotograph="+id_trialsitephotograph;
+    function downloadfile2(id_trialsitephotograph) {
+        location.href = "/tbtrialsite/downloadfile2/?id_trialsitephotograph=" + id_trialsitephotograph;
     }
 
-    function viewphotograph(id_trialsitephotograph){
-        window.open ("/tbtrialsite/viewphotograph/?id_trialsitephotograph="+id_trialsitephotograph,"View_Photograph");
+    function viewphotograph(id_trialsitephotograph) {
+        window.open("/tbtrialsite/viewphotograph/?id_trialsitephotograph=" + id_trialsitephotograph, "View_Photograph");
     }
 
     $(function() {
@@ -116,6 +116,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['id_institution']->renderLabel('Institution') ?>
+            <?php echo HelpModule("Trial site", "id_institution"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['id_institution']->renderError() ?>
@@ -128,6 +129,7 @@
         <div class="label ui-helper-clearfix">
             <div class="label ui-helper-clearfix">
                 <label>Contact persons</label>
+                <?php echo HelpModule("Trial site", "id_contactperson"); ?>
             </div>
         </div>
         <?php
@@ -148,6 +150,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['id_country']->renderLabel('Country') ?>
+            <?php echo HelpModule("Trial site", "id_country"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['id_country']->renderError() ?>
@@ -158,6 +161,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['id_location']->renderLabel('Location') ?>
+            <?php echo HelpModule("Trial site", "id_location"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['id_location']->renderError() ?>
@@ -170,6 +174,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['trstname']->renderLabel('Name') ?>
+            <?php echo HelpModule("Trial site", "trstname"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['trstname']->renderError() ?>
@@ -180,6 +185,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['trstlatitude']->renderLabel('Latitude') ?>
+            <?php echo HelpModule("Trial site", "trstlatitude"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['trstlatitude']->renderError() ?>
@@ -205,6 +211,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['trstlongitude']->renderLabel('Longitude') ?>
+            <?php echo HelpModule("Trial site", "trstlongitude"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['trstlongitude']->renderError() ?>
@@ -228,6 +235,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['trstaltitude']->renderLabel('Altitude') ?>
+            <?php echo HelpModule("Trial site", "trstaltitude"); ?>
         </div>
         <div class="help">
             <span class="ui-icon ui-icon-help floatleft"></span>
@@ -242,6 +250,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['trstph']->renderLabel('Ph') ?>
+            <?php echo HelpModule("Trial site", "trstph"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['trstph']->renderError() ?>
@@ -252,6 +261,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['id_soil']->renderLabel('Soil texture') ?>
+            <?php echo HelpModule("Trial site", "id_soil"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['id_soil']->renderError() ?>
@@ -262,6 +272,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['id_taxonomyfao']->renderLabel('Taxonomy FAO') ?>
+            <?php echo HelpModule("Trial site", "id_taxonomyfao"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['id_taxonomyfao']->renderError() ?>
@@ -272,6 +283,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['weatherstation']->renderLabel('Weather stations') ?>
+            <?php echo HelpModule("Trial site", "Weather stations"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['weatherstation']->renderError() ?>
@@ -301,6 +313,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <label for="tb_trialsite_weathervariablesmeasured">Weather Information File</label>
+            <?php echo HelpModule("Trial site", "Weather Information File"); ?>
         </div>
         <?php
         //TAMANO DE LAS COLUMNAS
@@ -424,6 +437,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <label>Others Documents</label>
+            <?php echo HelpModule("Trial site", "Others Documents"); ?>
         </div>
         <?php
         //TAMANO DE LAS COLUMNAS
@@ -533,6 +547,7 @@
     <div class="sf_admin_form_row sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['trstfileaccess']->renderLabel('Files access') ?>
+            <?php echo HelpModule("Trial site", "trstfileaccess"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['trstfileaccess']->renderError() ?>
@@ -568,6 +583,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['trststatus']->renderLabel('Location verified?') ?>
+            <?php echo HelpModule("Trial site", "trststatus"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['trststatus']->renderError() ?>
@@ -578,6 +594,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['trststatereason']->renderLabel('Notes on the location (100 characters max)') ?>
+            <?php echo HelpModule("Trial site", "trststatereason"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['trststatereason']->renderError() ?>
@@ -588,6 +605,7 @@
     <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
         <div class="label ui-helper-clearfix">
             <?php echo $form['id_trialsitetype']->renderLabel('Trial site type') ?>
+            <?php echo HelpModule("Trial site", "id_trialsitetype"); ?>
         </div>
         <div class="label ui-state-error-text">
             <?php echo $form['id_trialsitetype']->renderError() ?>
@@ -599,6 +617,7 @@
         <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_text">
             <div class="label ui-helper-clearfix">
                 <?php echo $form['trstactive']->renderLabel('Is active?') ?>
+                <?php echo HelpModule("Trial site", "trstactive"); ?>
             </div>
             <div class="label ui-state-error-text">
                 <?php echo $form['trstactive']->renderError() ?>

@@ -320,12 +320,17 @@ class administrationActions extends sfActions {
     }
 
     public function executeFieldmodulehelp(sfWebRequest $request) {
+        $id_user = $this->getUser()->getGuardUser()->getId();
+        if (!(CheckUserPermission($id_user, 1))) {
+            echo "<script> alert('*** ERROR *** \\n\\n Not have permissions!'); window.history.back();</script>";
+            die();
+        }
         $flmdhlmodule = trim($request->getParameter('flmdhlmodule'));
         $Fields = trim($request->getParameter('Fields'));
 
         if ($flmdhlmodule != '') {
             $connection = Doctrine_Manager::getInstance()->connection();
-            $QUERY = "SELECT id_fieldmodulehelp,flmdhlmodule,flmdhlfield,flmdhlname,trgrflhelp FROM tb_fieldmodulehelp WHERE flmdhlmodule = '$flmdhlmodule'";
+            $QUERY = "SELECT id_fieldmodulehelp,flmdhlmodule,flmdhlfield,flmdhlname,trgrflhelp FROM tb_fieldmodulehelp WHERE flmdhlmodule = '$flmdhlmodule' ORDER BY id_fieldmodulehelp";
             $st = $connection->execute($QUERY);
             $R_FieldModuleHelp = $st->fetchAll();
             $this->R_FieldModuleHelp = $R_FieldModuleHelp;

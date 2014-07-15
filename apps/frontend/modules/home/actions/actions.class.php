@@ -389,150 +389,99 @@ class homeActions extends sfActions {
     public function executeTest(sfWebRequest $request) {
         $this->setLayout(FALSE);
 
-//        $sent = date("d-M-Y") . " " . date("h:i:s");
-//        $destinatario = trim("herlin25@gmail.com");
-//        $asunto = "PRUEBAS";
-//        $cuerpo = "<html>";
-//        $cuerpo .= "<head>";
-//        $cuerpo .= "<title>PRUEBAS</title>";
-//        $cuerpo .= "<b>Sent:</b> $sent ";
-//        $cuerpo .= "</body>";
-//        $cuerpo .= "</html>";
-//        $headers = "MIME-Version: 1.0\r\n";
-//        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-//        $headers .= "From: Trial Sites - Don't reply <noreplyagtrials@gmail.com>\r\n";
-//        mail("herlin25@gmail.com","asuntillo","Este es el cuerpo del mensaje") ;
-//        //mail($destinatario, $asunto, $cuerpo, $headers);
-//        die("Enviado....");
-//
-//
-//
-//
-//
-//        $conexion = pg_connect("host=localhost port=5432 dbname=trialsites user=app_agtrials password=65*Tri8*ALs68");
-//        //$arr_crop = array(1 => 'Cassava', 2 => 'Chickpea', 4 => 'Cowpea', 9 => 'Groundnut', 11 => 'Maize', 47 => 'Musa', 5 => 'Potato', 14 => 'Rice', 8 => 'Sorghum', 12 => 'Wheat');
-//        $arr_crop = array(11 => 'Maize');
-//
-//        foreach ($arr_crop as $key => $value) {
-//            $traits = new traits($value);
-//            $Arr_Datos = $traits->get();
-//            echo "<br><b>Crop: $value </b><br>";
-//            foreach ($Arr_Datos AS $Arr_Datos_Trait) {
-//                if (count($Arr_Datos_Trait) > 0) {
-//                    foreach ($Arr_Datos_Trait AS $Arr_Trait) {
-//                        $ArrTraitName = json_decode($Arr_Trait->name);
-//                        if (count($ArrTraitName) > 0)
-//                            $TraitName = ucfirst(strtolower($ArrTraitName->english));
-//                        else
-//                            $TraitName = ucfirst(strtolower($Arr_Trait->name));
-//                        $Trait_children = $Arr_Trait->children;
-//                        echo "<br><br>******** Trait Class: $TraitName ********<br>";
-//                        if (count($Trait_children) > 0) {
-//                            foreach ($Trait_children AS $Children) {
-//                                $idtrait = $Children->id;
-//                                $nametrait = json_decode($Children->name);
-//                                $NumNameTrait = count($nametrait);
-//                                if ($NumNameTrait > 0)
-//                                    $NameTrait = ucfirst(strtolower($nametrait->english));
-//                                else
-//                                    $NameTrait = ucfirst(strtolower($Children->name));
-//                                $nametrait = str_replace("'", "''", $NameTrait);
-//                                $resultado = pg_query($conexion, "SELECT id_variablesmeasured FROM tb_variablesmeasured WHERE id_crop = $key AND UPPER(vrmsname) = '$NameTrait'");
-//                                if (pg_num_rows($resultado) == 0) {
-//                                    $url = "http://www.cropontology.org/get-attributes/$idtrait";
-//                                    $data = file_get_contents($url);
-//                                    $data_array = json_decode($data);
-//                                    $name = "";
-//                                    $synonym = "";
-//                                    $definition = "";
-//                                    $method = "";
-//                                    $unit = "";
-//                                    foreach ($data_array AS $datas) {
-//                                        if ($datas->key == 'name') {
-//                                            $tmpname = $datas->value;
-//                                            $ArrName = json_decode($tmpname);
-//                                            if (count($ArrName) > 0)
-//                                                $name = ucfirst(strtolower($ArrName->english));
-//                                            else
-//                                                $name = ucfirst(strtolower($tmpname));
-//                                        }
-//                                        if ($datas->key == 'synonym') {
-//                                            $tmpsynonym = $datas->value;
-//                                            $ArrSynonym = json_decode($tmpsynonym);
-//                                            if (count($ArrSynonym) > 0)
-//                                                $synonym = ucfirst(strtolower($ArrSynonym->english));
-//                                            else
-//                                                $synonym = ucfirst(strtolower($tmpsynonym));
-//                                        }
-//                                        if ($datas->key == 'def') {
-//                                            $tmpdefinition = $datas->value;
-//                                            $ArrDefinition = json_decode($tmpdefinition);
-//                                            if (count($ArrDefinition) > 0)
-//                                                $definition = ucfirst(strtolower($ArrDefinition->english));
-//                                            else
-//                                                $definition = ucfirst(strtolower($tmpdefinition));
-//                                        }
-//                                    }
-//
-//                                    //AQUI VERIFICAMOS LOS HIJO A VER SI TIENE METODO
-//                                    $url = "http://www.cropontology.org/get-children/$idtrait";
-//                                    $data = file_get_contents($url);
-//                                    $ChildrenTrait = json_decode($data);
-//                                    if (count($ChildrenTrait) > 0) {
-//                                        $IdMethod = $ChildrenTrait[0]->id;
-//                                        $url = "http://www.cropontology.org/get-attributes/$IdMethod";
-//                                        $data = file_get_contents($url);
-//                                        $MethodAttributes = json_decode($data);
-//                                        if (count($MethodAttributes) > 0) {
-//                                            foreach ($MethodAttributes AS $Method) {
-//                                                if ($Method->key == 'Method') {
-//                                                    $ArrMethod = json_decode($Method->value);
-//                                                    if (count($ArrMethod) > 0)
-//                                                        $method = ucfirst(strtolower($ArrMethod->english));
-//                                                    else
-//                                                        $method = ucfirst(strtolower($Method->value));
-//                                                }
-//                                            }
-//
-//                                            //AQUI VERIFICAMOS LOS HIJO A VER SI TIENE UNIDADES
-//                                            $url = "http://www.cropontology.org/get-children/$IdMethod";
-//                                            $data = file_get_contents($url);
-//                                            $ChildrenTrait2 = json_decode($data);
-//                                            if (count($ChildrenTrait2) > 0) {
-//                                                $IdUnit = $ChildrenTrait2[0]->id;
-//                                                $url = "http://www.cropontology.org/get-attributes/$IdUnit";
-//                                                $data = file_get_contents($url);
-//                                                $UnitAttributes = json_decode($data);
-//                                                if (count($UnitAttributes) > 0) {
-//                                                    foreach ($UnitAttributes AS $Unit) {
-//                                                        if ($Unit->key == 'name') {
-//                                                            $ArrUnit = json_decode($Unit->value);
-//                                                            if (count($ArrUnit) > 0)
-//                                                                $unit = ucfirst(strtolower($ArrUnit->english));
-//                                                            else
-//                                                                $unit = ucfirst(strtolower($Unit->value));
-//                                                        }
-//                                                    }
-//                                                }
-//                                            }
-//                                        }
-//                                    }
-//
-//                                    echo "ID: $idtrait <br>";
-//                                    echo "NAM: $name <br>";
-//                                    echo "SYN: $synonym <br>";
-//                                    echo "DEF: $definition <br>";
-//                                    echo "MET: $method <br>";
-//                                    echo "UNI: $unit <br><br>";
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        die("Final");
+        /*         * ***
+         * A simple reference implementation of the AgMIP external authentication
+         * process in PHP. This does not do much error handling and the cookies
+         * a bit iffy, but everything does work.
+         * 
+         * Author: Christopher Villalobos
+         * Created: 15/05/2014 17:26:50 EDT
+         * Last Modified: --
+         */
+
+
+        $auth_loc = "https://auth.agmip.org/";
+
+        /*         * **
+         * Check to see if a SSO Token is already in the COOKIEs, if not 
+         * check to see if this is a postback from the authentication process.
+         */
+        print_r($_COOKIE);
+        die("Stop");
+
+        if (!array_key_exists("__agmip", $_COOKIE)) {
+
+            if (!array_key_exists("nextval", $_GET)) {
+                $this->redirect($auth_loc . "?s=agtrials");
+                //header("Location: " . $auth_loc . "?s=agtrials");
+            } else {
+                /*                 * ***
+                 * Encrypt the postback combined with the key, seperated by a colon.
+                 */
+                $key = "t5dWsc_wY1PxBjH3CeC4i-Dha";
+                $export = "vector=" . sha1($_GET['nextval'] . ":" . $key);
+
+                /*                 * ***
+                 * Send the encrypted data to the authentication server for validation.
+                 * The SSO token will be returned if it is valid. Otherwise a 304 error
+                 * will be returned and the token will be blank.
+                 */
+                $ch = curl_init();
+
+                curl_setopt($ch, CURLOPT_URL, $auth_loc . "extern/auth");
+                curl_setopt($ch, CURLOPT_POST, true); // Use POST method
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Save the curl_exec to a variable
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $export);
+
+                $token = curl_exec($ch);
+
+                if ($token === false) {
+                    echo "User not authorized";
+                    curl_close($ch);
+                    die();
+                }
+                curl_close($ch);
+                // Set a cookie for the agmip user
+                setcookie("__agmip", $token);
+
+
+                // Second request to get the user email address
+                $jsonEmail = getUserEmail($auth_loc, $token);
+
+                if ($jsonEmail === false) {
+                    echo "Unable to authorize user";
+                } else {
+                    $user = json_decode($jsonEmail, true);
+                    echo "Welcome " . $user['email'];
+                }
+            }
+        } else {
+            $jsonEmail = getUserEmail($auth_loc, $_COOKIE['__agmip']);
+            if ($jsonEmail === false) {
+                echo "Unable to authorize user";
+                // Clear the cookie
+                unset($_COOKIE["__agmip"]);
+                setcookie("__agmip", "", time() - 3600);
+            } else {
+                $user = json_decode($jsonEmail, true);
+                echo "Welcome back " . $user['email'];
+            }
+        }
+    }
+
+    function getUserEmail($auth_loc, $token) {
+        $ch2 = curl_init();
+        curl_setopt($ch2, CURLOPT_URL, $auth_loc . "email/" . $token);
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true); // Save the curl_exec to a variable
+
+        $jsonEmail = curl_exec($ch2);
+        $returnVal = curl_getinfo($ch2, CURLINFO_HTTP_CODE);
+
+        if ($returnVal != 200) {
+            return false;
+        } else {
+            return $jsonEmail;
+        }
     }
 
 }
-

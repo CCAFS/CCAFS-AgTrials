@@ -15,4 +15,7 @@ Communications:
 
 batchprocesses:
   is_secure:   on        # La acción es sólo para usuarios autenticados
+  
+fieldmodulehelp:
+  is_secure: on
 

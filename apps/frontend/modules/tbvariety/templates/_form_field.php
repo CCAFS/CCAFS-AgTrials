@@ -7,10 +7,8 @@
                 <div class="label ui-helper-clearfix">
         <?php
             echo $form[$name]->renderLabel($label);
-
-            if ($label == 'Origin')
-                echo '<span class="help">Place where variety was developed (crossed or geographic origin for landraces).<br></span>';
-
+            echo HelpModule("Variety/Race", $name);
+                        
             if ($help || $help = $form[$name]->renderHelp()):
         ?>
 

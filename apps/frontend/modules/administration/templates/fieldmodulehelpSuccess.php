@@ -60,13 +60,11 @@ use_helper('Thickbox');
         </form>
         <?php if (count($R_FieldModuleHelp) > 0) { ?>
             <form id="FormFieldModuleHelpUpdate" name="FormFieldModuleHelpUpdate" action="<?php echo url_for('@fieldmodulehelp'); ?>" enctype="multipart/form-data" method="post">
-                <table>
-                    <tr>
-                        <td width="5%"><label>Id</label></td>
-                        <td width="15%"><label>Module</label></td>
-                        <td width="25%"><label>Field</label></td>
-                        <td width="28%"><label>Name</label></td>
-                        <td width="27%"><label>Text help</label></td>
+                <table width="100%">
+                    <tr width="100%">
+                        <td width="25%"><label>Module</label></td>
+                        <td width="30%"><label>Name</label></td>
+                        <td width="45%"><label>Text help</label></td>
                     </tr>
                     <?php
                     $bgcolor = "#C0C0C0";
@@ -78,11 +76,13 @@ use_helper('Thickbox');
                             $bgcolor = "#C0C0C0";
                         ?>
                         <tr bgcolor="<?php echo $bgcolor; ?>">
-                            <td><input type="hidden" value="<?php echo $Values['id_fieldmodulehelp']; ?>" id="id_fieldmodulehelp<?php echo $a; ?>" name="id_fieldmodulehelp<?php echo $a; ?>"/><?php echo $Values['id_fieldmodulehelp']; ?></td>
-                            <td><input type="hidden" value="<?php echo $Values['flmdhlmodule']; ?>" id="flmdhlmodule<?php echo $a; ?>" name="flmdhlmodule<?php echo $a; ?>"/><?php echo $Values['flmdhlmodule']; ?></td>
-                            <td><input type="hidden" value="<?php echo $Values['flmdhlfield']; ?>" id="flmdhlfield<?php echo $a; ?>" name="flmdhlfield<?php echo $a; ?>"/><?php echo $Values['flmdhlfield']; ?></td>
+                            <td>
+                                <input type="hidden" value="<?php echo $Values['id_fieldmodulehelp']; ?>" id="id_fieldmodulehelp<?php echo $a; ?>" name="id_fieldmodulehelp<?php echo $a; ?>"/>
+                                <input type="hidden" value="<?php echo $Values['flmdhlmodule']; ?>" id="flmdhlmodule<?php echo $a; ?>" name="flmdhlmodule<?php echo $a; ?>"/>
+                                <?php echo $Values['flmdhlmodule']; ?>
+                            </td>
                             <td><input type="hidden" value="<?php echo $Values['flmdhlname']; ?>" id="flmdhlname<?php echo $a; ?>" name="flmdhlname<?php echo $a; ?>"/><?php echo $Values['flmdhlname']; ?></td>
-                            <td><input type="text" size="40" value="<?php echo $Values['trgrflhelp']; ?>" id="trgrflhelp<?php echo $a; ?>" name="trgrflhelp<?php echo $a; ?>"/></td>
+                            <td><input type="text" size="65" value="<?php echo $Values['trgrflhelp']; ?>" id="trgrflhelp<?php echo $a; ?>" name="trgrflhelp<?php echo $a; ?>"/></td>
                         </tr>
                         <?php
                         $a++;

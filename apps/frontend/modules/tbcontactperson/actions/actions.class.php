@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__) . '/../lib/tbcontactpersonGeneratorConfiguration.class.php';
 require_once dirname(__FILE__) . '/../lib/tbcontactpersonGeneratorHelper.class.php';
+require_once '../lib/funtions/funtion.php';
 
 /**
  * tbcontactperson actions.

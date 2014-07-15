@@ -37,13 +37,6 @@ class TbTrialgroupForm extends BaseTbTrialgroupForm {
             'trgrname' => new sfWidgetFormInputText(array(), array('size' => 30)),
             'trgrstartyear' => new sfWidgetFormInputText(array(), array('size' => 5, 'maxlength' => 4)),
             'trgrendyear' => new sfWidgetFormInputText(array(), array('size' => 5, 'maxlength' => 4)),
-            'trgrtrialgrouprecorddate' => new sfWidgetFormJQueryDate(array(
-                'image' => dirname($_SERVER['SCRIPT_NAME']) . '/images/calendar-icon.png',
-                'culture' => 'fr',
-                'date_widget' => new sfWidgetFormDate(array(
-                    'format' => '%day%%month%%year%',
-                    'years' => $years))
-            )),
             'trgrtrialgrouprecordstatus' => new sfWidgetFormChoice(array('choices' => array('Open' => 'Open', 'Closed' => 'Closed', 'Inactive' => 'Inactive', 'Canceled' => 'Canceled'))),
             'id_user' => new sfWidgetFormInputHidden(),
             'id_user_update' => new sfWidgetFormInputHidden(),
@@ -59,7 +52,6 @@ class TbTrialgroupForm extends BaseTbTrialgroupForm {
             'trgrname' => new sfValidatorString(),
             'trgrstartyear' => new sfValidatorInteger(),
             'trgrendyear' => new sfValidatorInteger(),
-            'trgrtrialgrouprecorddate' => new sfValidatorDate(),
             'trgrtrialgrouprecordstatus' => new sfValidatorString(),
             'id_user' => new sfValidatorString(array('required' => false)),
             'id_user_update' => new sfValidatorString(array('required' => false)),

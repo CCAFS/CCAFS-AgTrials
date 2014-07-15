@@ -3140,12 +3140,6 @@ TbTrial:
       unsigned: false
       notnull: false
       primary: false
-    trltrialrecorddate:
-      type: date(25)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
     created_at:
       type: timestamp(25)
       fixed: false
@@ -3384,12 +3378,6 @@ TbTrialLog:
       primary: false
     trlsoiltypeconditionsduringtrialfile:
       type: string()
-      fixed: false
-      unsigned: false
-      notnull: false
-      primary: false
-    trltrialrecorddate:
-      type: date(25)
       fixed: false
       unsigned: false
       notnull: false
@@ -3690,12 +3678,6 @@ TbTrialgroup:
       unsigned: false
       notnull: true
       primary: false
-    trgrtrialgrouprecorddate:
-      type: date(25)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
     trgrtrialgrouprecordstatus:
       type: string()
       fixed: false
@@ -3833,12 +3815,6 @@ TbTrialgroupLog:
       primary: false
     trgrendyear:
       type: string()
-      fixed: false
-      unsigned: false
-      notnull: false
-      primary: false
-    trgrtrialgrouprecorddate:
-      type: date(25)
       fixed: false
       unsigned: false
       notnull: false

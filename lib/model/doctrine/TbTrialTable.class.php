@@ -26,7 +26,6 @@ class TbTrialTable extends Doctrine_Table {
         $TbTrial->setTrllicense($trllicense);
         $TbTrial->setTrlfileaccess($trlfileaccess);
         $TbTrial->setTrltrialtype($trltrialtype);
-        $TbTrial->setTrltrialrecorddate(date('Y-m-d'));
         $TbTrial->setIdUser($id_user);
         $TbTrial->setIdUserUpdate(null);
         $TbTrial->save();

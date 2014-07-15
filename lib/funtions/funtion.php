@@ -1,13 +1,13 @@
 <?php
 
-function select_from_table($name, $table, $idfield, $namefield, $wheretable='', $value = null, $properties=null) {
+function select_from_table($name, $table, $idfield, $namefield, $wheretable = '', $value = null, $properties = null) {
     if ($wheretable == '')
         $wheretable = 'true';
     $QUERY00 = Doctrine_Query::create()
-                    ->select("$idfield AS id, ($namefield) AS name")
-                    ->from("$table")
-                    ->where("$wheretable")
-                    ->orderBy("$namefield");
+            ->select("$idfield AS id, ($namefield) AS name")
+            ->from("$table")
+            ->where("$wheretable")
+            ->orderBy("$namefield");
 //echo $QUERY00->getSqlQuery();
     $Resultado00 = $QUERY00->execute();
     $OPTION = "<OPTION VALUE=''>Choose...</OPTION>";
@@ -27,7 +27,7 @@ function select_from_table($name, $table, $idfield, $namefield, $wheretable='', 
     return $HTML;
 }
 
-function select_from_table_trial($name, $table, $idfield, $namefield, $wheretable='', $value = null, $properties=null) {
+function select_from_table_trial($name, $table, $idfield, $namefield, $wheretable = '', $value = null, $properties = null) {
     $WhereList = sfContext::getInstance()->getUser()->getAttribute('WhereList');
     $WhereVariety = sfContext::getInstance()->getUser()->getAttribute('WhereVariety');
     $WhereListVariablesMeasured = sfContext::getInstance()->getUser()->getAttribute('WhereListVariablesMeasured');
@@ -68,7 +68,7 @@ function select_from_table_trial($name, $table, $idfield, $namefield, $wheretabl
     return $HTML;
 }
 
-function select_from_table_ReloadField($name, $table, $idfield, $namefield, $wheretable='', $value = null, $properties=null) {
+function select_from_table_ReloadField($name, $table, $idfield, $namefield, $wheretable = '', $value = null, $properties = null) {
     $connection = Doctrine_Manager::getInstance()->connection();
     $QUERY = "SELECT T1.$idfield AS id,$namefield AS name ";
     $QUERY .= "FROM $table T1 ";
@@ -98,7 +98,7 @@ function select_from_table_ReloadField($name, $table, $idfield, $namefield, $whe
     return $HTML;
 }
 
-function select_from_table_TrialSite($name, $wheretable='', $value = null, $properties=null) {
+function select_from_table_TrialSite($name, $wheretable = '', $value = null, $properties = null) {
     if ($wheretable == '')
         $wheretable = 'true';
     $connection = Doctrine_Manager::getInstance()->connection();
@@ -191,9 +191,9 @@ function MoveFile($UploadDir, $TmpUploadDir, $File) {
 
 function getTable($table, $fieldname, $fieldid, $value) {
     $QUERY00 = Doctrine_Query::create()
-                    ->select("$fieldname AS value")
-                    ->from("$table")
-                    ->where("$fieldid = $value");
+            ->select("$fieldname AS value")
+            ->from("$table")
+            ->where("$fieldid = $value");
     $Resultado00 = $QUERY00->execute();
     foreach ($Resultado00 AS $fila) {
         $value = $fila['value'];
@@ -201,7 +201,7 @@ function getTable($table, $fieldname, $fieldid, $value) {
     return $value;
 }
 
-function generatecode($lenght=6) {
+function generatecode($lenght = 6) {
     $cadena = "[^A-Z0-9]";
     $code = substr(@eregi_replace($cadena, "", md5(rand())) . @eregi_replace($cadena, "", md5(rand())) . @eregi_replace($cadena, "", md5(rand())), 0, $lenght);
     return $code;
@@ -273,7 +273,7 @@ function LongitudeSexagesimal($trstlongitudedecimal) {
     return $trstlongitude;
 }
 
-function datecheck($input, $format="") {
+function datecheck($input, $format = "") {
     $separator_type = array(
         "/",
         "-",
@@ -305,10 +305,10 @@ function PermissionChangeTrial($id_user, $id_trial) {
     $id_contactperson = $TbContactperson->getIdContactperson();
 
     $QUERY00 = Doctrine_Query::create()
-                    ->select("T.*")
-                    ->from("TbTrialgroupcontactperson T")
-                    ->where("T.id_trialgroup = $id_trialgroup")
-                    ->andWhere("T.id_contactperson = $id_contactperson");
+            ->select("T.*")
+            ->from("TbTrialgroupcontactperson T")
+            ->where("T.id_trialgroup = $id_trialgroup")
+            ->andWhere("T.id_contactperson = $id_contactperson");
     $Resultado00 = $QUERY00->execute();
     if (count($Resultado00) > 0) {
         $Return = true;
@@ -323,10 +323,10 @@ function PermissionChangeTrialGroup($id_user, $id_trialgroup) {
     $id_contactperson = $TbContactperson->getIdContactperson();
 
     $QUERY00 = Doctrine_Query::create()
-                    ->select("T.*")
-                    ->from("TbTrialgroupcontactperson T")
-                    ->where("T.id_trialgroup = $id_trialgroup")
-                    ->andWhere("T.id_contactperson = $id_contactperson");
+            ->select("T.*")
+            ->from("TbTrialgroupcontactperson T")
+            ->where("T.id_trialgroup = $id_trialgroup")
+            ->andWhere("T.id_contactperson = $id_contactperson");
     $Resultado00 = $QUERY00->execute();
     if (count($Resultado00) > 0) {
         $Return = true;
@@ -349,7 +349,7 @@ function CheckUserPermission($id_user, $permissions) {
     return $Return;
 }
 
-function array_sort($array, $on, $order=SORT_ASC) {
+function array_sort($array, $on, $order = SORT_ASC) {
     $new_array = array();
     $sortable_array = array();
 
@@ -419,95 +419,95 @@ class traits {
 }
 
 function DeleteFusionTable($id_trial) {
-    /*$ft = new FusionTable();
-    $Rowid = null;
-    $Resultado = $ft->query("SELECT ROWID  FROM 1596286 WHERE id_trial = $id_trial");
-    $count = count($Resultado);
-    if ($count > 0) {
-        $Rowid = $Resultado[0]['rowid'];
-        if ($Rowid != '') {
-            $ft->query("DELETE FROM 1596286 WHERE ROWID = '$Rowid'");
-        }
-    }*/
+    /* $ft = new FusionTable();
+      $Rowid = null;
+      $Resultado = $ft->query("SELECT ROWID  FROM 1596286 WHERE id_trial = $id_trial");
+      $count = count($Resultado);
+      if ($count > 0) {
+      $Rowid = $Resultado[0]['rowid'];
+      if ($Rowid != '') {
+      $ft->query("DELETE FROM 1596286 WHERE ROWID = '$Rowid'");
+      }
+      } */
 }
 
 function SaveFusionTable($id_trial) {
-    /*$connection = Doctrine_Manager::getInstance()->connection();
-    $Query00 = "SELECT T.id_trialsite,CP.id_contactperson,NULL,INS.id_institution,CN.id_country,TS.trstname,";
-    $Query00 .= "TS.trstlatitudedecimal,TS.trstlongitudedecimal,TS.trstaltitude,TS.trstph,TS.trststatus,CN.cntname,CN.cntiso,CN.cntiso3,NULL,INS.insname,";
-    $Query00 .= "INS.insaddress,INS.insphone,CP.cnprfirstname,CP.cnprlastname,CP.cnpraddress,CP.cnprphone,CP.cnpremail,CP.cnprfirstname||''||CP.cnprlastname,";
-    $Query00 .= "T.id_trial,T.id_trialgroup,T.id_crop,NULL,T.trlname,T.trlsowdate,T.trlharvestdate,T.trltrialresultsfileaccess,";
-    $Query00 .= "NULL,T.trltrialrecorddate,T.trltrialtype,TG.trgrname,TG.trgrstartyear,TG.trgrendyear,CR.crpname,CR.crpscientificname ";
-    $Query00 .= "FROM tb_trial T ";
-    $Query00 .= "INNER JOIN tb_trialsite TS ON T.id_trialsite = TS.id_trialsite ";
-    $Query00 .= "INNER JOIN tb_contactperson CP ON T.id_contactperson = CP.id_contactperson ";
-    $Query00 .= "INNER JOIN tb_institution INS ON CP.id_institution = INS.id_institution ";
-    $Query00 .= "INNER JOIN tb_country CN ON T.id_country = CN.id_country ";
-    $Query00 .= "INNER JOIN tb_crop CR ON T.id_crop = CR.id_crop ";
-    $Query00 .= "INNER JOIN tb_trialgroup TG ON T.id_trialgroup = TG.id_trialgroup ";
-    $Query00 .= "WHERE T.id_trial = $id_trial";
-    $st = $connection->execute($Query00);
-    $R_datos = $st->fetchAll();
-    $NumDatos = count($R_datos);
-    if ($NumDatos > 0) {
+    /* $connection = Doctrine_Manager::getInstance()->connection();
+      $Query00 = "SELECT T.id_trialsite,CP.id_contactperson,NULL,INS.id_institution,CN.id_country,TS.trstname,";
+      $Query00 .= "TS.trstlatitudedecimal,TS.trstlongitudedecimal,TS.trstaltitude,TS.trstph,TS.trststatus,CN.cntname,CN.cntiso,CN.cntiso3,NULL,INS.insname,";
+      $Query00 .= "INS.insaddress,INS.insphone,CP.cnprfirstname,CP.cnprlastname,CP.cnpraddress,CP.cnprphone,CP.cnpremail,CP.cnprfirstname||''||CP.cnprlastname,";
+      $Query00 .= "T.id_trial,T.id_trialgroup,T.id_crop,NULL,T.trlname,T.trlsowdate,T.trlharvestdate,T.trltrialresultsfileaccess,";
+      $Query00 .= "NULL,T.trltrialrecorddate,T.trltrialtype,TG.trgrname,TG.trgrstartyear,TG.trgrendyear,CR.crpname,CR.crpscientificname ";
+      $Query00 .= "FROM tb_trial T ";
+      $Query00 .= "INNER JOIN tb_trialsite TS ON T.id_trialsite = TS.id_trialsite ";
+      $Query00 .= "INNER JOIN tb_contactperson CP ON T.id_contactperson = CP.id_contactperson ";
+      $Query00 .= "INNER JOIN tb_institution INS ON CP.id_institution = INS.id_institution ";
+      $Query00 .= "INNER JOIN tb_country CN ON T.id_country = CN.id_country ";
+      $Query00 .= "INNER JOIN tb_crop CR ON T.id_crop = CR.id_crop ";
+      $Query00 .= "INNER JOIN tb_trialgroup TG ON T.id_trialgroup = TG.id_trialgroup ";
+      $Query00 .= "WHERE T.id_trial = $id_trial";
+      $st = $connection->execute($Query00);
+      $R_datos = $st->fetchAll();
+      $NumDatos = count($R_datos);
+      if ($NumDatos > 0) {
 
-//VERIFICAMOS SI YA EXISTE; SI ES ASI LO BORRAMOS
-        DeleteFusionTable($id_trial);
+      //VERIFICAMOS SI YA EXISTE; SI ES ASI LO BORRAMOS
+      DeleteFusionTable($id_trial);
 
-//ASIGNACION DE VALORES
-        $V_id_trialsite = $R_datos[0][0];
-        $V_id_contactperson = $R_datos[0][1];
-        $V_id_location = $R_datos[0][2];
-        $V_id_institution = $R_datos[0][3];
-        $V_id_country = $R_datos[0][4];
-        $V_trstname = $R_datos[0][5];
-        $V_lat = $R_datos[0][6];
-        $V_long = $R_datos[0][7];
-        $V_trstaltitude = $R_datos[0][8];
-        $V_trstph = $R_datos[0][9];
-        $V_trststatus = $R_datos[0][10];
-        $V_cntname = $R_datos[0][11];
-        $V_cntiso = $R_datos[0][12];
-        $V_cntiso3 = $R_datos[0][13];
-        $V_lctname = $R_datos[0][14];
-        $V_insname = $R_datos[0][15];
-        $V_insaddress = $R_datos[0][16];
-        $V_insphone = $R_datos[0][17];
-        $V_cnprfirstname = $R_datos[0][18];
-        $V_cnprlastname = $R_datos[0][19];
-        $V_cnpraddress = $R_datos[0][20];
-        $V_cnprphone = $R_datos[0][21];
-        $V_cnpremail = $R_datos[0][22];
-        $V_ctprtpname = $R_datos[0][23];
-        $V_id_trial = $R_datos[0][24];
-        $V_id_trialgroup = $R_datos[0][25];
-        $V_id_crop = $R_datos[0][26];
-        $V_trlvarieties = $R_datos[0][27];
-        $V_trlname = $R_datos[0][28];
-        $V_trlsowdate = $R_datos[0][29];
-        $V_trlharvestdate = $R_datos[0][30];
-        $V_trltrialresultsfileaccess = $R_datos[0][31];
-        $V_trlvariablesmeasured = $R_datos[0][32];
-        $V_trltrialrecorddate = $R_datos[0][33];
-        $V_trltrialtype = $R_datos[0][34];
-        $V_trgrname = $R_datos[0][35];
-        $V_trgrstartyear = $R_datos[0][36];
-        $V_trgrendyear = $R_datos[0][37];
-        $V_crpname = $R_datos[0][38];
-        $V_crpscientificname = $R_datos[0][39];
+      //ASIGNACION DE VALORES
+      $V_id_trialsite = $R_datos[0][0];
+      $V_id_contactperson = $R_datos[0][1];
+      $V_id_location = $R_datos[0][2];
+      $V_id_institution = $R_datos[0][3];
+      $V_id_country = $R_datos[0][4];
+      $V_trstname = $R_datos[0][5];
+      $V_lat = $R_datos[0][6];
+      $V_long = $R_datos[0][7];
+      $V_trstaltitude = $R_datos[0][8];
+      $V_trstph = $R_datos[0][9];
+      $V_trststatus = $R_datos[0][10];
+      $V_cntname = $R_datos[0][11];
+      $V_cntiso = $R_datos[0][12];
+      $V_cntiso3 = $R_datos[0][13];
+      $V_lctname = $R_datos[0][14];
+      $V_insname = $R_datos[0][15];
+      $V_insaddress = $R_datos[0][16];
+      $V_insphone = $R_datos[0][17];
+      $V_cnprfirstname = $R_datos[0][18];
+      $V_cnprlastname = $R_datos[0][19];
+      $V_cnpraddress = $R_datos[0][20];
+      $V_cnprphone = $R_datos[0][21];
+      $V_cnpremail = $R_datos[0][22];
+      $V_ctprtpname = $R_datos[0][23];
+      $V_id_trial = $R_datos[0][24];
+      $V_id_trialgroup = $R_datos[0][25];
+      $V_id_crop = $R_datos[0][26];
+      $V_trlvarieties = $R_datos[0][27];
+      $V_trlname = $R_datos[0][28];
+      $V_trlsowdate = $R_datos[0][29];
+      $V_trlharvestdate = $R_datos[0][30];
+      $V_trltrialresultsfileaccess = $R_datos[0][31];
+      $V_trlvariablesmeasured = $R_datos[0][32];
+      $V_trltrialrecorddate = $R_datos[0][33];
+      $V_trltrialtype = $R_datos[0][34];
+      $V_trgrname = $R_datos[0][35];
+      $V_trgrstartyear = $R_datos[0][36];
+      $V_trgrendyear = $R_datos[0][37];
+      $V_crpname = $R_datos[0][38];
+      $V_crpscientificname = $R_datos[0][39];
 
-        $V_insaddress = str_replace(",", "-", $V_insaddress);
-        $V_cnpraddress = str_replace(",", "-", $V_cnpraddress);
-        $V_crpname = str_replace(",", "-", $V_crpname);
-        $V_crpscientificname = str_replace(",", "-", $V_crpscientificname);
+      $V_insaddress = str_replace(",", "-", $V_insaddress);
+      $V_cnpraddress = str_replace(",", "-", $V_cnpraddress);
+      $V_crpname = str_replace(",", "-", $V_crpname);
+      $V_crpscientificname = str_replace(",", "-", $V_crpscientificname);
 
-        $ft = new FusionTable();
-        $Tabla = 1596286;
-        $Campos = "id_trialsite,id_contactperson,id_location,id_institution,id_country,trstname,lat,long,trstaltitude,trstph,trststatus,cntname,cntiso,cntiso3,lctname,insname,insaddress,insphone,cnprfirstname,cnprlastname,cnpraddress,cnprphone,cnpremail,ctprtpname,id_trial,id_trialgroup,id_crop,trlvarieties,trlname,trlsowdate,trlharvestdate,trltrialresultsfileaccess,trlvariablesmeasured,trltrialrecorddate,trltrialtype,trgrname,trgrstartyear,trgrendyear,crpname,crpscientificname";
-        $Valores = "'$V_id_trialsite','$V_id_contactperson','$V_id_location','$V_id_institution','$V_id_country','$V_trstname','$V_lat','$V_long','$V_trstaltitude','$V_trstph','$V_trststatus','$V_cntname','$V_cntiso','$V_cntiso3','$V_lctname','$V_insname','$V_insaddress','$V_insphone','$V_cnprfirstname','$V_cnprlastname','$V_cnpraddress','$V_cnprphone','$V_cnpremail','$V_ctprtpname','$V_id_trial','$V_id_trialgroup','$V_id_crop','$V_trlvarieties','$V_trlname','$V_trlsowdate','$V_trlharvestdate','$V_trltrialresultsfileaccess','$V_trlvariablesmeasured','$V_trltrialrecorddate','$V_trltrialtype','$V_trgrname','$V_trgrstartyear','$V_trgrendyear','$V_crpname','$V_crpscientificname'";
-        $Query = "INSERT INTO $Tabla ($Campos) VALUES ($Valores)";
-        $ft->query($Query);
-    }*/
+      $ft = new FusionTable();
+      $Tabla = 1596286;
+      $Campos = "id_trialsite,id_contactperson,id_location,id_institution,id_country,trstname,lat,long,trstaltitude,trstph,trststatus,cntname,cntiso,cntiso3,lctname,insname,insaddress,insphone,cnprfirstname,cnprlastname,cnpraddress,cnprphone,cnpremail,ctprtpname,id_trial,id_trialgroup,id_crop,trlvarieties,trlname,trlsowdate,trlharvestdate,trltrialresultsfileaccess,trlvariablesmeasured,trltrialrecorddate,trltrialtype,trgrname,trgrstartyear,trgrendyear,crpname,crpscientificname";
+      $Valores = "'$V_id_trialsite','$V_id_contactperson','$V_id_location','$V_id_institution','$V_id_country','$V_trstname','$V_lat','$V_long','$V_trstaltitude','$V_trstph','$V_trststatus','$V_cntname','$V_cntiso','$V_cntiso3','$V_lctname','$V_insname','$V_insaddress','$V_insphone','$V_cnprfirstname','$V_cnprlastname','$V_cnpraddress','$V_cnprphone','$V_cnpremail','$V_ctprtpname','$V_id_trial','$V_id_trialgroup','$V_id_crop','$V_trlvarieties','$V_trlname','$V_trlsowdate','$V_trlharvestdate','$V_trltrialresultsfileaccess','$V_trlvariablesmeasured','$V_trltrialrecorddate','$V_trltrialtype','$V_trgrname','$V_trgrstartyear','$V_trgrendyear','$V_crpname','$V_crpscientificname'";
+      $Query = "INSERT INTO $Tabla ($Campos) VALUES ($Valores)";
+      $ft->query($Query);
+      } */
 }
 
 function GetPermissionsUser($id_user) {
@@ -660,7 +660,7 @@ class FusionTable {
             if (preg_match("/^\"/", $value)) {
 // Concatenate the value with the next cell and remove the double quotes
                 $cells[$index] = preg_replace("/^\"|\"$/", "", $cells[$index] .
-                                $cells[$index + 1]);
+                        $cells[$index + 1]);
 
 // Drop the next cell from the array
                 array_splice($cells, $index + 1, 1);
@@ -687,13 +687,26 @@ class FusionTable {
 function CheckAPI($key) {
     $key = trim($key);
     $QUERY00 = Doctrine_Query::create()
-                    ->from("SfGuardUserInformation UI")
-                    ->where("UI.key = '$key'");
+            ->from("SfGuardUserInformation UI")
+            ->where("UI.key = '$key'");
     $Resultado00 = $QUERY00->execute();
     if (count($Resultado00) == 0)
         return false;
     else
         return true;
+}
+
+function HelpModule($module, $field) {
+    $connection = Doctrine_Manager::getInstance()->connection();
+    $TextHelp = "";
+    $HTML = "";
+    $QUERY = "SELECT trgrflhelp AS name FROM tb_fieldmodulehelp WHERE flmdhlmodule = '$module' AND flmdhlfield = '$field'";
+    $st = $connection->execute($QUERY);
+    $R_Help = $st->fetch(PDO::FETCH_BOTH);
+    $TextHelp = $R_Help['name'];
+    if ($TextHelp != '')
+        $HTML = "<div class='help'><span class='ui-icon ui-icon-info floatleft'></span>$TextHelp</div>";
+    return $HTML;
 }
 
 function CheckVarietyGenebank($variety) {
@@ -754,9 +767,9 @@ function NextLetter($present = null) {
 
 function Weatherstationuserpermission($id_weatherstation, $id_user) {
     $QUERY00 = Doctrine_Query::create()
-                    ->from("TbWeatherstationuserpermission WSUP")
-                    ->where("WSUP.id_weatherstation = $id_weatherstation")
-                    ->andWhere("WSUP.id_userpermission = $id_user");
+            ->from("TbWeatherstationuserpermission WSUP")
+            ->where("WSUP.id_weatherstation = $id_weatherstation")
+            ->andWhere("WSUP.id_userpermission = $id_user");
     $Resultado00 = $QUERY00->execute();
 
     if (count($Resultado00) == 0)
