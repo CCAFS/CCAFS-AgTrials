@@ -109,7 +109,6 @@ if ($sf_user->isAuthenticated()) {
 
                                 <?php if ($sf_user->isAuthenticated()) {
                                 ?>
-
                                             <div id='cssmenu'>
                                                 <ul>
                                                     <li><a href='/list'><span>Search Trials</span></a></li>
@@ -157,7 +156,6 @@ if ($sf_user->isAuthenticated()) {
                                                 <?php
                                                 if (CheckUserPermission($id_user, 1)) {
                                                 ?>
-
                                                     <li><a href="/sfGuardUser">Users</a></li>
                                                     <li><a href="/administration">Administration</a></li>
                                                     <li><a href="/fieldmodulehelp">Field Module Help</a></li>
