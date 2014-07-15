@@ -103,7 +103,7 @@
         </div>
         <?php echo $form['id_trialgroup']->render() ?>
         <span id="add_trialgroup">
-            <?php echo thickbox_iframe(image_tag('add-icon.png'), 'tbtrialgroup/new', array('pop' => '1')) ?>
+            <a href="#" onclick="javascript:openWindow('/tbtrialgroup/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
 
@@ -128,7 +128,7 @@
         </div>
         <?php echo $form['id_contactperson']->render() ?>
         <span id="add_contactperson">
-            <?php echo thickbox_iframe(image_tag('add-icon.png'), 'tbcontactperson/new', array('pop' => '1')) ?>
+            <a href="#" onclick="javascript:openWindow('/tbcontactperson/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
 
@@ -153,7 +153,7 @@
         </div>
         <?php echo $form['id_trialsite']->render() ?>
         <span id="add_trialsite">
-            <?php echo thickbox_iframe(image_tag('add-icon.png'), 'tbtrialsite/new', array('pop' => '1')) ?>
+            <a href="#" onclick="javascript:openWindow('/tbtrialsite/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
 
@@ -171,7 +171,7 @@
             </select>
         </span>
         <span id="add_fieldnamenumber">
-            <?php echo thickbox_iframe(image_tag('add-icon.png'), 'tbfieldnamenumber/new', array('pop' => '1')) ?>
+            <a href="#" onclick="javascript:openWindow('/tbfieldnamenumber/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
 
@@ -225,9 +225,6 @@
             <?php echo $form['id_crop']->renderError() ?>
         </div>
         <?php echo $form['id_crop']->render() ?>
-        <span id="add_crop">
-            <?php echo thickbox_iframe(image_tag('add-icon.png'), 'tbcrop/new', array('pop' => '1')) ?>
-        </span>
     </div>
 
     <div class="sf_admin_form_row sf_admin_text">
@@ -269,7 +266,7 @@
             ?>
         </span>
         <span id="add_variety">
-            <?php echo thickbox_iframe(image_tag('add-icon.png'), 'tbvariety/new', array('pop' => '1')) ?>
+            <a href="#" onclick="javascript:openWindow('/tbvariety/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
     <div class="sf_admin_form_row sf_admin_text">
@@ -299,7 +296,7 @@
             ?>
         </span>
         <span id="add_variablesmeasured">
-            <?php echo thickbox_iframe(image_tag('add-icon.png'), 'tbvariablesmeasured/new', array('pop' => '1')) ?>
+            <a href="#" onclick="javascript:openWindow('/tbvariablesmeasured/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
 
         <!--INICIO ADICCION VARIABLES MEDIDAS-->
