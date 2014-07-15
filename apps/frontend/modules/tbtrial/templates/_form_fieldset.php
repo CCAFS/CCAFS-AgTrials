@@ -366,7 +366,7 @@
         </div>
         <?php echo $form['trllicense']->render() ?>
         <span id="add_licence">
-            <?php echo thickbox_iframe(image_tag('licence-icon.png') . 'Creative Commons License Generator', '@license_generator', array('pop' => '1'), array(), array('width' => '800', 'height' => '500')) ?>
+            <?php echo thickbox_iframe(image_tag('licence-icon.png') . 'Creative Commons License Generator', '@license_generator', array('pop' => '1'), array(), array('width' => '800', 'height' => '320')) ?>
         </span>
     </div>
 

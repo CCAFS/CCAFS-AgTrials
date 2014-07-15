@@ -339,7 +339,7 @@ class tbtrialActions extends autoTbtrialActions {
     }
 
     public function executeLicence(sfWebRequest $request) {
-        
+        $this->setLayout(false);
     }
 
     public function executeDownload(sfWebRequest $request) {
@@ -3543,4 +3543,3 @@ function rev($number) {
     }
     return $res;
 }
-
