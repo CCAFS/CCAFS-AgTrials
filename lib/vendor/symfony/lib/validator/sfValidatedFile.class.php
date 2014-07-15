@@ -258,7 +258,7 @@ class sfValidatedFile
       'application/msword' => 'doc',
       'application/ocsp-request' => 'orq',
       'application/ocsp-response' => 'ors',
-      'application/octet-stream' => 'bin',
+      'application/octet-stream' => 'zip',
       'application/oda' => 'oda',
       'application/ogg' => 'ogg',
       'application/pdf' => 'pdf',

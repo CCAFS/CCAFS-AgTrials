@@ -78,13 +78,13 @@ SfGuardGroup:
       notnull: true
       primary: false
   relations:
-    TbTrialgrouppermission:
-      local: id
-      foreign: id_group
-      type: many
     SfGuardGroupPermission:
       local: id
       foreign: group_id
+      type: many
+    TbTrialgrouppermission:
+      local: id
+      foreign: id_group
       type: many
     SfGuardUserGroup:
       local: id
@@ -311,18 +311,6 @@ SfGuardUser:
       local: id
       foreign: user_id
       type: many
-    SfGuardForgotPassword:
-      local: id
-      foreign: user_id
-      type: many
-    SfGuardUserDownloads:
-      local: id
-      foreign: user_id
-      type: many
-    SfGuardUserInformation:
-      local: id
-      foreign: user_id
-      type: many
     TbTrialsiteuserpermissionfiles:
       local: id
       foreign: id_userpermission
@@ -338,6 +326,18 @@ SfGuardUser:
     TbWeatherstationuserpermission:
       local: id
       foreign: id_userpermission
+      type: many
+    SfGuardForgotPassword:
+      local: id
+      foreign: user_id
+      type: many
+    SfGuardUserDownloads:
+      local: id
+      foreign: user_id
+      type: many
+    SfGuardUserInformation:
+      local: id
+      foreign: user_id
       type: many
 SfGuardUserDownloads:
   connection: doctrine
@@ -1289,10 +1289,6 @@ TbCountry:
       local: id_country
       foreign: id_country
       type: many
-    SfGuardUserInformation:
-      local: id_country
-      foreign: id_country
-      type: many
     TbTrial:
       local: id_country
       foreign: id_country
@@ -1302,6 +1298,10 @@ TbCountry:
       foreign: id_country
       type: many
     TbOrigin:
+      local: id_country
+      foreign: id_country
+      type: many
+    SfGuardUserInformation:
       local: id_country
       foreign: id_country
       type: many
@@ -1430,15 +1430,15 @@ TbCrop:
       local: id_crop
       foreign: id_crop
       type: many
-    TbBibliography:
-      local: id_crop
-      foreign: id_crop
-      type: many
     TbTrial:
       local: id_crop
       foreign: id_crop
       type: many
     TbVariety:
+      local: id_crop
+      foreign: id_crop
+      type: many
+    TbBibliography:
       local: id_crop
       foreign: id_crop
       type: many
@@ -1870,10 +1870,6 @@ TbInstitution:
       local: id_institution
       foreign: id_institution
       type: many
-    SfGuardUserInformation:
-      local: id_institution
-      foreign: id_institution
-      type: many
     TbTrialgroup:
       local: id_institution
       foreign: id_institution
@@ -1883,6 +1879,10 @@ TbInstitution:
       foreign: id_institution
       type: many
     TbOrigin:
+      local: id_institution
+      foreign: id_institution
+      type: many
+    SfGuardUserInformation:
       local: id_institution
       foreign: id_institution
       type: many
@@ -3218,14 +3218,6 @@ TbTrial:
       local: id_trial
       foreign: id_trial
       type: many
-    TbTrialgrouppermission:
-      local: id_trial
-      foreign: id_trial
-      type: many
-    SfGuardUserDownloads:
-      local: id_trial
-      foreign: id_trial
-      type: many
     TbTrialcomments:
       local: id_trial
       foreign: id_trial
@@ -3238,7 +3230,15 @@ TbTrial:
       local: id_trial
       foreign: id_trial
       type: many
+    TbTrialgrouppermission:
+      local: id_trial
+      foreign: id_trial
+      type: many
     TbTrialdata:
+      local: id_trial
+      foreign: id_trial
+      type: many
+    SfGuardUserDownloads:
       local: id_trial
       foreign: id_trial
       type: many
@@ -3729,6 +3729,10 @@ TbTrialgroup:
       local: id_trialgroup
       foreign: id_trialgroup
       type: many
+    TbTrial:
+      local: id_trialgroup
+      foreign: id_trialgroup
+      type: many
     TbBibliography:
       local: id_trialgroup
       foreign: id_trialgroup
@@ -3738,10 +3742,6 @@ TbTrialgroup:
       foreign: id_trialgroup
       type: many
     TbTrialgroupfile:
-      local: id_trialgroup
-      foreign: id_trialgroup
-      type: many
-    TbTrial:
       local: id_trialgroup
       foreign: id_trialgroup
       type: many
@@ -4307,18 +4307,6 @@ TbTrialsite:
       local: id_trialsite
       foreign: id_trialsite
       type: many
-    TbTrialsitephotograph:
-      local: id_trialsite
-      foreign: id_trialsite
-      type: many
-    TbTrialsiteweatherstation:
-      local: id_trialsite
-      foreign: id_trialsite
-      type: many
-    TbFieldnamenumber:
-      local: id_trialsite
-      foreign: id_trialsite
-      type: many
     TbTrial:
       local: id_trialsite
       foreign: id_trialsite
@@ -4327,7 +4315,19 @@ TbTrialsite:
       local: id_trialsite
       foreign: id_trialsite
       type: many
+    TbTrialsitephotograph:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
+    TbTrialsiteweatherstation:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
     TbTrialsitecontactperson:
+      local: id_trialsite
+      foreign: id_trialsite
+      type: many
+    TbFieldnamenumber:
       local: id_trialsite
       foreign: id_trialsite
       type: many

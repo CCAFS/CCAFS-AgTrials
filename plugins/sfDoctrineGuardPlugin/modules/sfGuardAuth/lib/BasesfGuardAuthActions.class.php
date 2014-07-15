@@ -35,13 +35,14 @@ class BasesfGuardAuthActions extends sfActions {
                 // always redirect to a URL set in app.yml
                 // or to the referer
                 // or to the homepage
-                $signinUrl = sfConfig::get('app_sf_guard_plugin_success_signin_url', $user->getReferer($request->getReferer()));
-                //return $this->redirect('@trialsites');
-                //AQUI SE REDIRECCION A LA PAGINA DE DONDE VENIA O SINO A LA INICIAL AUTENTICADA
-//                if ($signinUrl != "http://www.agtrials.org/")
-//                    return $this->redirect('' != $signinUrl ? $signinUrl : '@trialsites');
-//                else
-                    return $this->redirect('@trialsites');
+				$signinUrl = sfConfig::get('app_sf_guard_plugin_success_signin_url', $user->getReferer($request->getReferer()));
+				$ServerName = $this->getRequest()->getHost();
+				//AQUI SE REDIRECCION A LA PAGINA DE DONDE VENIA O SINO A LA INICIAL AUTENTICADA
+				if ($signinUrl != $ServerName)
+					return $this->redirect('' != $signinUrl ? $signinUrl : '@trialsites');
+				else
+					return $this->redirect('@trialsites');
+			
             }
         } else {
             if ($request->isXmlHttpRequest()) {

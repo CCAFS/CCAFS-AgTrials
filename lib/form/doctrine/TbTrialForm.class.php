@@ -87,7 +87,7 @@ class TbTrialForm extends BaseTbTrialForm {
             'trlreplications' => new sfValidatorString(array('required' => false)),
             'trlvarieties' => new sfValidatorString(array('required' => false)),
             'trlvariablesmeasured' => new sfValidatorString(array('required' => false)),
-            'trltrialresultsfile' => new sfValidatorFile(
+			'trltrialresultsfile' => new sfValidatorFile(
                     array(
                 'required' => false,
                 'max_size' => '10485760',
@@ -106,6 +106,7 @@ class TbTrialForm extends BaseTbTrialForm {
                     'application/x-mspowerpoint',
                     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
                     'application/pdf',
+					'application/octet-stream',
                     'application/x-compressed',
                     'application/x-zip-compressed',
                     'application/zip',
@@ -114,7 +115,8 @@ class TbTrialForm extends BaseTbTrialForm {
                 'required' => 'Select a file to upload.',
                 'mime_types' => 'The file must be of .doc, .xls, .ppt, pdf and .zip format.',
                 'max_size' => 'Invalid file max size 10 MB')),
-            'trlsupplementalinformationfile' => new sfValidatorFile(
+			'trltrialresultsfile_delete' => new sfValidatorBoolean(),
+			'trlsupplementalinformationfile' => new sfValidatorFile(
                     array(
                 'required' => false,
                 'max_size' => '10485760',
@@ -133,6 +135,7 @@ class TbTrialForm extends BaseTbTrialForm {
                     'application/x-mspowerpoint',
                     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
                     'application/pdf',
+					'application/octet-stream',
                     'application/x-compressed',
                     'application/x-zip-compressed',
                     'application/zip',
@@ -141,7 +144,8 @@ class TbTrialForm extends BaseTbTrialForm {
                 'required' => 'Select a file to upload.',
                 'mime_types' => 'The file must be of .doc, .xls, .ppt, pdf and .zip format.',
                 'max_size' => 'Invalid file max size 10 MB')),
-            'trlweatherduringtrialfile' => new sfValidatorFile(
+			'trlsupplementalinformationfile_delete' => new sfValidatorBoolean(),
+			'trlweatherduringtrialfile' => new sfValidatorFile(
                     array(
                 'required' => false,
                 'max_size' => '10485760',
@@ -160,6 +164,7 @@ class TbTrialForm extends BaseTbTrialForm {
                     'application/x-mspowerpoint',
                     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
                     'application/pdf',
+					'application/octet-stream',
                     'application/x-compressed',
                     'application/x-zip-compressed',
                     'application/zip',
@@ -168,7 +173,8 @@ class TbTrialForm extends BaseTbTrialForm {
                 'required' => 'Select a file to upload.',
                 'mime_types' => 'The file must be of .doc, .xls, .ppt, pdf and .zip format.',
                 'max_size' => 'Invalid file max size 10 MB')),
-            'trlsoiltypeconditionsduringtrialfile' => new sfValidatorFile(
+			'trlweatherduringtrialfile_delete' => new sfValidatorBoolean(),
+			'trlsoiltypeconditionsduringtrialfile' => new sfValidatorFile(
                     array(
                 'required' => false,
                 'max_size' => '10485760',
@@ -187,6 +193,7 @@ class TbTrialForm extends BaseTbTrialForm {
                     'application/x-mspowerpoint',
                     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
                     'application/pdf',
+					'application/octet-stream',
                     'application/x-compressed',
                     'application/x-zip-compressed',
                     'application/zip',
@@ -195,6 +202,7 @@ class TbTrialForm extends BaseTbTrialForm {
                 'required' => 'Select a file to upload.',
                 'mime_types' => 'The file must be of .doc, .xls, .ppt, pdf and .zip format.',
                 'max_size' => 'Invalid file max size 10 MB')),
+            'trlsoiltypeconditionsduringtrialfile_delete' => new sfValidatorBoolean(),
             'trllicense' => new sfValidatorString(array('required' => false)),
             'trlfileaccess' => new sfValidatorString(array('required' => false)),
             'trltrialtype' => new sfValidatorString(array('required' => false)),

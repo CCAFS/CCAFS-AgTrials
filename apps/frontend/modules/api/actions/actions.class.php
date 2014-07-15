@@ -295,6 +295,8 @@ class apiActions extends sfActions {
 
             $st = $connection->execute($QUERY00);
             $Result = $st->fetchAll(PDO::FETCH_ASSOC);
+			//$rows = count($Result);
+			//die("rows: $rows");
             $JSON = json_encode($Result);
             $JSONApimap = "agtrialWS = " . $JSON . ";";
             header('Content-type: text/json');

@@ -90,8 +90,8 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.TERRAIN
     });
     
-    google.maps.event.addDomListener(document.getElementById('mc-cb'),'click', toggleMarkerClusterer);
-    google.maps.event.addDomListener(document.getElementById('mgr-cb'),'click', toggleMarkerManager);
+    google.maps.event.addDomListener(document.getElementById('mc-cb'), 'click', toggleMarkerClusterer);
+    google.maps.event.addDomListener(document.getElementById('mgr-cb'), 'click', toggleMarkerManager);
 
     var infowindow = new google.maps.InfoWindow();
    

@@ -66,7 +66,6 @@ function toggleMarkerManager() {
 function toggleMarkerClusterer() {
     showMarketClusterer = !showMarketClusterer;
     if (showMarketClusterer) {
-
         if (mc) {
             mc.addMarkers(markers.info);
         } else {
@@ -120,7 +119,6 @@ function initialize() {
         center: new google.maps.LatLng(30, 0),
         zoom: 1,
         mapTypeId: google.maps.MapTypeId.TERRAIN
-                //mapTypeId: google.maps.MapTypeId.HYBRID  
     });
 
     google.maps.event.addDomListener(document.getElementById('mc-cb'), 'click', toggleMarkerClusterer);
@@ -143,7 +141,8 @@ function initialize() {
                     position: new google.maps.LatLng(Lat, Log),
                     clickable: true,
                     draggable: false,
-                    flat: true
+                    flat: true,
+					icon: '/images/GoogleMap/m0.png'
                 });
                 google.maps.event.addListener(markers[level][i], 'click', (function(marker, i) {
                     return function() {

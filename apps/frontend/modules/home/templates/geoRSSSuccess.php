@@ -24,7 +24,7 @@
             <agtrials:variablesmeasured><?php echo $valor->trlvariablesmeasured; ?></agtrials:variablesmeasured>
             <agtrials:fileaccess><?php echo $valor->trlfileaccess; ?></agtrials:fileaccess>
             <agtrials:trialtype><?php echo $valor->trltrialtype; ?></agtrials:trialtype>
-            <agtrials:trialrecorddate><?php echo $valor->trltrialrecorddate; ?></agtrials:trialrecorddate>
+            <agtrials:trialrecorddate><?php echo $valor->created_at; ?></agtrials:trialrecorddate>
             <georss:point><?php echo $valor->georsspoint; ?></georss:point>
         </entry>
 <?php } ?>

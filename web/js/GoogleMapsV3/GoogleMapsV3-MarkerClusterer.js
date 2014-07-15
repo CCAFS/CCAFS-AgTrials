@@ -20,10 +20,9 @@ function k(a,b,c){
     this.j=[];
     this.A=!1;
     c=c||{};
-    
     this.g=c.gridSize||60;
     this.l=c.minimumClusterSize||2;
-    this.J=c.maxZoom||d;
+    this.J=8; //AQUI SE DEFINE EL ZOOM MAXIMO PARA CLUSTERIZAR
     this.j=c.styles||[];
     this.X=c.imagePath||this.Q;
     this.W=c.imageExtension||this.P;
@@ -46,7 +45,7 @@ function k(a,b,c){
     b&&b.length&&this.C(b,!1)
     }
     j=k.prototype;
-j.Q="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m";
+j.Q="/js/GoogleMapsV3/images/m";
 j.P="png";
 j.extend=function(a,b){
     return function(a){

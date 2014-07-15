@@ -22,22 +22,22 @@ use_javascript('/sfAdminThemejRollerPlugin/js/ui.selectmenu.js');
     <div class="fg-toolbar ui-widget-header ui-corner-all">
         <h1>Welcome to Trial Site - Sign In</h1>
     </div>
-    <br>
-    <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
-        <table class="centrar">
-            <tbody>
-                <?php echo $form ?>
-            </tbody>
-            <tfoot>
-                <tr class="centrar">
-                    <td colspan="2" class="centrar">
-                        <input type="submit" value="<?php echo __('Signin', null, 'sf_guard') ?>" />
-                        <input type="button" value="Forgot your password?" OnClick="window.location = '/forgotpassword'">
-                        <input type="button" value="AgMIP" OnClick="window.location = 'https://auth.agmip.org/?s=agtrials'">
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </form>
-    <br>
+        <br>
+        <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
+            <table class="centrar">
+                <tbody>
+                    <?php echo $form ?>
+                </tbody>
+                <tfoot>
+                    <tr class="centrar">
+                        <td colspan="2" class="centrar">
+                            <input type="submit" value="<?php echo __('Signin', null, 'sf_guard') ?>" />
+                            <input type="button" value="Back" OnClick="window.history.back()">
+                            <input type="button" value="Forgot your password?" OnClick="window.location='/forgotpassword'">
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+         </form>
+        <br>
 </div>
