@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() { 
 
     //VALIDAMOS TIPO ARCHIVOS
     $('#tb_trial_trltrialresultsfile').blur(function() {
