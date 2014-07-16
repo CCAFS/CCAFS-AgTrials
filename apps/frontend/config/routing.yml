@@ -682,6 +682,10 @@ savetrialgroupcontactperson:
   url:   /savetrialgroupcontactperson/*
   param: { module: tbtrialgroup, action: savetrialgroupcontactperson }
   
+listobjective:
+  url:   /listobjective/*
+  param: { module: tbtrialgroup, action: listobjective }
+  
 weatherstationuserpermission:
   url:   /weatherstationuserpermission/*
   param: { module: tbweatherstation, action: weatherstationuserpermission }

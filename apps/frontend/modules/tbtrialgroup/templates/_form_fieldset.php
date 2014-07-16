@@ -80,7 +80,9 @@
         <div class="label ui-state-error-text">
             <?php echo $form['id_objective']->renderError() ?>
         </div>
-        <?php echo $form['id_objective']->render() ?>
+        <a href="/listobjective?pop=1&amp;KeepThis=true&amp;TB_iframe=true&amp;width=750&amp;height=600" class="thickbox"><input id="nameobjective" type="text" name="nameobjective" size="60"></a>
+        <input id="tb_trialgroup_id_trialgrouptype" type="hidden" name="tb_trialgroup[id_trialgrouptype]" size="30">
+
     </div>
 
     <div class="sf_admin_form_row sf_admin_text">

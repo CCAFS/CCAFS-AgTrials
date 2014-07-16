@@ -99,7 +99,7 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
     public function executeAutoinstitution($request) {
         $this->getResponse()->setContentType('application/json');
         $Institution = Doctrine::getTable('TbInstitution')->retrieveForSelect(
-                        $request->getParameter('q'), $request->getParameter('limit')
+                $request->getParameter('q'), $request->getParameter('limit')
         );
         return $this->renderText(json_encode($Institution));
     }
@@ -107,7 +107,7 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
     public function executeAutocontactperson($request) {
         $this->getResponse()->setContentType('application/json');
         $Contactperson = Doctrine::getTable('TbContactperson')->retrieveForSelect(
-                        $request->getParameter('q'), null, $request->getParameter('limit')
+                $request->getParameter('q'), null, $request->getParameter('limit')
         );
         return $this->renderText(json_encode($Contactperson));
     }
@@ -387,11 +387,11 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         $objPHPExcel->setActiveSheetIndex(1);
         $objPHPExcel->getActiveSheet(1)->setTitle('Institution');
         $QUERY01 = Doctrine_Query::create()
-                        ->select("I.id_institution,I.insname")
-                        ->addSelect("CN.cntname AS country")
-                        ->from("TbInstitution I")
-                        ->innerJoin("I.TbCountry CN")
-                        ->orderBy('CN.cntname, I.insname');
+                ->select("I.id_institution,I.insname")
+                ->addSelect("CN.cntname AS country")
+                ->from("TbInstitution I")
+                ->innerJoin("I.TbCountry CN")
+                ->orderBy('CN.cntname, I.insname');
         $Resultado01 = $QUERY01->execute();
         $i = 2;
         $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Id');
@@ -414,9 +414,9 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         $objPHPExcel->setActiveSheetIndex(2);
         $objPHPExcel->getActiveSheet(2)->setTitle('Contact Person');
         $QUERY02 = Doctrine_Query::create()
-                        ->select("CP.id_contactperson AS id, (CP.cnprfirstname||' ' ||CP.cnprlastname) AS name")
-                        ->from("TbContactperson CP")
-                        ->orderBy("CP.cnprfirstname");
+                ->select("CP.id_contactperson AS id, (CP.cnprfirstname||' ' ||CP.cnprlastname) AS name")
+                ->from("TbContactperson CP")
+                ->orderBy("CP.cnprfirstname");
         $Resultado02 = $QUERY02->execute();
         $i = 2;
         $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Id');
@@ -435,9 +435,9 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         $objPHPExcel->setActiveSheetIndex(3);
         $objPHPExcel->getActiveSheet(3)->setTitle('Trial group type');
         $QUERY03 = Doctrine_Query::create()
-                        ->select("TGT.id_trialgrouptype AS id, TGT.trgptyname AS name")
-                        ->from("Tbtrialgrouptype TGT")
-                        ->orderBy("TGT.trgptyname");
+                ->select("TGT.id_trialgrouptype AS id, TGT.trgptyname AS name")
+                ->from("Tbtrialgrouptype TGT")
+                ->orderBy("TGT.trgptyname");
         $Resultado03 = $QUERY03->execute();
         $i = 2;
         $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Id');
@@ -457,9 +457,9 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         $objPHPExcel->setActiveSheetIndex(4);
         $objPHPExcel->getActiveSheet(4)->setTitle('Objective');
         $QUERY04 = Doctrine_Query::create()
-                        ->select("O.id_objective AS id, O.objname AS name")
-                        ->from("Tbobjective O")
-                        ->orderBy("O.objname");
+                ->select("O.id_objective AS id, O.objname AS name")
+                ->from("Tbobjective O")
+                ->orderBy("O.objname");
         $Resultado04 = $QUERY04->execute();
         $i = 2;
         $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Id');
@@ -479,9 +479,9 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         $objPHPExcel->setActiveSheetIndex(5);
         $objPHPExcel->getActiveSheet(5)->setTitle('Primary discipline');
         $QUERY05 = Doctrine_Query::create()
-                        ->select("PD.id_primarydiscipline AS id, PD.prdsname AS name")
-                        ->from("Tbprimarydiscipline PD")
-                        ->orderBy("PD.prdsname");
+                ->select("PD.id_primarydiscipline AS id, PD.prdsname AS name")
+                ->from("Tbprimarydiscipline PD")
+                ->orderBy("PD.prdsname");
         $Resultado05 = $QUERY05->execute();
         $i = 2;
         $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Id');
@@ -511,23 +511,23 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
 
     public function executeDownloadfile(sfWebRequest $request) {
         $id_trialgroupfile = $request->getParameter('id_trialgroupfile');
-		if($id_trialgroupfile != ""){
-			$TbTrialgroupfile = Doctrine::getTable('TbTrialgroupfile')->findOneByIdTrialgroupfile($id_trialgroupfile);
-			$Trgrflfile = $TbTrialgroupfile->getTrgrflfile();
-			$Trgrfldescription = $TbTrialgroupfile->getTrgrfldescription();
-			$id_trialgroup = $TbTrialgroupfile->getIdTrialgroup();
+        if ($id_trialgroupfile != "") {
+            $TbTrialgroupfile = Doctrine::getTable('TbTrialgroupfile')->findOneByIdTrialgroupfile($id_trialgroupfile);
+            $Trgrflfile = $TbTrialgroupfile->getTrgrflfile();
+            $Trgrfldescription = $TbTrialgroupfile->getTrgrfldescription();
+            $id_trialgroup = $TbTrialgroupfile->getIdTrialgroup();
 
-			$TrialGroupFile = "TrialGroupFile_$id_trialgroup";
-			$uploadDir = sfConfig::get("sf_upload_dir");
-			$dir_file = "$uploadDir/$TrialGroupFile/$Trgrflfile";
-			$dir_file = str_replace("/", "\\", $dir_file);
-			$file = file($dir_file);
-			$file2 = implode("", $file);
-			header("Content-Type: application/octet-stream");
-			header("Content-Disposition: attachment; filename=" . str_replace(" ", "_", $Trgrflfile) . "\r\n\r\n");
-			header("Content-Length: " . strlen($file2) . "\n\n");
-			echo $file2;
-		}
+            $TrialGroupFile = "TrialGroupFile_$id_trialgroup";
+            $uploadDir = sfConfig::get("sf_upload_dir");
+            $dir_file = "$uploadDir/$TrialGroupFile/$Trgrflfile";
+            $dir_file = str_replace("/", "\\", $dir_file);
+            $file = file($dir_file);
+            $file2 = implode("", $file);
+            header("Content-Type: application/octet-stream");
+            header("Content-Disposition: attachment; filename=" . str_replace(" ", "_", $Trgrflfile) . "\r\n\r\n");
+            header("Content-Length: " . strlen($file2) . "\n\n");
+            echo $file2;
+        }
         die();
     }
 
@@ -562,19 +562,19 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         $dato = strtolower($request->getParameter('term'));
         if ($this->getUser()->hasCredential('Administrator')) {
             $QUERY01 = Doctrine_Query::create()
-                            ->select("T.*,T.id_trialgroup AS id, (T.trgrname) AS name")
-                            ->from("TbTrialgroup T")
-                            ->where("LOWER(T.trgrname) LIKE '$dato%'")
-                            ->orderBy("T.trgrname")
-                            ->limit(20);
+                    ->select("T.*,T.id_trialgroup AS id, (T.trgrname) AS name")
+                    ->from("TbTrialgroup T")
+                    ->where("LOWER(T.trgrname) LIKE '$dato%'")
+                    ->orderBy("T.trgrname")
+                    ->limit(20);
         } else {
             $QUERY01 = Doctrine_Query::create()
-                            ->select("T.*,T.id_trialgroup AS id, (T.trgrname) AS name")
-                            ->from("TbTrialgroup T")
-                            ->where("T.id_user = $id_user")
-                            ->andWhere("LOWER(T.trgrname) LIKE '$dato%'")
-                            ->orderBy("T.trgrname")
-                            ->limit(20);
+                    ->select("T.*,T.id_trialgroup AS id, (T.trgrname) AS name")
+                    ->from("TbTrialgroup T")
+                    ->where("T.id_user = $id_user")
+                    ->andWhere("LOWER(T.trgrname) LIKE '$dato%'")
+                    ->orderBy("T.trgrname")
+                    ->limit(20);
         }
         $Resultado01 = $QUERY01->execute();
         $rv = "";
@@ -610,6 +610,10 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         }
         $list_contactperson = substr($list_contactperson, 0, strlen($list_contactperson) - 2);
         $this->name = $list_contactperson;
+    }
+
+    public function executeListobjective(sfWebRequest $request) {
+        $this->setLayout(false);
     }
 
 }
