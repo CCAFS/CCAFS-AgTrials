@@ -10,12 +10,14 @@
 <script src="/autocompletemultiple/autocomplete.js" type="text/javascript"></script>
 <?php
 $ArrWidth = array('5%', '95%');
+$IdObjective = "";
 ?>
 <script>
-    function SelectObjective(check) {
-        var Valor = check.value;
+    var IdObjective = parent.document.getElementById("tb_trialgroup_id_objective").value
+    function SelectObjective(Object) {
+        var Valor = Object.value;
         var Name = "";
-        if (check.checked) {
+        if (Object.checked) {
             Name = $('#ObjectiveName' + Valor).attr('value');
             parent.document.getElementById("tb_trialgroup_id_objective").value = Valor;
             parent.document.getElementById("nameobjective").value = Name;

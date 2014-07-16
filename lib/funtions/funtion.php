@@ -817,8 +817,7 @@ function Listobjectives($ArrWidth) {
     $user = sfContext::getInstance()->getUser();
     $session_objective_id = $user->getAttribute('objective_id');
     $session_objective_name = $user->getAttribute('objective_name');
-
-
+    
     $QUERY = "SELECT id_objective,objname FROM tb_objective ORDER BY objname";
     $Results = $connection->execute($QUERY);
     $Record = $Results->fetchAll();
