@@ -81,7 +81,7 @@
             <?php echo $form['id_objective']->renderError() ?>
         </div>
         <a href="/listobjective?pop=1&amp;KeepThis=true&amp;TB_iframe=true&amp;width=750&amp;height=600" class="thickbox"><input id="nameobjective" type="text" name="nameobjective" size="60"></a>
-        <input id="tb_trialgroup_id_trialgrouptype" type="hidden" name="tb_trialgroup[id_trialgrouptype]" size="30">
+        <input id="tb_trialgroup_id_objective" type="hidden" name="tb_trialgroup[id_objective]" size="30">
 
     </div>
 
