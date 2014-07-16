@@ -80,8 +80,15 @@
         <div class="label ui-state-error-text">
             <?php echo $form['id_objective']->renderError() ?>
         </div>
-        <a href="/listobjective?pop=1&amp;KeepThis=true&amp;TB_iframe=true&amp;width=750&amp;height=600" class="thickbox"><input id="nameobjective" type="text" name="nameobjective" size="60"></a>
-        <input id="tb_trialgroup_id_objective" type="hidden" name="tb_trialgroup[id_objective]" size="30">
+        <?php
+        $id_objective = $form->getObject()->get('id_objective');
+        if ($id_objective != '') {
+            $Objective = Doctrine::getTable('TbObjective')->findOneByIdObjective($id_objective);
+            $Objname = $Objective->getObjname();
+        }
+        ?>
+        <a href="/listobjective?pop=1&amp;KeepThis=true&amp;TB_iframe=true&amp;width=750&amp;height=600" class="thickbox"><input id="nameobjective" type="text" name="nameobjective" size="60" value="<?php echo $Objname; ?>"></a>
+        <input id="tb_trialgroup_id_objective" type="hidden" name="tb_trialgroup[id_objective]" size="30" value="<?php echo $id_objective; ?>">
 
     </div>
 
