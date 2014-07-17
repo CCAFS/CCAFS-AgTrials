@@ -624,6 +624,8 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         $session_objective_id = $user->getAttribute('objective_id');
         $session_objective_name = $user->getAttribute('objective_name');
         $ArrWidth = array('5%', '95%');
+        $txt = str_replace("*quot*", " ", $txt);
+        $txt = mb_strtolower($txt, 'UTF-8');
 
         $QUERY = "SELECT id_objective,objname FROM tb_objective WHERE UPPER(objname) LIKE UPPER('%$txt%') ORDER BY objname";
         $Results = $connection->execute($QUERY);
@@ -632,6 +634,9 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         $html = '<table width="100%" cellspacing="1" cellpadding="10" border="1">';
         $bgcolor = "#C0C0C0";
         foreach ($Record AS $Value) {
+            $ValueName = $Value[1];
+            $ValueName = str_replace("$txt", "<span style='background-color:orange'><b>$txt</b></span>", $ValueName);
+
             if ($bgcolor != "#FFFFD9")
                 $bgcolor = "#FFFFD9";
             else
@@ -639,7 +644,7 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
 
             $html .= "<tr bgcolor='$bgcolor' id=fila$flag name=fila$flag onmouseover=\"cambiacolor_over(this)\" onmouseout=\"cambiacolor_out(this,$flag)\">";
             $html .= "<td width=$ArrWidth[0]><input type='radio' name='ObjectiveId' id='ObjectiveId' value='$Value[0]' onclick=SelectObjective(this)></td>";
-            $html .= "<td width=$ArrWidth[1]><input type='hidden' name='ObjectiveName$Value[0]' id='ObjectiveName$Value[0]' value='$Value[1]'>$Value[1]</td>";
+            $html .= "<td width=$ArrWidth[1]><input type='hidden' name='ObjectiveName$Value[0]' id='ObjectiveName$Value[0]' value='$Value[1]'>$ValueName</td>";
             $html .= "</tr>";
             $flag++;
         }

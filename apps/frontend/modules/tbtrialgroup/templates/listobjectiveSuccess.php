@@ -34,7 +34,15 @@ $IdObjective = "";
     $(document).ready(function() {
         $('#txt_filter').keyup(function() {
             var txt_filter = $('#txt_filter').attr('value');
-            $("#DivPPal").load('/tbtrialgroup/FilterObjective/txt/'+txt_filter);
+            var txt_filter = txt_filter.replace(" ", "*quot*");
+            $("#DivPPal").load("/tbtrialgroup/FilterObjective/txt/" + txt_filter, function() {
+                $('#Div_Filter').hide();
+                if ($('#txt_filter').attr('value') != '') {
+                    $('#Div_Filter_OK').show();
+                } else {
+                    $('#Div_Filter_OK').hide();
+                }
+            });
         });
     });
 
@@ -58,7 +66,7 @@ $IdObjective = "";
             <form id="listobjective" name="listobjective" action="<?php echo url_for('@listobjective'); ?>" enctype="multipart/form-data" method="post">
                 <table width="100%" cellspacing="1" cellpadding="10" border="1">
                     <tr>
-                        <td colspan="2"><b>Filter:</b> <input type="text" id="txt_filter" name="txt_filter" size="30"></td>
+                        <td colspan="4"><b style="font-size: 13px;">Filter: </b><input type="text" id="txt_filter" name="txt_filter" size="50" autocomplete="off" placeholder="Enter first letters of the objective name..." style="background-color: #F9EBB2; border: 2px solid #FFD511; font-size: 12px;">&ensp;<span id="Div_Filter" style="display:none;"><?php echo image_tag('loading4.gif', array('size' => '15x15')); ?></span><span id="Div_Filter_OK" style="display:none;"><?php echo image_tag('success.png', array('size' => '15x15')); ?></span></td>
                     </tr>
                     <tr><td colspan="2">&ensp;</td></tr>
                     <br>
