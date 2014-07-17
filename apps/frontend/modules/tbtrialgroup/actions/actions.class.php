@@ -616,4 +616,35 @@ class tbtrialgroupActions extends autoTbtrialgroupActions {
         $this->setLayout(false);
     }
 
+    public function executeFilterObjective($request) {
+        $this->setLayout(false);
+        $txt = $request->getParameter('txt');
+        $connection = Doctrine_Manager::getInstance()->connection();
+        $user = sfContext::getInstance()->getUser();
+        $session_objective_id = $user->getAttribute('objective_id');
+        $session_objective_name = $user->getAttribute('objective_name');
+        $ArrWidth = array('5%', '95%');
+
+        $QUERY = "SELECT id_objective,objname FROM tb_objective WHERE UPPER(objname) LIKE UPPER('%$txt%') ORDER BY objname";
+        $Results = $connection->execute($QUERY);
+        $Record = $Results->fetchAll();
+        $total = count($Record);
+        $html = '<table width="100%" cellspacing="1" cellpadding="10" border="1">';
+        $bgcolor = "#C0C0C0";
+        foreach ($Record AS $Value) {
+            if ($bgcolor != "#FFFFD9")
+                $bgcolor = "#FFFFD9";
+            else
+                $bgcolor = "#C0C0C0";
+
+            $html .= "<tr bgcolor='$bgcolor' id=fila$flag name=fila$flag onmouseover=\"cambiacolor_over(this)\" onmouseout=\"cambiacolor_out(this,$flag)\">";
+            $html .= "<td width=$ArrWidth[0]><input type='radio' name='ObjectiveId' id='ObjectiveId' value='$Value[0]' onclick=SelectObjective(this)></td>";
+            $html .= "<td width=$ArrWidth[1]><input type='hidden' name='ObjectiveName$Value[0]' id='ObjectiveName$Value[0]' value='$Value[1]'>$Value[1]</td>";
+            $html .= "</tr>";
+            $flag++;
+        }
+        $html .= "</table><input type='hidden' id='datos' name='datos' value='$total'>";
+        die($html);
+    }
+
 }
