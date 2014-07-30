@@ -398,84 +398,6 @@ class homeActions extends sfActions {
     public function executeTest(sfWebRequest $request) {
 
 
-        /*         * ***
-         * A simple reference implementation of the AgMIP external authentication
-         * process in PHP. This does not do much error handling and the cookies
-         * a bit iffy, but everything does work.
-         * 
-         * Author: Christopher Villalobos
-         * Created: 15/05/2014 17:26:50 EDT
-         * Last Modified: --
-         */
-
-
-        $auth_loc = "https://auth.agmip.org/";
-
-        /*         * **
-         * Check to see if a SSO Token is already in the COOKIEs, if not 
-         * check to see if this is a postback from the authentication process.
-         */
-
-        if (!array_key_exists("__agmip", $_COOKIE)) {
-
-            if (!array_key_exists("nextval", $_GET)) {
-                //header("Location: " . $auth_loc . "?s=agtrials");
-                $this->redirect($auth_loc . "?s=agtrials"); // this change is for symfony redirect
-            } else {
-                /*                 * ***
-                 * Encrypt the postback combined with the key, seperated by a colon.
-                 */
-
-                $key = "t5dWsc_wY1PxBjH3CeC4i-Dha";
-                $export = "vector=" . sha1($_GET['nextval'] . ":" . $key);
-
-
-                /*                 * ***
-                 * Send the encrypted data to the authentication server for validation.
-                 * The SSO token will be returned if it is valid. Otherwise a 304 error
-                 * will be returned and the token will be blank.
-                 */
-                $ch = curl_init();
-
-                curl_setopt($ch, CURLOPT_URL, $auth_loc . "extern/auth");
-                curl_setopt($ch, CURLOPT_POST, true); // Use POST method
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Save the curl_exec to a variable
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $export);
-
-                $token = curl_exec($ch);
-
-                if ($token === false) {
-                    echo "User not authorized";
-                    curl_close($ch);
-                    die();
-                }
-                curl_close($ch);
-                // Set a cookie for the agmip user
-                setcookie("__agmip", $token);
-
-
-                // Second request to get the user email address
-                $jsonEmail = getUserEmail($auth_loc, $token);
-
-                if ($jsonEmail === false) {
-                    echo "Unable to authorize user";
-                } else {
-                    $user = json_decode($jsonEmail, true);
-                    echo "Welcome " . $user['email'];
-                }
-            }
-        } else {
-            $jsonEmail = getUserEmail($auth_loc, $_COOKIE['__agmip']);
-            if ($jsonEmail === false) {
-                echo "Unable to authorize user";
-                // Clear the cookie
-                unset($_COOKIE["__agmip"]);
-                setcookie("__agmip", "", time() - 3600);
-            } else {
-                $user = json_decode($jsonEmail, true);
-                echo "Welcome back " . $user['email'];
-            }
-        }
     }
 
 }
@@ -487,17 +409,4 @@ function QuitarAcentos($cadena) {
     return $texto;
 }
 
-function getUserEmail($auth_loc, $token) {
-    $ch2 = curl_init();
-    curl_setopt($ch2, CURLOPT_URL, $auth_loc . "email/" . $token);
-    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true); // Save the curl_exec to a variable
 
-    $jsonEmail = curl_exec($ch2);
-    $returnVal = curl_getinfo($ch2, CURLINFO_HTTP_CODE);
-
-    if ($returnVal != 200) {
-        return false;
-    } else {
-        return $jsonEmail;
-    }
-}
