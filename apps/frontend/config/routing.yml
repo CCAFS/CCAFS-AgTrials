@@ -666,6 +666,10 @@ batchprocesses:
   url:   /batchprocesses/*
   param: { module: administration, action: batchprocesses }
   
+agmip:
+  url:   /agmip/*
+  param: { module: administration, action: agmip }
+  
 trialsitecontactperson:
   url:   /trialsitecontactperson/*
   param: { module: tbtrialsite, action: trialsitecontactperson }

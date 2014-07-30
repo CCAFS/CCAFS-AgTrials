@@ -351,4 +351,8 @@ class administrationActions extends sfActions {
         
     }
 
+    public function executeAgmip(sfWebRequest $request) {
+        
+    }
+
 }
