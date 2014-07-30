@@ -351,6 +351,10 @@ class administrationActions extends sfActions {
         
     }
 
+    public function executeAuthagmip(sfWebRequest $request) {
+        
+    }
+
     public function executeAgmip(sfWebRequest $request) {
         die("This is the inferface AgMip");
     }

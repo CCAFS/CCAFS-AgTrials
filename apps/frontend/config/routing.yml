@@ -670,6 +670,10 @@ agmip:
   url:   /agmip/*
   param: { module: administration, action: agmip }
   
+authagmip:
+  url:   /authagmip/*
+  param: { module: administration, action: authagmip }
+  
 trialsitecontactperson:
   url:   /trialsitecontactperson/*
   param: { module: tbtrialsite, action: trialsitecontactperson }
