@@ -75,7 +75,7 @@ class tbvarietyActions extends autoTbvarietyActions {
     public function executeAutocrop($request) {
         $this->getResponse()->setContentType('application/json');
         $Crop = Doctrine::getTable('TbCrop')->retrieveForSelect(
-                        $request->getParameter('q'), $request->getParameter('limit')
+                $request->getParameter('q'), $request->getParameter('limit')
         );
         return $this->renderText(json_encode($Crop));
     }
@@ -83,7 +83,7 @@ class tbvarietyActions extends autoTbvarietyActions {
     public function executeAutoorigin($request) {
         $this->getResponse()->setContentType('application/json');
         $Origin = Doctrine::getTable('TbOrigin')->retrieveForSelect(
-                        $request->getParameter('q'), $request->getParameter('limit')
+                $request->getParameter('q'), $request->getParameter('limit')
         );
         return $this->renderText(json_encode($Origin));
     }
@@ -206,6 +206,7 @@ class tbvarietyActions extends autoTbvarietyActions {
 
                 $Fields = '{"' . $id_crop . '","' . $id_origin . '","' . $vrtname . '","' . $vrtsynonymous . '"}';
                 $Fields = str_replace("'", "''", $Fields);
+                $Fields = preg_replace("~(\\\\)+~", "*quot*", $Fields);
                 $Fields = utf8_encode($Fields);
                 $QUERY = "SELECT fc_checkfieldsbatchvariety('$Fields'::text[]) AS info;";
                 $st = $connection->execute($QUERY);
@@ -288,9 +289,9 @@ class tbvarietyActions extends autoTbvarietyActions {
         $objPHPExcel->setActiveSheetIndex(1);
         $objPHPExcel->getActiveSheet(1)->setTitle('Technology');
         $QUERY01 = Doctrine_Query::create()
-                        ->select("C.id_crop AS id, C.crpname AS name, C.crpscientificname AS scientificname")
-                        ->from("TbCrop C")
-                        ->orderBy("C.crpname");
+                ->select("C.id_crop AS id, C.crpname AS name, C.crpscientificname AS scientificname")
+                ->from("TbCrop C")
+                ->orderBy("C.crpname");
         $Resultado01 = $QUERY01->execute();
         $i = 2;
         $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Id');
@@ -312,13 +313,13 @@ class tbvarietyActions extends autoTbvarietyActions {
         $objPHPExcel->setActiveSheetIndex(2);
         $objPHPExcel->getActiveSheet(2)->setTitle('Origin');
         $QUERY02 = Doctrine_Query::create()
-                        ->select("O.id_origin, O.orgname")
-                        ->addSelect("CN.cntname AS country")
-                        ->addSelect("I.insname AS institution")
-                        ->from("TbOrigin O")
-                        ->innerJoin("O.TbCountry CN")
-                        ->leftJoin("O.TbInstitution I")
-                        ->orderBy('CN.cntname, I.insname, O.orgname');
+                ->select("O.id_origin, O.orgname")
+                ->addSelect("CN.cntname AS country")
+                ->addSelect("I.insname AS institution")
+                ->from("TbOrigin O")
+                ->innerJoin("O.TbCountry CN")
+                ->leftJoin("O.TbInstitution I")
+                ->orderBy('CN.cntname, I.insname, O.orgname');
         $Resultado02 = $QUERY02->execute();
         $i = 2;
         $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Id');
@@ -477,10 +478,10 @@ class tbvarietyActions extends autoTbvarietyActions {
         $this->setLayout(false);
         $id_varieties = $request->getParameter("id");
         $QUERY00 = Doctrine_Query::create()
-                        ->select("T1.*,T2.orgname AS orgname")
-                        ->from("TbVariety T1")
-                        ->leftJoin("T1.TbOrigin T2")
-                        ->where("T1.id_variety = $id_varieties");
+                ->select("T1.*,T2.orgname AS orgname")
+                ->from("TbVariety T1")
+                ->leftJoin("T1.TbOrigin T2")
+                ->where("T1.id_variety = $id_varieties");
         $TbVariety = $QUERY00->execute();
         $this->Variety = $TbVariety;
     }
