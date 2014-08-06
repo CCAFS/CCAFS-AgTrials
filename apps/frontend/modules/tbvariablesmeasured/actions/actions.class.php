@@ -196,6 +196,7 @@ class tbvariablesmeasuredActions extends autoTbvariablesmeasuredActions {
 
                 $Fields = '{"' . $id_crop . '","' . $id_traitclass . '","' . $vrmsname . '","' . $vrmsshortname . '","' . $vrmsdefinition . '","' . $vrmsunit . '"}';
                 $Fields = str_replace("'", "''", $Fields);
+                $Fields = preg_replace("~(\\\\)+~", "*quot*", $Fields);
                 $Fields = utf8_encode($Fields);
                 $QUERY = "SELECT fc_checkfieldsbatchvariablesmeasured('$Fields'::text[]) AS info;";
                 $st = $connection->execute($QUERY);
