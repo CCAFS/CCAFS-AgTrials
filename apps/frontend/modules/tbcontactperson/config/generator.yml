@@ -29,17 +29,13 @@ generator:
       list:
         title:          List Contact Person
         max_per_page:   20
-        display:        [id_contactperson, _institution, _country,	_contactpersontype, cnprfirstname,	cnprlastname, cnpraddress, cnprphone, cnpremail ]
+        display:        [id_contactperson,_institution,_country,cnprfirstname,cnprlastname]
         fields:
           id_contactperson:      {label: Id}
           _institution:          {label: Institution}
           _country:              {label: Country }
-          _contactpersontype:    {label: Contact person type}
           cnprfirstname:         {label: First name}
           cnprlastname:          {label: Last name}
-          cnpraddress:           {label: Address}
-          cnprphone:             {label: Phone}
-          cnpremail:             {label: Email}
         object_actions:
           _edit:        ~
         batch_actions:  {}
