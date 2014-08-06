@@ -69,7 +69,7 @@ use_javascript('/sfAdminThemejRollerPlugin/js/ui.selectmenu.js');
     <table width="940" border="0" align="center">
         <tr>
             <td width="460" valign="top">
-                <table width="455" border="0">
+                <table width="460" border="0">
                     <tr>
                         <td>
                             <div align="center" class="titulosesiones">
@@ -119,14 +119,14 @@ use_javascript('/sfAdminThemejRollerPlugin/js/ui.selectmenu.js');
                                 <a href="http://www.agtrials.org/forum" target="_blank" title="Forum"><img width="32" height="32" border="0" src="/images/forum-icon.png"></a>
                                 <a href="mailto:noreplyagtrials@gmail.com" target="_blank" title="Send E-mail"><img width="32" height="32" border="0" src="/images/mail-icon2.png"></a>
                             </div>
-                            </br></br></br></br>
+                            </br></br></br></br></br></br>
                         </td>
                     </tr>
                 </table>
             </td>
             <td width="20" valign="top"></td>
             <td width="460" valign="top">
-                <table width="455" border="0">
+                <table width="460" border="0">
                     <tr>
                         <td width="450" colspan="2">
                             <iframe width="462" height="320" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/home/mapindex"></iframe>
