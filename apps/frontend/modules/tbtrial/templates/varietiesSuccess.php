@@ -74,6 +74,7 @@ $user = sfContext::getInstance()->getUser();
             $('#Div_Filter').show();
             $('#Div_Filter_OK').hide();
             var txt_filtar = $('#txt_filtar').attr('value');
+            var txt_filtar = txt_filtar.replace(" ", "*quot*");
             $("#DivPPal").load('/tbtrial/FilterVarieties/txt/'+txt_filtar, function(){
                 $('#Div_Filter').hide();
                 if($('#txt_filtar').attr('value') != ''){

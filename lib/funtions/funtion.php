@@ -684,6 +684,15 @@ class FusionTable {
 
 }
 
+function strtoupperposition($str, $pos) {
+    $Part1 = substr($str, 0, ($pos - 1));
+    $Part2 = substr($str, $pos);
+    $Letter = substr($str, ($pos - 1), 1);
+    $Letter = mb_strtoupper($Letter, 'UTF-8');
+    $Cad = $Part1 . $Letter . $Part2;
+    return $Cad;
+}
+
 function CheckAPI($key) {
     $key = trim($key);
     $QUERY00 = Doctrine_Query::create()
@@ -817,7 +826,7 @@ function Listobjectives($ArrWidth) {
     $user = sfContext::getInstance()->getUser();
     $session_objective_id = $user->getAttribute('objective_id');
     $session_objective_name = $user->getAttribute('objective_name');
-    
+
     $QUERY = "SELECT id_objective,objname FROM tb_objective ORDER BY objname";
     $Results = $connection->execute($QUERY);
     $Record = $Results->fetchAll();

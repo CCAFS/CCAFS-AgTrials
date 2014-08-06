@@ -2841,6 +2841,7 @@ class tbtrialActions extends autoTbtrialActions {
         $NotIn = "";
         $WhereList = sfContext::getInstance()->getUser()->getAttribute('WhereList');
         $txt = $request->getParameter('txt');
+        $txt = str_replace("*quot*", " ", $txt);
         $connection = Doctrine_Manager::getInstance()->connection();
         $user = sfContext::getInstance()->getUser();
         $id_crop = $user->getAttribute('id_crop');
@@ -2869,6 +2870,8 @@ class tbtrialActions extends autoTbtrialActions {
         $html = '<table width="100%" cellspacing="1" cellpadding="10" border="1">';
         $bgcolor = "#C0C0C0";
         foreach ($Record AS $Value) {
+            $ValueName = $Value[1];
+
             if ($bgcolor != "#FFFFD9")
                 $bgcolor = "#FFFFD9";
             else
@@ -2876,7 +2879,7 @@ class tbtrialActions extends autoTbtrialActions {
 
             $html .= "<tr bgcolor='$bgcolor' id=fila$flag name=fila$flag onmouseover=\"cambiacolor_over(this)\" onmouseout=\"cambiacolor_out(this,$flag)\">";
             $html .= "<td width=$width1><input type='checkbox' name='varieties$flag' id='varieties$flag' value='$Value[0]' onclick=SelectVarieties(this,$flag,'$bgcolor')></td>";
-            $html .= "<td width=$width2>$Value[1]</td>";
+            $html .= "<td width=$width2>$ValueName</td>";
             $html .= "<td width=$width3>$Value[2]</td>";
             $html .= "<td width=$width4>$Value[3]</td>";
             $html .= "</tr>";
