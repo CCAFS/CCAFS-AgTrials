@@ -31,8 +31,8 @@
             <?php echo $form['id_institution']->renderError() ?>
         </div>
         <?php echo $form['id_institution']->render() ?>
-        <span id="add_institution">
-            <?php echo thickbox_iframe(image_tag('add-icon.png'), 'tbinstitution/new', array('pop' => '1'), array(), array('width' => '500', 'height' => '500')) ?>
+        <span>
+            <a href="#" title="Create New Institution" onclick="javascript:openWindow('/tbinstitution/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
 
@@ -56,8 +56,9 @@
             $list_contactperson = substr($list_contactperson, 0, strlen($list_contactperson) - 2);
         }
         echo thickbox_iframe("<textarea id='contactperson' name='contactperson' readonly='readonly' cols='37' rows='2'>$list_contactperson</textarea>" . image_tag('user.jpg'), '@trialgroupcontactperson', array('pop' => '1'));
-        echo thickbox_iframe(image_tag('add-icon.png'), 'tbcontactperson/new', array('pop' => '1'), array(), array('width' => '500', 'height' => '500'))
         ?>
+        <a href="#" title="Create New Contact Person" onclick="javascript:openWindow('/tbcontactperson/new')"><?php echo image_tag('add-icon.png'); ?></a>
+
         <input type="hidden" id="tb_trialgroup_id_contactperson" value="1" name="tb_trialgroup[id_contactperson]" size="30">
     </div>
 
@@ -91,7 +92,9 @@
         ?>
         <a href="/listobjective?pop=1&amp;KeepThis=true&amp;TB_iframe=true&amp;width=750&amp;height=600" class="thickbox"><input id="nameobjective" type="text" name="nameobjective" size="60" value="<?php echo $nameobjective; ?>"></a>
         <input id="tb_trialgroup_id_objective" type="hidden" name="tb_trialgroup[id_objective]" size="30" value="<?php echo $id_objective; ?>">
-
+        <span>
+            <a href="#" title="Create New Objective" onclick="javascript:openWindow('/tbobjective/new')"><?php echo image_tag('add-icon.png'); ?></a>
+        </span>
     </div>
 
     <div class="sf_admin_form_row sf_admin_text">
