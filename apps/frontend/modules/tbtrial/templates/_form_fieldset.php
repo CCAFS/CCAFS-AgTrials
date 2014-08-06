@@ -102,8 +102,8 @@
             <?php echo $form['id_trialgroup']->renderError() ?>
         </div>
         <?php echo $form['id_trialgroup']->render() ?>
-        <span id="add_trialgroup">
-            <a href="#" onclick="javascript:openWindow('/tbtrialgroup/new')"><?php echo image_tag('add-icon.png'); ?></a>
+        <span>
+            <a href="#" title="Create New Trial Group" onclick="javascript:openWindow('/tbtrialgroup/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
 
@@ -127,8 +127,8 @@
             <?php echo $form['id_contactperson']->renderError() ?>
         </div>
         <?php echo $form['id_contactperson']->render() ?>
-        <span id="add_contactperson">
-            <a href="#" onclick="javascript:openWindow('/tbcontactperson/new')"><?php echo image_tag('add-icon.png'); ?></a>
+        <span>
+            <a href="#" title="Create New Contact Person" onclick="javascript:openWindow('/tbcontactperson/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
 
@@ -152,8 +152,8 @@
             <?php echo $form['id_trialsite']->renderError() ?>
         </div>
         <?php echo $form['id_trialsite']->render() ?>
-        <span id="add_trialsite">
-            <a href="#" onclick="javascript:openWindow('/tbtrialsite/new')"><?php echo image_tag('add-icon.png'); ?></a>
+        <span>
+            <a href="#" title="Create New Trial Site" onclick="javascript:openWindow('/tbtrialsite/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
 
@@ -170,8 +170,8 @@
                 <option selected="selected" value=""></option>
             </select>
         </span>
-        <span id="add_fieldnamenumber">
-            <a href="#" onclick="javascript:openWindow('/tbfieldnamenumber/new')"><?php echo image_tag('add-icon.png'); ?></a>
+        <span>
+            <a href="#" title="Create New Field Name Number" onclick="javascript:openWindow('/tbfieldnamenumber/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
 
@@ -265,8 +265,8 @@
             echo thickbox_iframe("<textarea id='varieties' name='varieties' readonly='readonly' cols='58' rows='5' placeholder='Click to select Varieties/Race'>$list_varieties_name</textarea>" . image_tag('list-icon.png'), '@listvarieties', array('pop' => '1'));
             ?>
         </span>
-        <span id="add_variety">
-            <a href="#" onclick="javascript:openWindow('/tbvariety/new')"><?php echo image_tag('add-icon.png'); ?></a>
+        <span>
+            <a href="#" title="Create New Variety/Race" onclick="javascript:openWindow('/tbvariety/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
     </div>
     <div class="sf_admin_form_row sf_admin_text">
@@ -295,8 +295,8 @@
             echo thickbox_iframe("<textarea id='variablesmeasured' name='variablesmeasured' readonly='readonly' cols='58' rows='5' placeholder='Click to select Variables measured'>$list_variablesmeasured_name</textarea>" . image_tag('list-icon.png'), '@listvariablesmeasured', array('pop' => '1'));
             ?>
         </span>
-        <span id="add_variablesmeasured">
-            <a href="#" onclick="javascript:openWindow('/tbvariablesmeasured/new')"><?php echo image_tag('add-icon.png'); ?></a>
+        <span>
+            <a href="#" title="Create New Variables Measured" onclick="javascript:openWindow('/tbvariablesmeasured/new')"><?php echo image_tag('add-icon.png'); ?></a>
         </span>
 
         <!--INICIO ADICCION VARIABLES MEDIDAS-->
