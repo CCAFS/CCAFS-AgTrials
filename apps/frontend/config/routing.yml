@@ -574,6 +574,11 @@ specifiedgroups:
   url:   /specifiedgroups/*
   param: { module: tbtrial, action: specifiedgroups }
   
+#VENTANa DE Countries en las busqueda
+countries:
+  url:   /countries/*
+  param: { module: tbtrial, action: countries }
+  
 trialsitespecifiedusers:
   url:   /trialsitespecifiedusers/*
   param: { module: tbtrialsite, action: trialsitespecifiedusers }
@@ -625,6 +630,10 @@ savetrialcomment:
 permissionstrials:
   url:   /permissionstrials/*
   param: { module: tbtrial, action: permissionstrials }
+  
+savecountries:
+  url:   /savecountries/*
+  param: { module: tbtrial, action: savecountries }
 
 ViewVarieties:
   url:   /ViewVarieties/*

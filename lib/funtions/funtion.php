@@ -29,9 +29,10 @@ function select_from_table($name, $table, $idfield, $namefield, $wheretable = ''
 
 function select_from_table_trial($name, $table, $idfield, $namefield, $wheretable = '', $value = null, $properties = null) {
     $WhereList = sfContext::getInstance()->getUser()->getAttribute('WhereList');
+    $WhereCountries = sfContext::getInstance()->getUser()->getAttribute('WhereCountries');
     $WhereVariety = sfContext::getInstance()->getUser()->getAttribute('WhereVariety');
     $WhereListVariablesMeasured = sfContext::getInstance()->getUser()->getAttribute('WhereListVariablesMeasured');
-    $WhereList .= $WhereVariety . $WhereListVariablesMeasured;
+    $WhereList .= $WhereCountries . $WhereVariety . $WhereListVariablesMeasured;
 
     if ($wheretable == '')
         $wheretable = 'true';

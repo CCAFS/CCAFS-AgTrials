@@ -1339,6 +1339,10 @@ class tbtrialActions extends autoTbtrialActions {
         $this->setLayout(false);
     }
 
+    public function executeCountries($request) {
+        $this->setLayout(false);
+    }
+
     public function executeSavevarieties(sfWebRequest $request) {
         $this->setLayout(false);
         $user = sfContext::getInstance()->getUser();
@@ -1588,6 +1592,28 @@ class tbtrialActions extends autoTbtrialActions {
         $this->name = $list_trial;
     }
 
+    public function executeSavecountries(sfWebRequest $request) {
+        $this->setLayout(false);
+        $user = sfContext::getInstance()->getUser();
+        $array_countries = sfContext::getInstance()->getRequest()->getParameterHolder()->get('countries');
+        $country_id = $array_countries['user']['id'];
+        $country_name = $array_countries['user']['title'];
+        $list_country = "";
+        $session_countries_id = array();
+        $session_countries_name = array();
+        sfContext::getInstance()->getUser()->getAttributeHolder()->remove('countries_id');
+        sfContext::getInstance()->getUser()->getAttributeHolder()->remove('countries_name');
+        foreach ($country_id as $key => $id_country) {
+            $session_countries_id[] = $id_country;
+            $user->setAttribute('countries_id', $session_countries_id);
+            $session_countries_name[] = $country_name[$key];
+            $user->setAttribute('countries_name', $session_countries_name);
+            $list_country .= $country_name[$key] . ", ";
+        }
+        $list_country = substr($list_country, 0, strlen($list_country) - 2);
+        $this->name = $list_country;
+    }
+
     public function executeAutovarieties($request) {
         $user = sfContext::getInstance()->getUser();
         $id_crop = $user->getAttribute('id_crop');
@@ -1689,6 +1715,25 @@ class tbtrialActions extends autoTbtrialActions {
         return $this->renderText("[$rv]");
     }
 
+    public function executeAutocountries($request) {
+        $dato = strtolower($request->getParameter('term'));
+        $connection = Doctrine_Manager::getInstance()->connection();
+        $QUERY00 = "SELECT CN.id_country AS id, CN.cntname AS name ";
+        $QUERY00 .= "FROM tb_trial T ";
+        $QUERY00 .= "INNER JOIN tb_country CN ON T.id_country = CN.id_country ";
+        $QUERY00 .= "WHERE LOWER(CN.cntname) LIKE LOWER('$dato%') ";
+        $QUERY00 .= "GROUP BY CN.id_country, CN.cntname ";
+        $QUERY00 .= "ORDER BY CN.cntname ";
+        $st = $connection->execute($QUERY00);
+        $Result = $st->fetchAll();
+        foreach ($Result AS $Value) {
+            if ($rv != '')
+                $rv .= ', ';
+            $rv .= '{ title: "' . htmlspecialchars($Value[1], ENT_QUOTES, 'UTF-8') . '"' . ', id: ' . $Value[0] . ' } ';
+        }
+        return $this->renderText("[$rv]");
+    }
+
     public function executeAssigncrop($request) {
         sfContext::getInstance()->getUser()->getAttributeHolder()->remove('id_crop');
         $id_crop = $request->getParameter('id_crop');
@@ -1698,6 +1743,13 @@ class tbtrialActions extends autoTbtrialActions {
         sfContext::getInstance()->getUser()->getAttributeHolder()->remove('varieties_name');
         sfContext::getInstance()->getUser()->getAttributeHolder()->remove('variablesmeasured_id');
         sfContext::getInstance()->getUser()->getAttributeHolder()->remove('variablesmeasured_name');
+        die();
+    }
+
+    public function executeResetlistcountries($request) {
+        sfContext::getInstance()->getUser()->getAttributeHolder()->remove('countries_id');
+        sfContext::getInstance()->getUser()->getAttributeHolder()->remove('countries_name');
+        sfContext::getInstance()->getUser()->getAttributeHolder()->remove('WhereCountries');
         die();
     }
 
@@ -1719,12 +1771,12 @@ class tbtrialActions extends autoTbtrialActions {
         sfContext::getInstance()->getUser()->getAttributeHolder()->remove('WhereList');
         $ArrayFields = explode(",", $request->getParameter('ArrayFields'));
         $ArrayValuesFields = explode(",", $request->getParameter('ArrayValuesFields'));
+        $countries_id = sfContext::getInstance()->getUser()->getAttribute('countries_id');
         $varieties_id = sfContext::getInstance()->getUser()->getAttribute('varieties_id');
         $variablesmeasured_id = sfContext::getInstance()->getUser()->getAttribute('variablesmeasured_id');
 
         $InfoField['id_trialgroup'] = array("id_trialgroup_list", "tb_trialgroup", "id_trialgroup", "trgrname");
         $InfoField['id_contactperson'] = array("id_contactperson_list", "tb_contactperson", "id_contactperson", "(cnprfirstname||' '||cnprlastname)");
-        $InfoField['id_country'] = array("id_country_list", "tb_country", "id_country", "cntname");
         $InfoField['id_trialsite'] = array("id_trialsite_list", "tb_trialsite", "id_trialsite", "trstname");
         $InfoField['id_crop'] = array("id_crop_list", "tb_crop", "id_crop", "crpname");
 
@@ -1733,6 +1785,17 @@ class tbtrialActions extends autoTbtrialActions {
                 $Where .= " AND T2.{$ArrayFields[$a]} = {$ArrayValuesFields[$a]} ";
             }
         }
+
+        $Country_id = "";
+        if (count($countries_id) > 0) {
+            foreach ($countries_id AS $valor) {
+                $Country_id .= "$valor,";
+            }
+        }
+        $Country_id = substr($Country_id, 0, (strlen($Country_id) - 1));
+        if ($Country_id != "")
+            $WhereCountries = " AND T2.id_country IN ($Country_id) ";
+
 
         $Variety_id = "";
         if (count($varieties_id) > 0) {
@@ -1754,12 +1817,13 @@ class tbtrialActions extends autoTbtrialActions {
         if ($Variablesmeasured_id != "")
             $WhereListVariablesMeasured = " AND TVM.id_variablesmeasured IN ($Variablesmeasured_id)";
 
-
         sfContext::getInstance()->getUser()->setAttribute('WhereList', $Where);
+        sfContext::getInstance()->getUser()->setAttribute('WhereCountries', $WhereCountries);
         sfContext::getInstance()->getUser()->setAttribute('WhereVariety', $WhereVariety);
         sfContext::getInstance()->getUser()->setAttribute('WhereListVariablesMeasured', $WhereListVariablesMeasured);
 
-        $Where = $Where . $WhereVariety . $WhereListVariablesMeasured;
+        $Where = $Where . $WhereCountries . $WhereVariety . $WhereListVariablesMeasured;
+
 
         foreach ($InfoField AS $Field => $ArrayInfoField) {
             $Key = array_search($Field, $ArrayFields); // $clave = 2;
@@ -1789,7 +1853,7 @@ class tbtrialActions extends autoTbtrialActions {
         $user = sfContext::getInstance()->getUser();
         $id_contactperson = $request->getParameter('id_contactperson_list');
         $id_trialgroup = $request->getParameter('id_trialgroup_list');
-        $id_country = $request->getParameter('id_country_list');
+        $countries = $request->getParameter('countries');
         $id_trialsite = $request->getParameter('id_trialsite_list');
         $id_crop = $request->getParameter('id_crop_list');
         $varieties = $request->getParameter('varieties');
@@ -1862,8 +1926,20 @@ class tbtrialActions extends autoTbtrialActions {
             $where .= " AND T.id_contactperson = $id_contactperson";
         if ($id_trialgroup != '')
             $where .= " AND T.id_trialgroup = $id_trialgroup";
-        if ($id_country != '')
-            $where .= " AND T.id_country = $id_country";
+        if ($countries != '') {
+            $countries_id = $user->getAttribute('countries_id');
+            $country_id = "";
+            if (count($countries_id) > 0) {
+                foreach ($countries_id AS $valor) {
+                    $country_id .= "$valor,";
+                }
+            }
+            $country_id = substr($country_id, 0, (strlen($country_id) - 1));
+            $where .= " AND T.id_country IN ($country_id)";
+        } else {
+            sfContext::getInstance()->getUser()->getAttributeHolder()->remove('countries_id');
+            sfContext::getInstance()->getUser()->getAttributeHolder()->remove('countries_name');
+        }
         if ($id_trialsite != '')
             $where .= " AND T.id_trialsite = $id_trialsite";
         if ($id_crop != '')
@@ -1953,7 +2029,7 @@ class tbtrialActions extends autoTbtrialActions {
 
         $this->id_contactperson = $id_contactperson;
         $this->id_trialgroup = $id_trialgroup;
-        $this->id_country = $id_country;
+        $this->countries = $countries;
         $this->id_trialsite = $id_trialsite;
         $this->id_crop = $id_crop;
         $this->varieties = $varieties;

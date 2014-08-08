@@ -1,4 +1,4 @@
-$(document).ready(function() { 
+$(document).ready(function() {
 
     //VALIDAMOS TIPO ARCHIVOS
     $('#tb_trial_trltrialresultsfile').blur(function() {
@@ -162,9 +162,10 @@ $(document).ready(function() {
         $('#id_contactperson_list').val("");
         ChangeList();
     });
-    $('#Div_id_country_list_Clear').click(function() {
-        $('#id_country_list').val("");
+    $('#Div_countries_list_Clear').click(function() {
+        ResetListCountries();
         ChangeList();
+        $('#Div_countries_list_Clear').hide();
     });
     $('#Div_id_trialsite_list_Clear').click(function() {
         $('#id_trialsite_list').val("");
@@ -256,8 +257,8 @@ function validarpagina(e, valor) {
 }
 
 function ChangeList() {
-    var ArrayFields = ["id_trialgroup", "id_contactperson", "id_country", "id_trialsite", "id_crop"];
-    var ArrayFieldsInfo = ["id_trialgroup_list", "id_contactperson_list", "id_country_list", "id_trialsite_list", "id_crop_list"];
+    var ArrayFields = ["id_trialgroup", "id_contactperson", "id_trialsite", "id_crop"];
+    var ArrayFieldsInfo = ["id_trialgroup_list", "id_contactperson_list", "id_trialsite_list", "id_crop_list"];
     var ArrayValuesFields = new Array();
     for (var i = 0; i < ArrayFieldsInfo.length; i++) {
         ArrayValuesFields[i] = $('#' + ArrayFieldsInfo[i]).attr('value');
@@ -280,6 +281,16 @@ function ChangeList() {
                 else
                     $('#Div_' + Fields + '_Clear').hide();
             }
+        }
+    });
+}
+
+function ResetListCountries() {
+    $('#countries').val("");
+    $.ajax({
+        type: "GET",
+        url: "/tbtrial/resetlistcountries/",
+        success: function() {
         }
     });
 }
