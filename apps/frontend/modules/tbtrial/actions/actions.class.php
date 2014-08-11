@@ -2049,7 +2049,7 @@ class tbtrialActions extends autoTbtrialActions {
         $this->trlsowdate1 = $trlsowdate1;
         $this->trlsowdate2 = $trlsowdate2;
         $this->trlharvestdate1 = $trlharvestdate1;
-        $this->trlharvestdate1 = $trlharvestdate2;
+        $this->trlharvestdate2 = $trlharvestdate2;
         $this->trialtype = $trialtype;
         $this->pagination = $pagination;
         $this->paginar = $paginar;

@@ -195,6 +195,18 @@ $(document).ready(function() {
         $('#Div_variablesmeasured_list_Clear').hide();
     });
 
+    $('#Div_trlsowdate_list_Clear').click(function() {
+        $('#trlsowdate1').attr('value', '');
+        $('#trlsowdate2').attr('value', '');
+        $('#Div_trlsowdate_list_Clear').hide();
+    });
+
+    $('#Div_trlharvestdate_list_Clear').click(function() {
+        $('#trlharvestdate1').attr('value', '');
+        $('#trlharvestdate2').attr('value', '');
+        $('#Div_trlharvestdate_list_Clear').hide();
+    });
+
     $('#tbtrialfilter').click(function() {
         $('#div_loading').show();
         $('#tbtriallist').submit();

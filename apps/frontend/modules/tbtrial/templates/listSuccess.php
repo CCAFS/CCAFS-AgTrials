@@ -20,6 +20,8 @@ $id_trialsite_Clear_Display = "none";
 $id_crop_Clear_Display = "none";
 $varieties_Clear_Display = "none";
 $variablesmeasured_Clear_Display = "none";
+$trlsowdate_Clear_Display = "none";
+$trlharvestdate_Clear_Display = "none";
 
 if ($id_trialgroup != '')
     $id_trialgroup_Clear_Display = "visible";
@@ -35,6 +37,10 @@ if ($varieties != '')
     $varieties_Clear_Display = "visible";
 if ($variablesmeasured != '')
     $variablesmeasured_Clear_Display = "visible";
+if (($trlsowdate1 != '') || ($trlsowdate2 != ''))
+    $trlsowdate_Clear_Display = "visible";
+if (($trlharvestdate1 != '') || ($trlharvestdate2 != ''))
+    $trlharvestdate_Clear_Display = "visible";
 ?>
 <style type="text/css">
     #controls {
@@ -128,14 +134,16 @@ if ($variablesmeasured != '')
                     <td nowrap><b>Sow/plant date:</b></td>
                     <td>
                         <input type="text" placeholder="yyyy-mm-dd" name="trlsowdate1" id="trlsowdate1" size="15" value="<?php echo $trlsowdate1; ?>" onkeyUp="ValidaFecha(this);" maxlength="10"> to 
-                        <input type="text" placeholder="yyyy-mm-dd" name="trlsowdate2" id="trlsowdate2" size="15" value="<?php echo $trlsowdate2; ?>" onkeyUp="ValidaFecha(this);" maxlength="10"><br>
+                        <input type="text" placeholder="yyyy-mm-dd" name="trlsowdate2" id="trlsowdate2" size="15" value="<?php echo $trlsowdate2; ?>" onkeyUp="ValidaFecha(this);" maxlength="10">
+                        <span id="Div_trlsowdate_list_Clear" style="display:<?php echo $trlsowdate_Clear_Display; ?>;"><a href="#" title="Reset values"><?php echo image_tag('clear-icon.png'); ?>Clear</a></span>
                     </td>
                 </tr>
                 <tr class="sf_admin_form_row sf_admin_text">
                     <td nowrap><b>Harvest date:</b></td>
                     <td>
                         <input type="text" placeholder="yyyy-mm-dd"  name="trlharvestdate1" id="trlharvestdate1" size="15" value="<?php echo $trlharvestdate1; ?>" onkeyUp="ValidaFecha(this);" maxlength="10"> to
-                        <input type="text" placeholder="yyyy-mm-dd"  name="trlharvestdate2" id="trlharvestdate2" size="15" value="<?php echo $trlharvestdate2; ?>" onkeyUp="ValidaFecha(this);" maxlength="10"><br>
+                        <input type="text" placeholder="yyyy-mm-dd"  name="trlharvestdate2" id="trlharvestdate2" size="15" value="<?php echo $trlharvestdate2; ?>" onkeyUp="ValidaFecha(this);" maxlength="10">
+                        <span id="Div_trlharvestdate_list_Clear" style="display:<?php echo $trlharvestdate_Clear_Display; ?>;"><a href="#" title="Reset values"><?php echo image_tag('clear-icon.png'); ?>Clear</a></span>
                     </td>
                 </tr>
                 <tr class="sf_admin_form_row sf_admin_text">
