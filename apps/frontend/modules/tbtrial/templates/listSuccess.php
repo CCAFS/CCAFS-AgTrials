@@ -125,6 +125,20 @@ if ($variablesmeasured != '')
                     </td>
                 </tr>
                 <tr class="sf_admin_form_row sf_admin_text">
+                    <td nowrap><b>Sow/plant date:</b></td>
+                    <td>
+                        <input type="text" placeholder="yyyy-mm-dd" name="trlsowdate1" id="trlsowdate1" size="15" value="<?php echo $trlsowdate1; ?>" onkeyUp="ValidaFecha(this);" maxlength="10"> to 
+                        <input type="text" placeholder="yyyy-mm-dd" name="trlsowdate2" id="trlsowdate2" size="15" value="<?php echo $trlsowdate2; ?>" onkeyUp="ValidaFecha(this);" maxlength="10"><br>
+                    </td>
+                </tr>
+                <tr class="sf_admin_form_row sf_admin_text">
+                    <td nowrap><b>Harvest date:</b></td>
+                    <td>
+                        <input type="text" placeholder="yyyy-mm-dd"  name="trlharvestdate1" id="trlharvestdate1" size="15" value="<?php echo $trlharvestdate1; ?>" onkeyUp="ValidaFecha(this);" maxlength="10"> to
+                        <input type="text" placeholder="yyyy-mm-dd"  name="trlharvestdate2" id="trlharvestdate2" size="15" value="<?php echo $trlharvestdate2; ?>" onkeyUp="ValidaFecha(this);" maxlength="10"><br>
+                    </td>
+                </tr>
+                <tr class="sf_admin_form_row sf_admin_text">
                     <td nowrap><b>Trial name:</b></td>
                     <td><input type="text" name="trlname" id="trlname" size="15" value="<?php echo $trlname; ?>"><br></td>
                 </tr>

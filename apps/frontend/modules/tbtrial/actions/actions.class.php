@@ -1859,8 +1859,10 @@ class tbtrialActions extends autoTbtrialActions {
         $varieties = $request->getParameter('varieties');
         $variablesmeasured = $request->getParameter('variablesmeasured');
         $trlname = $request->getParameter('trlname');
-        $date1 = $request->getParameter('date1');
-        $date2 = $request->getParameter('date2');
+        $trlsowdate1 = $request->getParameter('trlsowdate1');
+        $trlsowdate2 = $request->getParameter('trlsowdate2');
+        $trlharvestdate1 = $request->getParameter('trlharvestdate1');
+        $trlharvestdate2 = $request->getParameter('trlharvestdate2');
         $trialtype = $request->getParameter('trialtype');
         $paginar = $request->getParameter('paginar');
         $pagination = $request->getParameter('pagination');
@@ -1937,6 +1939,7 @@ class tbtrialActions extends autoTbtrialActions {
             $country_id = substr($country_id, 0, (strlen($country_id) - 1));
             $where .= " AND T.id_country IN ($country_id)";
         } else {
+            sfContext::getInstance()->getUser()->getAttributeHolder()->remove('WhereCountries');
             sfContext::getInstance()->getUser()->getAttributeHolder()->remove('countries_id');
             sfContext::getInstance()->getUser()->getAttributeHolder()->remove('countries_name');
         }
@@ -1950,10 +1953,17 @@ class tbtrialActions extends autoTbtrialActions {
             $where .= " AND UPPER(T.trlname) LIKE UPPER('%$trlname%')";
         if ($iduser != '')
             $where .= " AND T.id_user = $iduser";
-        if (($date1 != '') && ($date2 != '')) {
-            $fecha1 = changedate($date1);
-            $fecha2 = changedate($date2);
-            $where .= " AND T.trltrialrecorddate BETWEEN '$fecha1' AND '$fecha2'";
+        if (($trlsowdate1 != '')) {
+            if ($trlsowdate2 == '')
+                $trlsowdate2 = $trlsowdate1;
+
+            $where .= " AND T.trlsowdate BETWEEN '$trlsowdate1' AND '$trlsowdate2'";
+        }
+        if (($trlharvestdate1 != '')) {
+            if ($trlharvestdate2 == '')
+                $trlharvestdate2 = $trlharvestdate1;
+
+            $where .= " AND T.trlharvestdate BETWEEN '$trlharvestdate1' AND '$trlharvestdate2'";
         }
         if ($trialtype != '') {
             $where .= " AND T.trltrialtype = '$trialtype'";
@@ -2036,8 +2046,10 @@ class tbtrialActions extends autoTbtrialActions {
         $this->variablesmeasured = $variablesmeasured;
         $this->trlname = $trlname;
         $this->iduser = $iduser;
-        $this->date1 = $date1;
-        $this->date2 = $date2;
+        $this->trlsowdate1 = $trlsowdate1;
+        $this->trlsowdate2 = $trlsowdate2;
+        $this->trlharvestdate1 = $trlharvestdate1;
+        $this->trlharvestdate1 = $trlharvestdate2;
         $this->trialtype = $trialtype;
         $this->pagination = $pagination;
         $this->paginar = $paginar;

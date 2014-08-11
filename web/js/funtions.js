@@ -198,3 +198,46 @@ function openWindow(url)
     window.open(url, '_blank');
     window.focus();
 }
+
+function ValidaFecha(Fecha) {
+    var Campo = Fecha.name;
+    var Valor = Fecha.value;
+    var LenFecha = Valor.length;
+    if (LenFecha <= 4) {
+        if (isNaN(Valor)) {
+            Valor = Valor.substring(0, (LenFecha - 1));
+            $('#' + Campo).attr('value', Valor);
+        }
+        LenFecha = Valor.length;
+        if (LenFecha == 4) {
+            $('#' + Campo).attr('value', Valor + "-");
+        }
+    } else if (LenFecha <= 7) {
+        var Valor2 = Valor.substring(5, (LenFecha))
+        if (isNaN(Valor2)) {
+            Valor = Valor.substring(0, (LenFecha - 1));
+            $('#' + Campo).attr('value', Valor);
+        }
+        if ((Valor2 >= 0) && (Valor2 <= 12)) {
+            LenFecha = Valor.length;
+            if (LenFecha == 7) {
+                $('#' + Campo).attr('value', Valor + "-");
+            }
+        } else {
+            Valor = Valor.substring(0, (LenFecha - 2));
+            $('#' + Campo).attr('value', Valor);
+        }
+    } else if (LenFecha <= 10) {
+        var Valor3 = Valor.substring(8, (LenFecha))
+        if (isNaN(Valor3)) {
+            Valor = Valor.substring(0, (LenFecha - 1))
+            $('#' + Campo).attr('value', Valor);
+        }
+        if ((Valor3 >= 0) && (Valor3 <= 31)) {
+            LenFecha = Valor.length;
+        } else {
+            Valor = Valor.substring(0, (LenFecha - 2));
+            $('#' + Campo).attr('value', Valor);
+        }
+    }
+}
