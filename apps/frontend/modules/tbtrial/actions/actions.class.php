@@ -2015,7 +2015,8 @@ class tbtrialActions extends autoTbtrialActions {
                         ->orderBy("T.id_trial");
             }
 
-//echo $QUERY00->getSqlQuery();
+            //echo $QUERY00->getSqlQuery();
+            //die();
             $vwtrial = new Doctrine_View($QUERY00, 'vw_trial');
             $vwtrial->create();
             $listtrial = $QUERY00->execute();
@@ -2172,15 +2173,20 @@ class tbtrialActions extends autoTbtrialActions {
         $connection = Doctrine_Manager::getInstance()->connection();
         $QUERY00 = "SELECT T.id_trial,TG.trgrname,(CP.cnprfirstname||' '||CP.cnprlastname),CN.cntname,TS.trstname,TS.trstlatitudedecimal,TS.trstlongitudedecimal,C.crpname, ";
         $QUERY00 .= "T.trlname,fc_trialvariety(T.id_trial),fc_trialvariablesmeasured(T.id_trial),T.trlsowdate,T.trlharvestdate,T.trltrialtype,T.trlirrigation,'http://www.agtrials.org/tbtrial/'||T.id_trial ";
+        //$QUERY00 .= ",COUNT(TVR.id_variety) AS Count_VR, COUNT(TVM.id_variablesmeasured) AS Count_TVM ";
         $QUERY00 .= "FROM tb_trial T ";
         $QUERY00 .= "INNER JOIN tb_trialgroup TG ON T.id_trialgroup = TG.id_trialgroup ";
         $QUERY00 .= "INNER JOIN tb_contactperson CP ON T.id_contactperson = CP.id_contactperson ";
         $QUERY00 .= "INNER JOIN tb_country CN ON T.id_country = CN.id_country ";
         $QUERY00 .= "INNER JOIN tb_trialsite TS ON T.id_trialsite = TS.id_trialsite ";
         $QUERY00 .= "INNER JOIN tb_crop C ON T.id_crop = C.id_crop ";
+        //$QUERY00 .= "LEFT JOIN tb_trialvariety TVR ON t.id_trial = TVR.id_trial ";
+        //$QUERY00 .= "LEFT JOIN tb_trialvariablesmeasured TVM ON t.id_trial = TVM.id_trial ";
         $QUERY00 .= "WHERE true $wheretrial ";
+        //$QUERY00 .= "GROUP BY T.id_trial,TG.trgrname,CP.cnprfirstname,CP.cnprlastname,CN.cntname,TS.trstname,TS.trstlatitudedecimal,TS.trstlongitudedecimal,C.crpname, ";
+        //$QUERY00 .= "T.trlname,fc_trialvariety(T.id_trial),fc_trialvariablesmeasured(T.id_trial),T.trlsowdate,T.trlharvestdate,T.trltrialtype,T.trlirrigation,'http://www.agtrials.org/tbtrial/'||T.id_trial ";
         $QUERY00 .= "ORDER BY T.id_trial ";
-//die($QUERY00);
+        //die($QUERY00);
         $st = $connection->execute($QUERY00);
         $Result = $st->fetchAll();
         $i = 2;
@@ -3204,6 +3210,255 @@ class tbtrialActions extends autoTbtrialActions {
     }
 
     //fin: VERSION NUEVA DEL SELECTOR DE Variablesmeasured
+
+    public function executeDownloaddata($request) {
+        $this->setLayout(false);
+        $user = sfContext::getInstance()->getUser();
+        $wheretrial = $user->getAttribute('wheretrial');
+        $Form = $request->getParameter('Form');
+        error_reporting(E_ALL);
+        date_default_timezone_set('Europe/London');
+        set_time_limit(600);
+        $InfoQuery = null;
+        $HTML = "";
+
+        if (($wheretrial != '') && ($Form == '')) {
+            $connection = Doctrine_Manager::getInstance()->connection();
+            $QUERY = "SELECT TVM.id_variablesmeasured,VM.vrmsname ";
+            $QUERY .= "FROM tb_trial T ";
+            $QUERY .= "INNER JOIN tb_trialvariablesmeasured TVM ON T.id_trial = TVM.id_trial ";
+            $QUERY .= "INNER JOIN tb_variablesmeasured VM ON TVM.id_variablesmeasured = VM.id_variablesmeasured ";
+            $QUERY .= "WHERE TRUE $wheretrial ";
+            $QUERY .= "GROUP BY TVM.id_variablesmeasured,VM.vrmsname ";
+            $st = $connection->execute($QUERY);
+            $InfoQuery = $st->fetchAll(PDO::FETCH_ASSOC);
+            $i = 1;
+            foreach ($InfoQuery AS $Value) {
+                $HTML .="<div><input type=checkbox value={$Value['id_variablesmeasured']} name=variablesmeasured$i id=variablesmeasured$i> {$Value['vrmsname']}</div>";
+                $i++;
+            }
+            $i--;
+            $HTML .="<div><input type=hidden value=$i name=count_variablesmeasured id=count_variablesmeasured></div>";
+        } else if ($Form == 'Enviar') {
+            $connection = Doctrine_Manager::getInstance()->connection();
+            $CountVM = $request->getParameter('count_variablesmeasured');
+            $ListIdVariablesmeasured = "";
+            for ($i = 1; $i <= $CountVM; $i++) {
+                $id_variablesmeasured = $request->getParameter("variablesmeasured$i");
+                if ($id_variablesmeasured != '') {
+                    $ListIdVariablesmeasured .= "$id_variablesmeasured,";
+                }
+            }
+            $ListIdVariablesmeasured = substr($ListIdVariablesmeasured, 0, (strlen($ListIdVariablesmeasured) - 1));
+
+            //inicio: GENERAMOS LA LISTA DE ENSAYOS CON PERMISOS
+            $QUERY = "SELECT T.id_trial,T.trlfileaccess ";
+            $QUERY .= "FROM tb_trial T ";
+            $QUERY .= "WHERE T.id_trial IN (SELECT id_trial FROM tb_trialvariablesmeasured WHERE id_variablesmeasured IN ($ListIdVariablesmeasured)) $wheretrial ";
+            $st = $connection->execute($QUERY);
+            $Result = $st->fetchAll();
+            $ListIdTrial = "";
+            foreach ($Result AS $Value) {
+                $id_trial = $Value[0];
+                $Trlfileaccess = $Value[1];
+                //SI TIENE LA REGLA PARA USUARIOS VERIFICAMOS EL USUARIO
+                if ($Trlfileaccess == 'Open to specified users') {
+                    if ($this->getUser()->isAuthenticated()) {
+                        $id_user = $this->getUser()->getGuardUser()->getId();
+                        $filas = 0;
+                        $QUERY00 = Doctrine_Query::create()
+                                ->select("T.id_trialuserpermissionfiles AS id")
+                                ->from("TbTrialuserpermissionfiles T")
+                                ->where("T.id_trial = $id_trial")
+                                ->andWhere("T.id_userpermission = $id_user");
+                        $Resultado00 = $QUERY00->execute();
+                        if (count($Resultado00) > 0) {
+                            $ListIdTrial .= "$id_trial,";
+                        }
+                    }
+                }
+
+                //SI TIENE LA REGLA PARA GRUPOS VERIFICAMOS EL GRUPO DEL USUARIO
+                if ($Trlfileaccess == 'Open to specified groups') {
+                    if ($this->getUser()->isAuthenticated()) {
+                        $id_user = $this->getUser()->getGuardUser()->getId();
+                        $SfGuardUserGroup = Doctrine::getTable('SfGuardUserGroup')->findByUserId($id_user);
+                        foreach ($SfGuardUserGroup AS $Group) {
+                            $id_group = $Group->group_id;
+                            $TbTrialgrouppermission = Doctrine::getTable('TbTrialgrouppermission')->findByIdGroup($id_group);
+                            if (count($TbTrialgrouppermission) > 0) {
+                                $ListIdTrial .= "$id_trial,";
+                            }
+                        }
+                    }
+                }
+
+                //SI TIENE LA REGLA PARA TODOS LOS USUARIOS DEL SISTEMA SE VERIFICA QUE ESTE AUTENTICADO
+                if ($Trlfileaccess == 'Open to all users') {
+                    if ($this->getUser()->isAuthenticated()) {
+                        $ListIdTrial .= "$id_trial,";
+                    }
+                }
+
+                if ($Trlfileaccess == 'Public domain') {
+                    $ListIdTrial .= "$id_trial,";
+                }
+            }
+            $ListIdTrial = substr($ListIdTrial, 0, (strlen($ListIdTrial) - 1));
+            if ($ListIdTrial == '') {
+                echo "<script> alert('*** ERROR *** \\n\\n Not permissions to DOWNLOAD.!'); window.close();</script>";
+                Die();
+            }
+
+            //fin: GENERAMOS LA LISTA DE ENSAYOS CON PERMISOS
+
+
+            $objPHPExcel = new PHPExcel();
+
+            $objPHPExcel->getProperties()->setCreator("AgTrials")
+                    ->setLastModifiedBy("AgTrials")
+                    ->setTitle("Trials Data")
+                    ->setSubject("Trials Data")
+                    ->setDescription("Trials Data")
+                    ->setKeywords("Trials Data")
+                    ->setCategory("Trials Data");
+
+            $objPHPExcel->setActiveSheetIndex(0)
+                    ->setCellValue('A1', 'Id Trials')
+                    ->setCellValue('B1', 'Trial group')
+                    ->setCellValue('C1', 'Contact person')
+                    ->setCellValue('D1', 'Country')
+                    ->setCellValue('E1', 'Trial site')
+                    ->setCellValue('F1', 'Latitude')
+                    ->setCellValue('G1', 'Longitude')
+                    ->setCellValue('H1', 'Crop')
+                    ->setCellValue('I1', 'Trial Name')
+                    ->setCellValue('J1', 'Varieties')
+                    ->setCellValue('K1', 'Variables measured')
+                    ->setCellValue('L1', 'Sow date')
+                    ->setCellValue('M1', 'Harvest date')
+                    ->setCellValue('N1', 'Trial type')
+                    ->setCellValue('O1', 'Irrigation')
+                    ->setCellValue('P1', 'Link');
+
+            $objPHPExcel->getActiveSheet()->getStyle('A1:P1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('P')->setAutoSize(true);
+
+            $objPHPExcel->getActiveSheet(0)->setTitle('Metadata');
+
+            $QUERY00 = "SELECT T.id_trial,TG.trgrname,(CP.cnprfirstname||' '||CP.cnprlastname),CN.cntname,TS.trstname,TS.trstlatitudedecimal,TS.trstlongitudedecimal,C.crpname, ";
+            $QUERY00 .= "T.trlname,fc_trialvariety(T.id_trial),fc_trialvariablesmeasured(T.id_trial),T.trlsowdate,T.trlharvestdate,T.trltrialtype,T.trlirrigation,'http://www.agtrials.org/tbtrial/'||T.id_trial ";
+            $QUERY00 .= "FROM tb_trial T ";
+            $QUERY00 .= "INNER JOIN tb_trialgroup TG ON T.id_trialgroup = TG.id_trialgroup ";
+            $QUERY00 .= "INNER JOIN tb_contactperson CP ON T.id_contactperson = CP.id_contactperson ";
+            $QUERY00 .= "INNER JOIN tb_country CN ON T.id_country = CN.id_country ";
+            $QUERY00 .= "INNER JOIN tb_trialsite TS ON T.id_trialsite = TS.id_trialsite ";
+            $QUERY00 .= "INNER JOIN tb_crop C ON T.id_crop = C.id_crop ";
+            $QUERY00 .= "WHERE T.id_trial IN ($ListIdTrial) ";
+            $QUERY00 .= "ORDER BY T.id_trial ";
+            $st = $connection->execute($QUERY00);
+            $Result = $st->fetchAll();
+            $i = 2;
+            foreach ($Result AS $Value) {
+                $objPHPExcel->getActiveSheet()->setCellValue('A' . $i, $Value[0]);
+                $objPHPExcel->getActiveSheet()->setCellValue('B' . $i, $Value[1]);
+                $objPHPExcel->getActiveSheet()->setCellValue('C' . $i, $Value[2]);
+                $objPHPExcel->getActiveSheet()->setCellValue('D' . $i, $Value[3]);
+                $objPHPExcel->getActiveSheet()->setCellValue('E' . $i, $Value[4]);
+                $objPHPExcel->getActiveSheet()->setCellValue('F' . $i, $Value[5]);
+                $objPHPExcel->getActiveSheet()->setCellValue('G' . $i, $Value[6]);
+                $objPHPExcel->getActiveSheet()->setCellValue('H' . $i, $Value[7]);
+                $objPHPExcel->getActiveSheet()->setCellValue('I' . $i, $Value[8]);
+                $objPHPExcel->getActiveSheet()->setCellValue('J' . $i, $Value[9]);
+                $objPHPExcel->getActiveSheet()->setCellValue('K' . $i, $Value[10]);
+                $objPHPExcel->getActiveSheet()->setCellValue('L' . $i, $Value[11]);
+                $objPHPExcel->getActiveSheet()->setCellValue('M' . $i, $Value[12]);
+                $objPHPExcel->getActiveSheet()->setCellValue('N' . $i, $Value[13]);
+                $objPHPExcel->getActiveSheet()->setCellValue('O' . $i, $Value[14]);
+                $objPHPExcel->getActiveSheet()->setCellValue('P' . $i, 'Go to Trial ' . $Value[0]);
+                $objPHPExcel->getActiveSheet()->getCell('P' . $i)->getHyperlink()->setUrl($Value[15]);
+                $objPHPExcel->getActiveSheet()->getCell('P' . $i)->getHyperlink()->setTooltip('Navigate to website');
+                $i++;
+            }
+            $objPHPExcel->getActiveSheet()->getStyle('P2')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+
+            //GENERAMOS EL LIBRO DE DATOS
+            $objPHPExcel->createSheet();
+            $objPHPExcel->setActiveSheetIndex(1);
+            $objPHPExcel->getActiveSheet(1)->setTitle('Data');
+            $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Id Trial');
+            $objPHPExcel->getActiveSheet()->setCellValue('B1', 'Replication');
+            $objPHPExcel->getActiveSheet()->setCellValue('C1', 'Varieties/Races');
+            $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_RED);
+            $objPHPExcel->getActiveSheet()->getStyle('B1')->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_RED);
+            $objPHPExcel->getActiveSheet()->getStyle('C1')->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_RED);
+
+            $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+
+            //AQUI GENERAMOS LAS FILA DE VARIABLES MEDIDAS
+            $letter = "C";
+
+            $QUERY00 = "SELECT VM.id_variablesmeasured, VM.vrmsname, VM.vrmsunit AS unit ";
+            $QUERY00 .= "FROM tb_variablesmeasured VM ";
+            $QUERY00 .= "WHERE VM.id_variablesmeasured IN ($ListIdVariablesmeasured) ";
+            $st = $connection->execute($QUERY00);
+            $Resultado02 = $st->fetchAll();
+            $ArrLeter = null;
+            foreach ($Resultado02 AS $fila) {
+                $id_variablesmeasured = $fila['id_variablesmeasured'];
+                $Vrmsname = $fila['vrmsname'];
+                $Unit = $fila['unit'];
+                $letter = NextLetter($letter);
+                $objPHPExcel->getActiveSheet()->setCellValue($letter . '1', $Vrmsname);
+                $objPHPExcel->getActiveSheet()->getColumnDimension($letter)->setAutoSize(true);
+                $objPHPExcel->getActiveSheet()->getStyle($letter . '1')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+                $objPHPExcel->getActiveSheet()->getStyle($letter . '1')->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_RED);
+                $ArrLeter[$id_variablesmeasured] = $letter;
+            }
+            $objPHPExcel->getActiveSheet()->protectCells("A1:" . $letter . "1");
+
+            //GENERAMOS LOS DATOS
+            $QUERY01 = "SELECT T.id_trial,TD.trdtreplication,V.vrtname,VM.id_variablesmeasured,VM.vrmsname,TD.trdtvalue ";
+            $QUERY01 .= "FROM tb_trial T ";
+            $QUERY01 .= "INNER JOIN tb_trialdata TD ON T.id_trial = TD.id_trial ";
+            $QUERY01 .= "INNER JOIN tb_variety V ON TD.id_variety = V.id_variety ";
+            $QUERY01 .= "INNER JOIN tb_variablesmeasured VM ON TD.id_variablesmeasured = VM.id_variablesmeasured ";
+            $QUERY01 .= "WHERE T.id_trial IN ($ListIdTrial) ";
+            $QUERY01 .= "AND TD.id_variablesmeasured IN ($ListIdVariablesmeasured) ";
+            $st = $connection->execute($QUERY01);
+            $Resultado01 = $st->fetchAll();
+            $i = 2;
+            foreach ($Resultado01 AS $Fila01) {
+                $id_trial = $Fila01['id_trial'];
+                $Replication = $Fila01['trdtreplication'];
+                $Variety = $Fila01['vrtname'];
+                $id_variablesmeasured = $Fila01['id_variablesmeasured'];
+                $Value = $Fila01['trdtvalue'];
+                $letter = $ArrLeter[$id_variablesmeasured];
+                $objPHPExcel->getActiveSheet()->setCellValue("A$i", $id_trial);
+                $objPHPExcel->getActiveSheet()->setCellValue("B$i", $Replication);
+                $objPHPExcel->getActiveSheet()->setCellValue("C$i", $Variety);
+                $objPHPExcel->getActiveSheet()->setCellValue("$letter$i", $Value);
+                $i++;
+            }
+
+
+
+            $objPHPExcel->setActiveSheetIndex(0);
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment;filename="Trials List.xls"');
+            header('Cache-Control: max-age=0');
+
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+            $objWriter->save('php://output');
+            exit;
+        }
+
+        $this->HTML = $HTML;
+    }
+
 //plantilla de pruebas
     public function executePruebas($request) {
         

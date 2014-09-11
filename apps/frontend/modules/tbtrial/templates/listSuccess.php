@@ -67,12 +67,14 @@ if (($trlharvestdate1 != '') || ($trlharvestdate2 != ''))
             <?php if (count($listtrial) > 0): ?>
                 <span class="fg-button ui-state-default fg-button-icon-left ui-corner-all" onclick="muestra_oculta('tbtrial_list')">Show/Hide List</span>
                 <span class="fg-button ui-state-default fg-button-icon-left ui-corner-all" onclick="muestra_oculta('tbtrial_map')">Show/Hide Map</span>
-                <a href="/tbtrial/downloadexcel/" class="fg-button ui-state-default fg-button-icon-left ui-corner-all" tabindex="-1"><span></span><img height="13" width="13" border="0" src="/images/excel-icon.png">  Download Excel</img></a>
+                <?php if ($sf_user->isAuthenticated()) {
+                    ?>
+                    <a href="tbtrial/new" class="fg-button ui-state-default fg-button-icon-left ui-corner-all" tabindex="-1"><span class="ui-icon ui-icon-plus"></span>New</a>
+                <?php } ?>
+                <a href="/tbtrial/downloadexcel/" class="fg-button ui-state-default fg-button-icon-left ui-corner-all" tabindex="-1"><span></span><img height="13" width="13" border="0" src="/images/excel-icon.png">  Download Metadata</img></a>
+                <a onclick="openWindowPopUp('/tbtrial/downloaddata/');" class="fg-button ui-state-default fg-button-icon-left ui-corner-all" tabindex="-1"><span></span><img height="13" width="13" border="0" src="/images/excel-icon.png">  Download Data</img></a>
             <?php endif; ?>
-            <?php if ($sf_user->isAuthenticated()) {
-                ?>
-                <a href="tbtrial/new" class="fg-button ui-state-default fg-button-icon-left ui-corner-all" tabindex="-1"><span class="ui-icon ui-icon-plus"></span>New</a>
-            <?php } ?>
+
 
 
         </div>

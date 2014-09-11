@@ -199,6 +199,10 @@ function openWindow(url)
     window.focus();
 }
 
+function openWindowPopUp(url) {
+    open(url, '', 'top=300,left=300,width=600,height=500');
+}
+
 function ValidaFecha(Fecha) {
     var Campo = Fecha.name;
     var Valor = Fecha.value;
