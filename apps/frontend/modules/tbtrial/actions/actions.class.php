@@ -3216,6 +3216,7 @@ class tbtrialActions extends autoTbtrialActions {
         $user = sfContext::getInstance()->getUser();
         $wheretrial = $user->getAttribute('wheretrial');
         $Form = $request->getParameter('Form');
+        $UploadDir = sfConfig::get("sf_upload_dir");
         error_reporting(E_ALL);
         date_default_timezone_set('Europe/London');
         set_time_limit(600);
@@ -3240,6 +3241,11 @@ class tbtrialActions extends autoTbtrialActions {
             $i--;
             $HTML .="<div><input type=hidden value=$i name=count_variablesmeasured id=count_variablesmeasured></div>";
         } else if ($Form == 'Enviar') {
+            $resultsfile = $request->getParameter('resultsfile');
+            $supplementalfile = $request->getParameter('supplementalfile');
+            $weatherfile = $request->getParameter('weatherfile');
+            $soilfile = $request->getParameter('soilfile');
+
             $connection = Doctrine_Manager::getInstance()->connection();
             $CountVM = $request->getParameter('count_variablesmeasured');
             $ListIdVariablesmeasured = "";
@@ -3430,6 +3436,7 @@ class tbtrialActions extends autoTbtrialActions {
             $st = $connection->execute($QUERY01);
             $Resultado01 = $st->fetchAll();
             $i = 2;
+            $ListIdTrialData = "";
             foreach ($Resultado01 AS $Fila01) {
                 $id_trial = $Fila01['id_trial'];
                 $Replication = $Fila01['trdtreplication'];
@@ -3441,19 +3448,86 @@ class tbtrialActions extends autoTbtrialActions {
                 $objPHPExcel->getActiveSheet()->setCellValue("B$i", $Replication);
                 $objPHPExcel->getActiveSheet()->setCellValue("C$i", $Variety);
                 $objPHPExcel->getActiveSheet()->setCellValue("$letter$i", $Value);
+                $ListIdTrialData .= "$id_trial,";
                 $i++;
+            }
+            $ListIdTrialData = substr($ListIdTrialData, 0, (strlen($ListIdTrialData) - 1));
+            $ArrIdTrial = explode(",", $ListIdTrial);
+            $ArrIdTrial = array_unique($ArrIdTrial);
+            $ArrIdTrialData = explode(",", $ListIdTrialData);
+            $ArrIdTrialData = array_unique($ArrIdTrialData);
+
+            if ((count($ArrIdTrial) != count($ArrIdTrialData)) && ($resultsfile != "SI")) {
+                $ArrIdTrialNoData = array_diff($ArrIdTrial, $ArrIdTrialData);
             }
 
 
-
             $objPHPExcel->setActiveSheetIndex(0);
-            header('Content-Type: application/vnd.ms-excel');
-            header('Content-Disposition: attachment;filename="Trials List.xls"');
-            header('Cache-Control: max-age=0');
 
+            $tmp_download = $UploadDir . "/tmp$id_user";
+            if (!is_dir($tmp_download)) {
+                mkdir($tmp_download, 0777);
+            }
+
+            $FileMetadataData = "MetadataDataTrials.xls";
             $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-            $objWriter->save('php://output');
-            exit;
+            $objWriter->save("$tmp_download/$FileMetadataData");
+
+            $zip = new ZipArchive();
+            $filename = "$tmp_download/FilesTrials.zip";
+
+            if ($zip->open($filename, ZIPARCHIVE::CREATE) === true) {
+                $zip->addFile("$tmp_download/$FileMetadataData", "$FileMetadataData");
+
+                $QUERY = "SELECT T.id_trial,T.trltrialresultsfile,T.trlsupplementalinformationfile,T.trlweatherduringtrialfile,T.trlsoiltypeconditionsduringtrialfile ";
+                $QUERY .= "FROM tb_trial T ";
+                $QUERY .= "WHERE T.id_trial IN ($ListIdTrial) ";
+                $st = $connection->execute($QUERY);
+                $Result = $st->fetchAll();
+
+                foreach ($Result AS $Value) {
+                    $id_trial = $Value[0];
+                    $trltrialresultsfile = $Value[1];
+                    $trlsupplementalinformationfile = $Value[2];
+                    $trlweatherduringtrialfile = $Value[3];
+                    $trlsoiltypeconditionsduringtrialfile = $Value[4];
+
+                    if ((($trltrialresultsfile != "") && ($resultsfile == "SI")) || (($trltrialresultsfile != "") && (in_array($id_trial, $ArrIdTrialNoData)))) {
+                        $PartFile1 = explode(".", $trltrialresultsfile);
+                        $trltrialresultsfile = $UploadDir . "/" . $trltrialresultsfile;
+                        $zip->addFile("$trltrialresultsfile", "ResultsFileTrial_$id_trial.{$PartFile1[1]}");
+                    }
+                    if (($trlsupplementalinformationfile != "") && ($supplementalfile == "SI")) {
+                        $PartFile2 = explode(".", $trlsupplementalinformationfile);
+                        $trlsupplementalinformationfile = $UploadDir . "/" . $trlsupplementalinformationfile;
+                        $zip->addFile("$trlsupplementalinformationfile", "SupplementalInformationFile_$id_trial.{$PartFile2[1]}");
+                    }
+                    if (($trlweatherduringtrialfile != "") && ($weatherfile == "SI")) {
+                        $PartFile3 = explode(".", $trlweatherduringtrialfile);
+                        $trlweatherduringtrialfile = $UploadDir . "/" . $trlweatherduringtrialfile;
+                        $zip->addFile("$trlweatherduringtrialfile", "WeatherDuringTrialFile_$id_trial.{$PartFile3[1]}");
+                    }
+                    if (($trlsoiltypeconditionsduringtrialfile != "") && ($soilfile == "SI")) {
+                        $PartFile4 = explode(".", $trlsoiltypeconditionsduringtrialfile);
+                        $trlsoiltypeconditionsduringtrialfile = $UploadDir . "/" . $trlsoiltypeconditionsduringtrialfile;
+                        $zip->addFile("$trlsoiltypeconditionsduringtrialfile", "SoilTypeConditionsDuringTrialFile_$id_trial.{$PartFile4[1]}");
+                    }
+                }
+                $zip->close();
+            } else {
+                die("Error Creating Zip File");
+            }
+            if (file_exists($filename)) {
+                header('Content-type: "application/zip"');
+                header('Content-Disposition: attachment; filename="FilesTrials.zip"');
+                readfile($filename);
+                unlink($filename);
+            }
+            if (@chdir($tmp_download)) {
+                $command = "rmdir /s /q " . $tmp_download;
+                exec($command);
+            }
+            die();
         }
 
         $this->HTML = $HTML;

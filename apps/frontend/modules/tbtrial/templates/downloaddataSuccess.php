@@ -37,7 +37,21 @@
             <form id="FormDownloadData" name="FormDownloadData" enctype="multipart/form-data" method="post">
                 <table align="center">
                     <tr><td colspan="2">&ensp;</td></tr>
-                    <tr><td colspan="2"><?php echo html_entity_decode($HTML); ?></td></tr>
+                    <tr><td colspan="2"><div style="width: 590px; max-height :250px; overflow-y: auto;"><?php echo html_entity_decode($HTML); ?></div></td></tr>
+                    <tr><td colspan="2">&ensp;</td></tr>
+                    <tr>
+                        <td colspan="2">
+                            <fieldset>
+                                <legend align="left">&ensp;<b>Data Files</b>&ensp;</legend>
+                                <div><img src="/images/information-icon.png">&ensp;&ensp;<span><b>Caution:</b> These files may be very large</span></div>
+                                <div><input type="checkbox" id="resultsfile" name="resultsfile" value="SI"> Trial results file</div>
+                                <div><input type="checkbox" id="supplementalfile" name="supplementalfile" value="SI"> Supplemental information file</div>
+                                <div><input type="checkbox" id="weatherfile" name="weatherfile" value="SI"> Weather during trial file</div>
+                                <div><input type="checkbox" id="soilfile" name="soilfile" value="SI"> Soil type conditions during trial file</div>
+
+                            </fieldset>
+                        </td>
+                    </tr>
                     <tr><td colspan="2">&ensp;</td></tr>
                     <tr>
                         <td colspan="2" align="center">
