@@ -819,7 +819,6 @@ function rrmdir($dir) {
         else
             unlink($file);
     }
-//rmdir($dir);
 }
 
 function Listobjectives($ArrWidth) {

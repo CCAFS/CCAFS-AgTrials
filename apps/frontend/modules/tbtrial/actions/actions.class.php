@@ -2172,7 +2172,7 @@ class tbtrialActions extends autoTbtrialActions {
 
         $connection = Doctrine_Manager::getInstance()->connection();
         $QUERY00 = "SELECT T.id_trial,TG.trgrname,(CP.cnprfirstname||' '||CP.cnprlastname),CN.cntname,TS.trstname,TS.trstlatitudedecimal,TS.trstlongitudedecimal,C.crpname, ";
-        $QUERY00 .= "T.trlname,fc_trialvariety(T.id_trial),fc_trialvariablesmeasured(T.id_trial),T.trlsowdate,T.trlharvestdate,T.trltrialtype,T.trlirrigation,'http://www.agtrials.org/tbtrial/'||T.id_trial ";
+        $QUERY00 .= "T.trlname,fc_trialvarietylist(T.id_trial),fc_trialvariablesmeasuredlist(T.id_trial),T.trlsowdate,T.trlharvestdate,T.trltrialtype,T.trlirrigation,'http://www.agtrials.org/tbtrial/'||T.id_trial ";
         //$QUERY00 .= ",COUNT(TVR.id_variety) AS Count_VR, COUNT(TVM.id_variablesmeasured) AS Count_TVM ";
         $QUERY00 .= "FROM tb_trial T ";
         $QUERY00 .= "INNER JOIN tb_trialgroup TG ON T.id_trialgroup = TG.id_trialgroup ";
